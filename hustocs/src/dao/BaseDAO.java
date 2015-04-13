@@ -140,7 +140,7 @@ public class BaseDAO{
 		//Test deleteById
 		Acay a = new Acay();
 		a.setId((short) 4);
-		a.setName("算法");
+		a.setName("软件学院");
 		System.out.println(new BaseDAO().add(a));		
 	}
 }
