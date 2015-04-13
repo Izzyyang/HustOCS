@@ -10,6 +10,7 @@ public class VideoInfo implements FfmpegOptioner{
 	/*
 	 * 默认视频bitrate：
 	 */
+	public static final int DEFAULT_BITRATE = 1;
 	/*
 	 * 默认视频codec：h264
 	 */
@@ -106,6 +107,8 @@ public class VideoInfo implements FfmpegOptioner{
 	
 	public static void main(String args[]) {
 		ImageInfo image = new ImageInfo();
+		image.setFormat("image2");
+		image.setOutput("D:/test.png");
 		AudioInfo audio = new AudioInfo(image);
 		VideoInfo video = new VideoInfo(audio);
 		video.setSize(new Size(640, 320));
@@ -118,4 +121,5 @@ public class VideoInfo implements FfmpegOptioner{
 			e.printStackTrace();
 		}
 	}
+
 }

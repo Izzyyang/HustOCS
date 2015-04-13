@@ -4,9 +4,29 @@ import entity.InvalidOptionException;
 import entity.Size;
 
 public class ImageInfo implements FfmpegOptioner {
+	/*
+	 * 默认图片截取起始时间:0
+	 */
 	public static final int DEFAULT_START_TIME = 0;
+
+	/*
+	 * 默认图片内的帧持续时间：1s
+	 */
 	public static final int DEFAULT_DURATION = 1;
+
+	/*
+	 * 默认图片对应的视频的帧数目：1
+	 */
 	public static final int DEFAULT_FRAME = 1;
+
+	/*
+	 * 默认图片尺寸：64x64
+	 */
+	public static final Size DEFAULT_SIZE = new Size(64, 64);
+
+	/*
+	 * 默认图片格式：image2
+	 */
 	public static final String DEFAULT_FORMAT = "image2";
 
 	private int starttime;
@@ -15,30 +35,31 @@ public class ImageInfo implements FfmpegOptioner {
 	private Size size;
 	private String format;
 	private String output;
-
-	public String getOutput() {
-		return output;
-	}
-
-	public void setOutput(String output) {
-		this.output = output;
-	}
-
-	public FfmpegOptioner getSuperOption() {
-		return superOption;
-	}
-
-	public void setSuperOption(FfmpegOptioner superOption) {
-		this.superOption = superOption;
-	}
-
 	private FfmpegOptioner superOption;
 
-	public ImageInfo() {
-	}
+	public ImageInfo() {}
 
+	/*
+	 * 设置图片输出前的选项
+	 */
 	public ImageInfo(FfmpegOptioner superOption) {
 		this.superOption = superOption;
+	}
+
+	public int getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(int starttime) {
+		this.starttime = starttime;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 	public int getFrame() {
@@ -65,20 +86,20 @@ public class ImageInfo implements FfmpegOptioner {
 		this.format = format;
 	}
 
-	public int getStarttime() {
-		return starttime;
+	public String getOutput() {
+		return output;
 	}
 
-	public void setStarttime(int starttime) {
-		this.starttime = starttime;
+	public void setOutput(String output) {
+		this.output = output;
 	}
 
-	public int getDuration() {
-		return duration;
+	public FfmpegOptioner getSuperOption() {
+		return superOption;
 	}
 
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setSuperOption(FfmpegOptioner superOption) {
+		this.superOption = superOption;
 	}
 
 	public ImageInfo clone() {
@@ -121,13 +142,30 @@ public class ImageInfo implements FfmpegOptioner {
 					.append(this.size.getWidth());
 		}
 		// format
-		if (!this.format.equals("")) {
+		if (this.format != null && !this.format.equals("")) {
 			sb.append(" -f ").append(this.format);
+		} else {
+			throw new InvalidOptionException("Invalid image format");
 		}
-		if (output != null && !output.equals("")) {
-			sb.append(output);
+
+		if (this.output != null && !this.output.equals("")) {
+			sb.append(" ").append(this.output);
+		} else {
+			throw new InvalidOptionException(
+					"Invalid output file path and name");
 		}
 		return sb.toString();
 	}
 
+	public static void main(String args[]) {
+		ImageInfo image = new ImageInfo();
+		image.setFormat("image2");
+		image.setOutput("D:/test.jif");
+		try {
+			System.out.println(image.toOption());
+		} catch (InvalidOptionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
