@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 package net.SunLnx.Ffav;
-=======
-package service;
->>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
 
 import it.sauronsoftware.jave.AudioAttributes;
 import it.sauronsoftware.jave.AudioInfo;

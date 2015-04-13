@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package net.SunLnx.Ffav;
 
 import entity.InvalidOptionException;
@@ -13,17 +13,10 @@ public class VideoInfo implements FfmpegOptioner{
 	/*
 	 * 默认视频codec：h264
 	 */
-=======
-package entity;
-
-
-public class VideoInfo extends AbsFfmpegOption{
->>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
 	private int bitRate;
 	private Size size = null;
 	private String codec = "h264 ";
 	private int frameRate;
-<<<<<<< HEAD
 	private FfmpegOptioner superOption;
 	private String output;
 	public String getOutput() {
@@ -40,17 +33,8 @@ public class VideoInfo extends AbsFfmpegOption{
 	}
 	public VideoInfo(FfmpegOptioner superOption) {
 		this.superOption = superOption;
-=======
-	private AbsFfmpegOption superOption;
-	
-	public VideoInfo() {
-		
 	}
-	public VideoInfo(AbsFfmpegOption superOption, String output) {
-		this.superOption = superOption;
-		this.output = output;
->>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
-	}
+
 	public int getBitRate() {
 		return bitRate;
 	}
@@ -84,17 +68,12 @@ public class VideoInfo extends AbsFfmpegOption{
 		video.setSuperOption(this.superOption);
 		return video;
 	}
-<<<<<<< HEAD
+
 	public String toOption()  throws InvalidOptionException{
 		StringBuilder sb = new StringBuilder();
 		if (this.superOption != null) {
 			sb.append(this.superOption.toOption());
-=======
-	public String toOptions()  throws InvalidOptionException{
-		StringBuilder sb = new StringBuilder();
-		if (this.superOption != null) {
-			sb.append(this.superOption.toOptions());
->>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
+
 		}
 		//bitrate		-vb		200k
 		if (this.bitRate < 0) {
@@ -124,38 +103,15 @@ public class VideoInfo extends AbsFfmpegOption{
 		return sb.toString();
 	}
 	
-<<<<<<< HEAD
-	public FfmpegOptioner getSuperOption() {
-		return superOption;
-	}
 	
 	public static void main(String args[]) {
-		ImageInfo image = new ImageInfo(null);
-		image.setOutput("a.png");
+		ImageInfo image = new ImageInfo();
 		AudioInfo audio = new AudioInfo(image);
 		VideoInfo video = new VideoInfo(audio);
-		video.setOutput("a.flv");
 		video.setSize(new Size(640, 320));
 		video.setFrameRate(1);
 		try {
 			String option = video.toOption();
-=======
-	public AbsFfmpegOption getSuperOption() {
-		return superOption;
-	}
-	public void setSuperOption(AbsFfmpegOption superOption) {
-		this.superOption = superOption;
-	}
-	
-	public static void main(String args[]) {
-		ImageInfo image = new ImageInfo(null, "test.png");
-		AudioInfo audio = new AudioInfo(image, null);
-		VideoInfo video = new VideoInfo(audio, "test.flv");
-		video.setSize(new Size(640, 320));
-		video.setFrameRate(1);
-		try {
-			String option = video.toOptions();
->>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
 			System.out.println(option);
 		} catch (InvalidOptionException e) {
 			// TODO Auto-generated catch block
