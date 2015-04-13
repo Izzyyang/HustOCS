@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+package net.SunLnx.Ffav;
+
+import java.io.IOException;
+
+import entity.InvalidOptionException;
+=======
 package service;
 
 import java.io.IOException;
@@ -7,6 +14,7 @@ import entity.AbsFfmpegOption;
 import entity.ImageInfo;
 import entity.InvalidOptionException;
 import entity.VideoInfo;
+>>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
 
 public class FfmpegEncodeImpl implements IFfmpegEncoder {
 	private static final String FFMPEG_PATH = "/usr/bin/ffmpeg";

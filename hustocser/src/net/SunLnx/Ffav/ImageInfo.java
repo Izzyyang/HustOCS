@@ -1,3 +1,40 @@
+<<<<<<< HEAD
+package net.SunLnx.Ffav;
+
+import entity.InvalidOptionException;
+import entity.Size;
+
+
+public class ImageInfo implements FfmpegOptioner{
+	public static final int DEFAULT_START_TIME = 0;
+	public static final int DEFAULT_DURATION=1;
+	public static final int DEFAULT_FRAME=1;
+	public static final String DEFAULT_FORMAT="image2";
+	
+	private int starttime;
+	private int duration;
+	private int frame;
+	private Size size;
+	private String format;
+	private String output;
+	public String getOutput() {
+		return output;
+	}
+	public void setOutput(String output) {
+		this.output = output;
+	}
+	public FfmpegOptioner getSuperOption() {
+		return superOption;
+	}
+	public void setSuperOption(FfmpegOptioner superOption) {
+		this.superOption = superOption;
+	}
+
+	private FfmpegOptioner superOption;
+	public ImageInfo(){}
+	public ImageInfo(FfmpegOptioner superOption) {
+		this.superOption = superOption;
+=======
 package entity;
 
 
@@ -13,6 +50,7 @@ public class ImageInfo extends AbsFfmpegOption{
 	public ImageInfo(AbsFfmpegOption superOption, String output) {
 		this.superOption = superOption;
 		this.output = output;
+>>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
 	}
 	public int getFrame() {
 		return frame;
@@ -63,10 +101,18 @@ public class ImageInfo extends AbsFfmpegOption{
 		image.setStarttime(this.starttime);
 		return image;
 	}
+<<<<<<< HEAD
+	
+	public String toOption() throws InvalidOptionException {
+		StringBuilder sb = new StringBuilder();
+		if (this.superOption != null) {
+			sb.append(this.superOption.toOption());
+=======
 	public String toOptions() throws InvalidOptionException {
 		StringBuilder sb = new StringBuilder();
 		if (this.superOption != null) {
 			sb.append(this.superOption.toOptions());
+>>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
 		}
 		// starttime -ss
 		if (this.starttime < 0) {

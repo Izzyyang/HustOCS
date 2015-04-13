@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+package net.SunLnx.Ffav;
+=======
 package service;
+>>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
 
 import it.sauronsoftware.jave.AudioAttributes;
 import it.sauronsoftware.jave.AudioInfo;
@@ -109,4 +113,19 @@ public class VideoEncodeImpl implements IFfmpegEncoder, IVideoDealer {
 		new VideoEncodeImpl().ToMp4();
 	}
 
+<<<<<<< HEAD
+	@Override
+	public boolean encode(String srcVideo, String desVideo, String desImage) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean encode(String srcVideo, AbsFfmpegOption options) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+=======
+>>>>>>> c8cba019d0424bde8e4054659c2bb10866e3457d
 }
