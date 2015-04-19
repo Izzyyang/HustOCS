@@ -1,17 +1,7 @@
 
 package net.SunLnx.Ffav;
 
-import java.io.IOException;
-
-import entity.InvalidOptionException;
-
 public class FfmpegEncodeImpl implements Encoder {
-
-	@Override
-	public boolean encode(String srcVideo, String desVideo, String desImage) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean encode(String srcVideo, FfmpegOptioner options) {

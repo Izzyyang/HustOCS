@@ -4,6 +4,7 @@ import entity.InvalidOptionException;
 import entity.Size;
 
 public class ImageInfo implements FfmpegOptioner {
+	
 	/*
 	 * 默认图片截取起始时间:0
 	 */
@@ -29,6 +30,7 @@ public class ImageInfo implements FfmpegOptioner {
 	 */
 	public static final String DEFAULT_FORMAT = "image2";
 
+	
 	private int starttime;
 	private int duration;
 	private int frame;
@@ -37,7 +39,13 @@ public class ImageInfo implements FfmpegOptioner {
 	private String output;
 	private FfmpegOptioner superOption;
 
-	public ImageInfo() {}
+	public ImageInfo() {
+		this.starttime = ImageInfo.DEFAULT_START_TIME;
+		this.duration = ImageInfo.DEFAULT_DURATION;
+		this.frame = ImageInfo.DEFAULT_FRAME;
+		this.size = ImageInfo.DEFAULT_SIZE;
+		this.format = ImageInfo.DEFAULT_FORMAT;
+	}
 
 	/*
 	 * 设置图片输出前的选项
