@@ -1,10 +1,12 @@
 package net.SunLnx.Ffav;
 
+import java.io.Serializable;
+
 import entity.InvalidOptionException;
 import entity.Size;
 
-public class ImageInfo implements FfmpegOptioner {
-	
+public class ImageInfo extends AbstractFfmpegOption implements Serializable {
+
 	/*
 	 * 默认图片截取起始时间:0
 	 */
@@ -30,28 +32,31 @@ public class ImageInfo implements FfmpegOptioner {
 	 */
 	public static final String DEFAULT_FORMAT = "image2";
 
-	
 	private int starttime;
 	private int duration;
 	private int frame;
 	private Size size;
 	private String format;
 	private String output;
-	private FfmpegOptioner superOption;
 
-	public ImageInfo() {
-		this.starttime = ImageInfo.DEFAULT_START_TIME;
-		this.duration = ImageInfo.DEFAULT_DURATION;
-		this.frame = ImageInfo.DEFAULT_FRAME;
-		this.size = ImageInfo.DEFAULT_SIZE;
-		this.format = ImageInfo.DEFAULT_FORMAT;
+	public ImageInfo(){}
+	/*
+	 * 构造方法中设置图片输出前的选项
+	 */
+	public ImageInfo(AbstractFfmpegOption preOptioner) {
+		this.setPreOption(preOptioner);
 	}
 
-	/*
-	 * 设置图片输出前的选项
-	 */
-	public ImageInfo(FfmpegOptioner superOption) {
-		this.superOption = superOption;
+	public ImageInfo(AbstractFfmpegOption preOption, int starttime,
+			int duration, int frame, int length, int width, String format,
+			String output) {
+		this.preOptioner = preOption;
+		this.starttime = starttime;
+		this.duration = duration;
+		this.frame = frame;
+		this.size = new Size(length, width);
+		this.format = format;
+		this.output = output;
 	}
 
 	public int getStarttime() {
@@ -102,29 +107,13 @@ public class ImageInfo implements FfmpegOptioner {
 		this.output = output;
 	}
 
-	public FfmpegOptioner getSuperOption() {
-		return superOption;
-	}
-
-	public void setSuperOption(FfmpegOptioner superOption) {
-		this.superOption = superOption;
-	}
-
 	public ImageInfo clone() {
-		ImageInfo image = new ImageInfo();
-		image.setDuration(this.duration);
-		image.setFormat(this.format);
-		image.setFrame(this.frame);
-		image.setSize(this.size);
-		image.setStarttime(this.starttime);
-		return image;
+		return new ImageInfo(null, this.starttime, this.duration, this.frame,
+				this.size.getLength(), this.size.getWidth(), this.format, null);
 	}
 
 	public String toOption() throws InvalidOptionException {
 		StringBuilder sb = new StringBuilder();
-		if (this.superOption != null) {
-			sb.append(this.superOption.toOption());
-		}
 		// starttime -ss
 		if (this.starttime < 0) {
 			throw new InvalidOptionException("Invalid image starttime");
@@ -170,7 +159,7 @@ public class ImageInfo implements FfmpegOptioner {
 		image.setFormat("image2");
 		image.setOutput("D:/test.jif");
 		try {
-			System.out.println(image.toOption());
+			System.out.println(image.toOptions());
 		} catch (InvalidOptionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

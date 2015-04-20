@@ -1,5 +1,7 @@
 package net.SunLnx.Ffav;
 
+import java.io.Serializable;
+
 import entity.InvalidOptionException;
 
 /*
@@ -7,7 +9,7 @@ import entity.InvalidOptionException;
  * 默认的音频codec为aac，其他默认相关参数匹配aac codec
  */
 
-public class AudioInfo implements FfmpegOptioner {
+public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 
 	/*
 	 * 默认的音频bitrate 128 kbps
@@ -34,13 +36,22 @@ public class AudioInfo implements FfmpegOptioner {
 	private int samplingRate;
 	private String codec = "";
 	private String output;
-	private FfmpegOptioner superOption;
 
 	public AudioInfo() {
 	}
 
-	public AudioInfo(FfmpegOptioner superOption) {
-		this.superOption = superOption;
+	public AudioInfo(AbstractFfmpegOption preOptione) {
+		this.setPreOption(preOptioner);
+	}
+
+	public AudioInfo(AbstractFfmpegOption preOption, int bitRate, int channel,
+			int samplingRate, String codec, String output) {
+		this.preOptioner = preOption;
+		this.bitRate = bitRate;
+		this.channel = channel;
+		this.samplingRate = samplingRate;
+		this.codec = codec;
+		this.output = output;
 	}
 
 	public int getBitRate() {
@@ -83,30 +94,14 @@ public class AudioInfo implements FfmpegOptioner {
 		this.output = output;
 	}
 
-	public FfmpegOptioner getSuperOption() {
-		return superOption;
-	}
-
-	public void setSuperOption(FfmpegOptioner superOption) {
-		this.superOption = superOption;
-	}
-
 	public AudioInfo clone() {
-		AudioInfo audio = new AudioInfo();
-		audio.setBitRate(this.bitRate);
-		audio.setChannel(this.channel);
-		audio.setCodec(this.codec);
-		audio.setSamplingRate(this.samplingRate);
-
-		return audio;
+		return new AudioInfo(null, this.bitRate, this.channel,
+				this.samplingRate, this.codec, null);
 	}
 
 	@Override
 	public String toOption() throws InvalidOptionException {
 		StringBuilder sb = new StringBuilder();
-		if (this.superOption != null) {
-			sb.append(this.superOption.toOption());
-		}
 		// samplecoding -ar
 		if (this.samplingRate < 0) {
 			throw new InvalidOptionException("Invalid audio sampling  rate");
@@ -143,7 +138,7 @@ public class AudioInfo implements FfmpegOptioner {
 		audio.setChannel(2);
 		audio.setCodec("mp3");
 		try {
-			System.out.println(audio.toOption());
+			System.out.println(audio.toOptions());
 		} catch (InvalidOptionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

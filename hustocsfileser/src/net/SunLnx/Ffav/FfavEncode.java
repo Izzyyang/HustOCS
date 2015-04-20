@@ -6,22 +6,21 @@ import entity.InvalidOptionException;
 
 public class FfavEncode implements Encoder {
 	private FfmpegLocater locater;
-	private FfmpegOptioner optioner;
+	private AbstractFfmpegOption optioner;
 	private ProcessBuilder pb;
 	
 	/*
 	 * 使用默认的ffmpeg和ffprobe 
 	 */
 	public FfavEncode() {
-		locater = new DefaultFfmpegLocate();
+		locater = DefaultFfmpegLocate.getInstance();	
 	}
 	
 	/*
-	 * 指定ffmpeg和ffprobe
+	 * 使用指定的ffmpeg和ffprobe
 	 */
 	public FfavEncode(FfmpegLocater locater) {
 		this.locater = locater;
-		pb = new ProcessBuilder(this.locater.getFfmpegExecutablePath());
 	}
 	
 	/*
@@ -29,8 +28,9 @@ public class FfavEncode implements Encoder {
 	 * @see net.SunLnx.Ffav.Encoder#encode(java.lang.String, net.SunLnx.Ffav.FfmpegOptioner)
 	 */
 	@Override
-	public boolean encode(String srcVideo, FfmpegOptioner optioner) {
-		this.optioner = optioner;
+	public boolean encode(String srcVideo, AbstractFfmpegOption optioner) {
+		InputInfo input = new InputInfo(null, srcVideo);
+		
 		return this.start();
 		
 	}
@@ -52,11 +52,16 @@ public class FfavEncode implements Encoder {
 		return start();
 	}
 	
+	private String toCommand(String srcVideo, ) {
+		
+	}
 	private boolean start() {
 		try {
 			pb = new ProcessBuilder(locater.getFfmpegExecutablePath(), optioner.toOption());
+			System.out.println(locater.getFfmpegExecutablePath()+ optioner.toOption());
 			Process pr = pb.start();
-			return pr.waitFor() == 0;
+			pr.waitFor();
+			return pr.exitValue() == 0;
 		} catch (InvalidOptionException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

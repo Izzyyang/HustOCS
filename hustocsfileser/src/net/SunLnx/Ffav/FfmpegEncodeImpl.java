@@ -4,7 +4,7 @@ package net.SunLnx.Ffav;
 public class FfmpegEncodeImpl implements Encoder {
 
 	@Override
-	public boolean encode(String srcVideo, FfmpegOptioner options) {
+	public boolean encode(String srcVideo, AbstractFfmpegOption options) {
 		// TODO Auto-generated method stub
 		return false;
 	}
