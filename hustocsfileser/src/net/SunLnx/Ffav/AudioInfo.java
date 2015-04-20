@@ -2,7 +2,6 @@ package net.SunLnx.Ffav;
 
 import java.io.Serializable;
 
-import entity.InvalidOptionException;
 
 /*
  * ffmpeg中的有关音频设置选项
@@ -11,6 +10,7 @@ import entity.InvalidOptionException;
 
 public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 
+	
 	/*
 	 * 默认的音频bitrate 128 kbps
 	 */
@@ -34,14 +34,18 @@ public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 	private int bitRate;
 	private int channel;
 	private int samplingRate;
-	private String codec = "";
+	private String codec;
 	private String output;
+	
+	public AudioInfo() {}
 
-	public AudioInfo() {
+	public AudioInfo(AbstractFfmpegOption preOption) {
+		this.preOptioner = preOption;
 	}
-
-	public AudioInfo(AbstractFfmpegOption preOptione) {
-		this.setPreOption(preOptioner);
+	
+	public AudioInfo(AbstractFfmpegOption preOption, String output) {
+		this.preOptioner =preOption;
+		this.output = output;
 	}
 
 	public AudioInfo(AbstractFfmpegOption preOption, int bitRate, int channel,
@@ -124,7 +128,7 @@ public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 			sb.append(" -ab ").append(this.bitRate);
 		}
 		// codec -acodec
-		if (!this.codec.equals("")) {
+		if (!"".equals(this.codec)) {
 			sb.append(" -acodec ").append(this.codec);
 		}
 		if (output != null && !output.equals("")) {
@@ -135,13 +139,12 @@ public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 
 	public static void main(String args[]) {
 		AudioInfo audio = new AudioInfo();
-		audio.setChannel(2);
-		audio.setCodec("mp3");
 		try {
 			System.out.println(audio.toOptions());
 		} catch (InvalidOptionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(audio.codec);
 	}
 }

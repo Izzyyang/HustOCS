@@ -2,23 +2,31 @@ package net.SunLnx.Ffav;
 
 import java.io.Serializable;
 
-import entity.InvalidOptionException;
-import entity.Size;
-
 public class VideoInfo extends AbstractFfmpegOption implements Serializable {
 
 	/*
 	 * 默认视频bitrate：
 	 */
-	public static final int DEFAULT_BITRATE = 1;
+	public static final int DEFAULT_BITRATE = 200;
+	
 	/*
 	 * 默认视频codec：h264
 	 */
+	public static final String DEFAULT_CODEC = "flv1";
+	
+	/*
+	 * 默认视频framerate:25k
+	 */
+	public static final int DEFAULT_FRAMERATE = 25;
 	private int bitRate;
-	private String codec = "h264 ";
+	private String codec = "flv1";
 	private int frameRate;
 	private Size size = null;
+	private int qscale;
+	
+
 	private String output;
+	
 
 	public VideoInfo() {}
 
@@ -26,6 +34,10 @@ public class VideoInfo extends AbstractFfmpegOption implements Serializable {
 		this.setPreOption(preOptioner);
 	}
 
+	public VideoInfo(AbstractFfmpegOption preOption, String output) {
+		this.preOptioner = preOption;
+		this.output = output;
+	}
 	public VideoInfo(AbstractFfmpegOption preOption, int bitRate, String codec,
 			int frameRate, int length, int width, String output) {
 		this.preOptioner = preOption;
@@ -67,7 +79,14 @@ public class VideoInfo extends AbstractFfmpegOption implements Serializable {
 	public void setFrameRate(int frameRate) {
 		this.frameRate = frameRate;
 	}
+	
+	public int getQscale() {
+		return qscale;
+	}
 
+	public void setQscale(int qscale) {
+		this.qscale = qscale;
+	}
 	public String getOutput() {
 		return output;
 	}

@@ -1,4 +1,4 @@
-package entity;
+package net.SunLnx.Ffav;
 
 public class InvalidOptionException extends  Exception{
 

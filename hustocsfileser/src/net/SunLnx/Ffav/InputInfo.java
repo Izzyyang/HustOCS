@@ -1,7 +1,5 @@
 package net.SunLnx.Ffav;
 
-import entity.InvalidOptionException;
-
 public class InputInfo extends AbstractFfmpegOption{
 	private String input;
 	

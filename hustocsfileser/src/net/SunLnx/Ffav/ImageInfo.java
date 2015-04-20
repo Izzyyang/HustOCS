@@ -2,9 +2,6 @@ package net.SunLnx.Ffav;
 
 import java.io.Serializable;
 
-import entity.InvalidOptionException;
-import entity.Size;
-
 public class ImageInfo extends AbstractFfmpegOption implements Serializable {
 
 	/*
@@ -47,6 +44,10 @@ public class ImageInfo extends AbstractFfmpegOption implements Serializable {
 		this.setPreOption(preOptioner);
 	}
 
+	public ImageInfo( AbstractFfmpegOption preOption, String output){
+		this.preOptioner = preOption;
+		this.output = output;
+	}
 	public ImageInfo(AbstractFfmpegOption preOption, int starttime,
 			int duration, int frame, int length, int width, String format,
 			String output) {

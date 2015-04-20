@@ -1,7 +1,5 @@
 package net.SunLnx.Ffav;
 
-import entity.InvalidOptionException;
-
 public abstract class AbstractFfmpegOption {
 	protected AbstractFfmpegOption preOptioner;
 
@@ -15,7 +13,6 @@ public abstract class AbstractFfmpegOption {
 
 	public String toOptions() throws InvalidOptionException {
 		StringBuffer sb = new StringBuffer();
-		System.out.println("lol");
 		if (this.preOptioner != null) {
 			sb.append(this.preOptioner.toOptions());
 		}
