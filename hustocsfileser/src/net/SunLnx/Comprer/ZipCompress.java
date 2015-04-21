@@ -11,11 +11,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.Adler32;
 import java.util.zip.CheckedOutputStream;
+import java.util.zip.Checksum;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class ZipCompress implements Comprer {
-
+public class ZipCompress extends AbstractChecksumContainer implements Comprer {
+	
+	public ZipCompress() {}
+	
+	public ZipCompress(Checksum checksum) {
+		super.checksum = checksum;
+	}
+	
 	/*
 	 * compress files  to one zip file
 	 * srcFilePath: source files's path, desFilePath:desitination zip file path
@@ -28,11 +35,16 @@ public class ZipCompress implements Comprer {
 		File srcFile = null;
 		BufferedInputStream bis;
 		ZipOutputStream zos;
+		CheckedOutputStream cos = null;
 		ZipEntry entry;
 		try {
-			zos = new ZipOutputStream(new BufferedOutputStream(
-					new CheckedOutputStream(new FileOutputStream(desFile),
-							new Adler32())));
+			
+			if (null == super.checksum) {
+				zos = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(desFile)));
+			} else {
+				cos = new CheckedOutputStream(new FileOutputStream(desFile),super.checksum);
+				zos = new ZipOutputStream(new BufferedOutputStream(cos));
+			}
 			for (String srcFilePath : srcFilePaths) {
 				srcFile = new File(srcFilePath);
 				bis = new BufferedInputStream(new FileInputStream(srcFile));
@@ -40,6 +52,9 @@ public class ZipCompress implements Comprer {
 				zos.putNextEntry(entry);
 				StreamUtil.write(zos, bis);
 				bis.close();
+			}
+			if (null != cos) {
+				super.checksumNumber = cos.getChecksum().getValue();
 			}
 			zos.close();
 		} catch (FileNotFoundException e1) {
@@ -64,8 +79,9 @@ public class ZipCompress implements Comprer {
 		return compress(srcPaths, desfile);
 	}
 
+	
 	public static void main(String agrs[]) {
-		ZipCompress zipC = new ZipCompress();
+		ZipCompress zipC = new ZipCompress(new Adler32());
 		List<String> strs = new LinkedList<String>();
 		strs.add("D:/movie.mp4");
 		//strs.add("D:/rmvb.rmvb");
@@ -74,7 +90,9 @@ public class ZipCompress implements Comprer {
 		long time = System.currentTimeMillis();
 		zipC.compress(strs, "D:/mkv.zip");
 		time = System.currentTimeMillis() - time;
-		System.out.println("cost time " + time);
+		System.out.println("cost time " + time + " check sum is" + zipC.getChecksumNumber());
 	}
+
+	
 
 }

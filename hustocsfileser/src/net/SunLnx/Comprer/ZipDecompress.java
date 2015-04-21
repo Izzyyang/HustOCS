@@ -9,31 +9,41 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.Adler32;
 import java.util.zip.CheckedInputStream;
-import java.util.zip.CheckedOutputStream;
+import java.util.zip.Checksum;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import util.StringUtil;
 
-public class ZipDecompress implements Decomprer {
+public class ZipDecompress extends AbstractChecksumContainer implements Decomprer {
 
+	public ZipDecompress() {}
+	
+	public ZipDecompress(Checksum checksum) {
+		super.checksum = checksum;
+	}
+	
 	/*
 	 * Decompress a zip file to one dir
 	 * srcFilePath: source zip file path, desFilePath: destination dir path
 	 * @see net.SunLnx.Comprer.Decomprer#decompress(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String decompress(String srcFilePath, String desFilePath) {
+	public boolean decompress(String srcFilePath, String desFilePath) {
 		File srcFile = new File(srcFilePath);
 		ZipEntry entry = null;
 		String filePath = null;
 		File file = null;
 		FileOutputStream fos = null;
-		CheckedOutputStream cos = null;
+		CheckedInputStream cis = null;
+		ZipInputStream zis = null;
 		try {
-			ZipInputStream zis = new ZipInputStream(new BufferedInputStream(
-					new CheckedInputStream(new FileInputStream(srcFile),
-							new Adler32())));
+			if (null != super.checksum ) {
+				cis =  new CheckedInputStream(new FileInputStream(srcFile),new Adler32());
+				zis = new ZipInputStream(new BufferedInputStream(cis));
+			} else {
+				zis = new ZipInputStream(new BufferedInputStream(new FileInputStream(srcFile)));
+			}
 			BufferedOutputStream bos = null;
 			while ((entry = zis.getNextEntry()) != null) {
 				filePath = StringUtil
@@ -44,21 +54,24 @@ public class ZipDecompress implements Decomprer {
 				StreamUtil.write(bos, zis);
 				bos.close();
 			}
+			if (null != cis) {
+				super.checksumNumber = cis.getChecksum().getValue();
+			}
 			zis.close();
-			return desFilePath;
+			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
 	public static void main(String agrs[]) {
-		ZipDecompress zipD = new ZipDecompress();
+		ZipDecompress zipD = new ZipDecompress(new Adler32());
 		long duration = System.currentTimeMillis();
-		zipD.decompress("D:/rmvb.zip", "D:/Video");
+		zipD.decompress("D:/mkv.zip", "D:/Video");
 		duration = System.currentTimeMillis() - duration;
-		System.out.println("decompress cost " + duration);
+		System.out.println("decompress cost " + duration +" and checksum is " + zipD.getChecksumNumber());
 	}
 }
