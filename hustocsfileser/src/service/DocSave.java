@@ -1,12 +1,11 @@
 package service;
 
-public class ImageSave extends AbstractFileSaver {
-
-	private static final String IMAGE_PATH = "D:/Images/";
+public class DocSave extends AbstractFileSaver{
+	private static final String DOC_PATH = "D:/Docs/";
 
 	@Override
 	protected String generateTopPath() {
-		return ImageSave.IMAGE_PATH;
+		return DocSave.DOC_PATH;
 	}
 
 	@Override

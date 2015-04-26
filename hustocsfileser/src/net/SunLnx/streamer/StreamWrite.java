@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class FileWrite implements FileWriter {
+public class StreamWrite implements StreamWriter {
 
 	private static final int BUF_SIZE = 1 << 20;
 
@@ -19,8 +19,8 @@ public class FileWrite implements FileWriter {
 	 */
 	@Override
 	public boolean write(String des, String src) throws IOException {
-		File input = FileWrite.touch(src, false);
-		File output = FileWrite.touch(des, true);
+		File input = StreamWrite.touch(src, false);
+		File output = StreamWrite.touch(des, true);
 		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(
 				input));
 		BufferedOutputStream bos = new BufferedOutputStream(
@@ -36,7 +36,7 @@ public class FileWrite implements FileWriter {
 	 */
 	@Override
 	public boolean write(OutputStream os, String src) throws IOException {
-		File input = FileWrite.touch(src, false);
+		File input = StreamWrite.touch(src, false);
 		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(
 				input));
 		boolean res = this.write(os, bis);
@@ -50,7 +50,7 @@ public class FileWrite implements FileWriter {
 	 */
 	@Override
 	public boolean write(String fn, InputStream is) throws IOException {
-		File output = FileWrite.touch(fn, true);
+		File output = StreamWrite.touch(fn, true);
 		BufferedOutputStream bos = new BufferedOutputStream(
 				new FileOutputStream(output));
 		boolean res = this.write(bos, is);
@@ -105,7 +105,7 @@ public class FileWrite implements FileWriter {
 	}
 
 	public static void main(String agrs[]) {
-		FileWrite fw = new FileWrite();
+		StreamWrite fw = new StreamWrite();
 		try {
 			fw.write("D:/copy.mp4", "D:/movie.mp4");
 		} catch (IOException e) {
