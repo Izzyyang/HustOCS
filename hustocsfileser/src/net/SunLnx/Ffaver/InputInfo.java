@@ -1,4 +1,4 @@
-package net.SunLnx.Ffav;
+package net.SunLnx.Ffaver;
 
 public class InputInfo extends AbstractFfmpegOption{
 	private String input;

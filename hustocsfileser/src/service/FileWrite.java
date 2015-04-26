@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class FileWriteImpl  implements IFileWriter {
+public class FileWrite  implements FileWriter {
 	
 	private static final int BUF_SIZE = 1 << 20;
 	@Override
@@ -48,7 +48,7 @@ public class FileWriteImpl  implements IFileWriter {
 	
 
 	public static void main(String args[]) throws FileNotFoundException {
-		FileWriteImpl fw = new FileWriteImpl();
+		FileWrite fw = new FileWrite();
 		File f = new File("/home/sunlnx/Videos/How fast.ogg");
 		fw.write(new FileInputStream(f), "/home/sunlnx/How fast.ogg");
 	}

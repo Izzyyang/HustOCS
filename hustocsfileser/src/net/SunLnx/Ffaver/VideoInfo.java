@@ -1,4 +1,4 @@
-package net.SunLnx.Ffav;
+package net.SunLnx.Ffaver;
 
 import java.io.Serializable;
 

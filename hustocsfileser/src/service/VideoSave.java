@@ -7,14 +7,14 @@ import java.io.InputStream;
 
 public class VideoSave extends AbsFilePathGenerator {
 	
-	private IFileWriter fwriter = null;
+	private FileWriter fwriter = null;
 	private static final String VIDEO_PATH  = "/home/sunlnx/video/";
 	
 	
 	public VideoSave() {
-		this.fwriter = new FileWriteImpl();
+		this.fwriter = new FileWrite();
 	}
-	public VideoSave(IFileWriter fwrite) {
+	public VideoSave(FileWriter fwrite) {
 		this.fwriter = fwrite;
 	}
 
