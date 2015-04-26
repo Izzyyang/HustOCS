@@ -1,4 +1,4 @@
-package com.SunLnx.streamer;
+package net.SunLnx.streamer;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -25,7 +25,9 @@ public class FileWrite implements FileWriter {
 				input));
 		BufferedOutputStream bos = new BufferedOutputStream(
 				new FileOutputStream(output));
-		return this.write(bos, bis);
+		boolean res = this.write(bos, bis);
+		bis.close();
+		return res;
 	}
 
 	/*
@@ -37,7 +39,9 @@ public class FileWrite implements FileWriter {
 		File input = FileWrite.touch(src, false);
 		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(
 				input));
-		return this.write(os, bis);
+		boolean res = this.write(os, bis);
+		bis.close();
+		return res;
 	}
 
 	/*
@@ -49,13 +53,15 @@ public class FileWrite implements FileWriter {
 		File output = FileWrite.touch(fn, true);
 		BufferedOutputStream bos = new BufferedOutputStream(
 				new FileOutputStream(output));
-		return this.write(bos, is);
+		boolean res = this.write(bos, is);
+		is.close();
+		return res;
 	}
 
 	/*
-	 * copy binary data from inoutstream to outputstream it's reconmended to use
-	 * bufferedinputstream and bufferedoutputstream before write. this method is
-	 * not responsible for close the stream
+	 * copy binary data from inoutstream to outputstream.
+	 * it's reconmended to use bufferedinputstream and bufferedoutputstream before write. 
+	 * this method is not responsible for close inputstream but outputstream
 	 * 
 	 * @see com.SunLnx.streamer.FileWriter#write(java.io.OutputStream,
 	 * java.io.InputStream)
@@ -68,6 +74,7 @@ public class FileWrite implements FileWriter {
 			os.write(data, 0, count);
 		}
 		os.flush();
+		os.close();
 		return true;
 	}
 

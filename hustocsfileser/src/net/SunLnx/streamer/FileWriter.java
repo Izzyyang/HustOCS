@@ -1,4 +1,4 @@
-package com.SunLnx.streamer;
+package net.SunLnx.streamer;
 
 import java.io.IOException;
 import java.io.InputStream;
