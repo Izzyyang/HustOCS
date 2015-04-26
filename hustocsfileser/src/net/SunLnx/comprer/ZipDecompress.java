@@ -1,4 +1,4 @@
-package net.SunLnx.Comprer;
+package net.SunLnx.comprer;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

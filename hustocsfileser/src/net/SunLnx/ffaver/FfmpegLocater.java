@@ -1,5 +1,5 @@
 
-package net.SunLnx.Ffaver;
+package net.SunLnx.ffaver;
 
 
 public interface FfmpegLocater  {

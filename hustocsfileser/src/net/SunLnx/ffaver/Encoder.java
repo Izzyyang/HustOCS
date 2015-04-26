@@ -1,5 +1,5 @@
 
-package net.SunLnx.Ffaver;
+package net.SunLnx.ffaver;
 
 public interface Encoder {
 	// 从srcVideo源视频文件，使用自定义项，转码生成对应的视频文件，缩略图等

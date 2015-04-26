@@ -1,4 +1,4 @@
-package net.SunLnx.Ffaver;
+package net.SunLnx.ffaver;
 
 public class InvalidOptionException extends  Exception{
 
