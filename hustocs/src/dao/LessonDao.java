@@ -1,5 +1,5 @@
 package dao;
 
-public class LessonDao {
+public class LessonDao implements LessonDaoer {
 
 }

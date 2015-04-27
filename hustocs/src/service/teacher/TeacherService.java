@@ -1,5 +1,7 @@
-package service;
+package service.teacher;
 
+import service.AbstractUserService;
+import service.UserServicer;
 import dao.LessonDaoer;
 import dao.ResourceDaoer;
 import dao.TeacherDaoer;

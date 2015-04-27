@@ -1,5 +1,5 @@
 package dao;
 
-public class ResourceDao {
+public class ResourceDao implements ResourceDaoer {
 
 }
