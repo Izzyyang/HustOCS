@@ -1,7 +1,10 @@
-package service;
+package service.student;
 
-public class StudentService extends AbstractUserService implements StudentServicer{
+import service.AbstractUserService;
+import service.UserServicer;
 
+public class StudentService extends AbstractUserService {
+	
 	@Override
 	public String regster(String id, String password) {
 		// TODO Auto-generated method stub

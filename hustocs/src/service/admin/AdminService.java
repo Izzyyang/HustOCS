@@ -1,49 +1,41 @@
-package service.teacher;
-
+package service.admin;
 import service.AbstractUserService;
 import service.UserServicer;
+import dao.AdminDaoer;
 import dao.LessonDaoer;
 import dao.ResourceDaoer;
-import dao.TeacherDaoer;
 
-public class TeacherService extends AbstractUserService implements TeacherServicer {
-	private TeacherDaoer teacherDao;
+public class AdminService extends AbstractUserService implements AdminServicer {
+	private AdminDaoer adminDao;
 	private LessonDaoer lessonDao;
 	private ResourceDaoer resourceDao;
-	public TeacherService(TeacherDaoer teacherDao) {
-		this.teacherDao = teacherDao;
+	public AdminDaoer getAdminDao() {
+		return adminDao;
 	}
-	public TeacherService(LessonDaoer lessonDao) {
-		this.lessonDao = lessonDao;
+	public void setAdminDao(AdminDaoer adminDao) {
+		this.adminDao = adminDao;
 	}
-	public TeacherService(ResourceDaoer resourceDao) {
-		this.resourceDao = resourceDao;
-	}
-	public TeacherDaoer getTeacherDao() {
-		return teacherDao;
-	}
-
-	public void setTeacherDao(TeacherDaoer teacherDao) {
-		this.teacherDao = teacherDao;
-	}
-
 	public LessonDaoer getLessonDao() {
 		return lessonDao;
 	}
-
 	public void setLessonDao(LessonDaoer lessonDao) {
 		this.lessonDao = lessonDao;
 	}
-
 	public ResourceDaoer getResourceDao() {
 		return resourceDao;
 	}
-
 	public void setResourceDao(ResourceDaoer resourceDao) {
 		this.resourceDao = resourceDao;
 	}
-
-	
+	public AdminService(AdminDaoer adminDao) {
+		this.adminDao = adminDao;
+	}
+	public AdminService(LessonDaoer lessonDao) {
+		this.lessonDao = lessonDao;
+	}
+	public AdminService(ResourceDaoer resourceDao) {
+		this.resourceDao = resourceDao;
+	}
 	@Override
 	public String regster(String id, String password) {
 		// TODO Auto-generated method stub
