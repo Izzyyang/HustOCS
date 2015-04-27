@@ -3,10 +3,10 @@ package util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class EncrypterImpl implements Encrypter {
+public class MD5Encrypte implements Encrypter {
 	@SuppressWarnings("finally")
 	public String encrypt(Salter salt) {
-		String str = salt.salt();
+		String str = salt.saltPlain();
 		if (!str.equals(null)) {
 			String result = null;
 			try {
