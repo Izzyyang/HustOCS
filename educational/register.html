@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>欢迎注册</title>
+<link rel="stylesheet" rev="stylesheet" href="layout/styles/register.css" type="text/css" media="screen"/>	
+<script type="text/javascript" src="layout/scripts/jquery.base64.js"></script>
+<script type="text/javascript" src="layout/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="layout/scripts/jquery.slidepanel.setup.js"></script>
+<script type="text/javascript" src="layout/scripts/jquery.ui.min.js"></script>
+<script type="text/javascript" src="layout/scripts/jquery.tabs.setup.js"></script>
+
+<script type="text/javascript">
+	if(window != top)
+	top.location.href = location.href;
+	
+	$(function(){	
+	    var check = true;
+		$("input[name='usertype']").click(function(){
+			if($('input[name="usertype"]:checked').val()=="jg"){
+				$("#user_t").val("请输入7位教工编号");
+			}else{
+				$("#user_t").val("请输入学号");
+			}
+		})
+		
+	$("#user_t").focus(function(){
+			$(this).hide();
+			$("#username").show();
+			$("#username").focus();
+		});
+    $("#username").blur(function(){
+			var v = $(this).val();
+			if(v==""){
+				$(this).hide();
+				$("#user_t").show();
+			  }
+			 //验证长度；
+			if(v.length < 7){
+			       check = false;
+			       $("#sid").html("");
+			       $("#sid").css('display','block');
+				   if($('input[name="usertype"]:checked').val()=="jg"){
+				        if(v.length==0) {
+						    $("#sid").html("*教工编号不能为空！");
+						}else{
+						$("#sid").html("*你输入教工编号长度不够！");
+						}
+					}else{
+					    if(v.length==0) {$("#sid").html("*学号不能为空！");}
+						  else{
+						      $("#sid").html("*你输入学号长度不够！");
+						 }
+					}
+					$("#sid").css("color","#FF0000");
+			}else if(/^[a-zA-Z]([0-9]$){0,10}/.test(v)==false){
+			    $("#sid").html("");
+				$("#sid").css("color","#FF0000");
+				$("#sid").html("*编号以字母开头，只包含字母和数字！");
+			 }else{
+			      $("#sid").html("");
+			      $("#sid").html(" √ ");
+				  $("#sid").css("color","#006600");
+			}
+		})
+		
+	$("#pwd_t").focus(function(){
+ 		   $(this).hide();
+		   $("#password").show();
+		   $("#password").focus();
+		})
+		
+	$("#password").blur(function(){
+			var v = $(this).val();
+			if(v==""){
+			    check = false;
+				$(this).hide();
+				$("#pwd_t").show();
+				$("#spwd").css("color","#FF0000");
+				$("#spwd").html("");
+				$("#spwd").html("*密码不能为空！");
+			}
+		})
+		
+	$("#c_pwd").focus(function(){
+			$(this).hide();
+			$("#cpassword").show();
+			$("#cpassword").focus();
+		})
+		
+	$("#cpassword").blur(function(){
+	       // alert("aaa  "+$(this).val());
+			var v = $(this).val();
+			var prev = $("#password").val();
+			if(v==""){
+			    check = false;
+				$(this).hide();
+				$("#c_pwd").show();
+				$("#scpwd").css("color","#FF0000");
+				$("#scpwd").html("");
+				$("#scpwd").html("*确认密码不能为空！");
+			}else if(v != prev){
+			    check = false;
+			    $("#scpwd").css("color","#FF0000");
+				$("#scpwd").html("");
+				$("#scpwd").html("*两次密码不一致！");
+			}else{
+			    $("#scpwd").html("");
+			    $("#scpwd").html(" √ ");
+				$("#scpwd").css("color","#006600");
+			}
+		})
+		
+		
+   $("#email_t").focus(function(){
+			$(this).hide();
+			$("#email").show();
+			$("#email").focus();
+		})
+		
+   $("#email").blur(function(){
+	       // alert("aaa  "+$(this).val());
+			var v = $(this).val();
+			if(v==""){
+			    check = false;
+				$(this).hide();
+				$("#email_t").show();
+			}
+			if(!$("#email").val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
+			   check = false;
+			   $("#semail").html("");
+			   $("#semail").css("color","#FF0000");
+			   $("#semail").html("*请输入正确的邮箱！"); 
+			}else{
+			    $("#semail").html("");
+			    $("#semail").html(" √ ");
+				$("#semail").css("color","#006600");
+			}
+		})
+		
+		
+    $("input[name='username']").blur(function(){
+			var v = $(this).val();
+			if(v==""){
+				//$("#zh_span").text("请输入用户名");
+			}else{
+				$("#zh_span").text("");
+				getrandomImg(v);
+			}
+		})
+	//提交前的验证
+	$("#regsubmit").click(function(){
+	     if(!check){
+		    alert("注册信息有误，请检查后重新提交！");
+			return false;
+		 }
+	})
+
+	})
+
+	</script>
+</head>
+
+<body>
+<div align="center">
+	<table style="width: 1000px;margin-top: 10px;">
+		<tr>
+			<td style="width: 450px;">
+				<div id="decPic" title="学院简介">
+				</div>
+				<div class="history" align="left">
+				  <div class="history_content">
+						<a href="http://sse.hust.edu.cn/">华中科技大学软件学院是经教育部批准（教高20016号文）的35所国家示范性软件学院之一。华中科技大学软件学院充分利用华中科技大学综合优势、办学资源和计算机学科优势，通过产学研结合，拓宽办学渠道，采用超常规办学模式，为我国IT产业培养多层次、具有国际竞争能力的“工程型”与“应用型”软件人才。</a>
+					</div>
+				</div>
+			</td>
+			
+			<td>
+				<table width="100%" border="1" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="left" valign="bottom" style="height: 50px;">
+						 <span style="color: #666666;font-size: 35px;line-height:40px;margin-left: 45px;">欢迎注册-软件学院</span></td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="height: 50px;">
+						 <span style="color: #666666;font-size: 35px;line-height:40px;margin-left: 45px;">教学视频站</span></td>
+				</tr>
+				  <tr>
+				    <td align="left" valign="middle" style="height: 350px;">
+						<!--表单开始-->
+						<div class="bubble" id="registe">
+							<div class="info" style="padding: 5px 5px 5px 5px;">
+								<form action="" name="form1" id="form1" method="post">
+									<table>
+										<tr> 
+										      <td width="180px"></td>
+											  <td align="left" valign="middle" style="font-size: 14px;PADDING-LEFT: 5px;" width="300px;" >
+													<input type="radio" name="usertype" value="jg" tabindex="1" checked/>
+													<span>教工号</span>
+													&nbsp;&nbsp; 
+													<input type="radio" name="usertype" value="xs" tabindex="1"/>
+													<span >学号</span>
+											
+											 </td>
+											 <td width="400px;">
+											    <span class="feedback" id="ssid"></span>
+											 </td>
+										</tr>
+										
+										<tr>
+											<td  align="right" valign="center">教工号/学号：</td>
+											<td>
+							<input type="text" class="input_text" id="user_t" value='请输入7位教工编号' tabindex="2"/>
+							<input type="text" class="input_text" id="username" name="username" style="color: #000000;display: none" tabindex="2"/>
+										  	</td>
+											 <td>
+											    <span class="feedback" id="sid">*</span>
+											 </td>
+										</tr>
+										
+										<tr>
+											<td align="right" valign="center"> 密码：</td>
+											<td>
+						  <input type="text" class="input_text" id="pwd_t" value="请输入密码" tabindex="3"/>						   				          
+						  <input type="password" class="input_text" id="password" name="password" style="color: #000000;display: none;" tabindex="3"/>
+										  </td>
+											 <td>
+											    <span class="feedback" id="spwd">*</span>
+											 </td>
+									    </tr>
+										<tr>
+											<td align="right" valign="center"> 确认密码：</td>
+											<td>
+						  <input type="text" class="input_text" id="c_pwd" value="请再次输入密码确认" tabindex="4"/>						   				        
+						  <input type="password" class="input_text" id="cpassword" name="cpassword" style="color: #000000;display: none;" tabindex="4"/>
+											</td>
+											 <td>
+											    <span class="feedback" id="scpwd">*</span>
+											 </td>
+									    </tr>
+										<tr>
+											<td align="right" valign="center"> 常用邮箱：</td>
+											<td>
+						  <input type="text" class="input_text" id="email_t" value="请输入邮箱" tabindex="4"/>						   				          
+						  <input type="text" class="input_text" id="email" name="cpassword" style="color: #000000;display: none;" tabindex="4"/>
+											</td>
+											 <td>
+											    <span class="feedback" id="semail">*</span>
+											 </td>
+									    </tr>
+										<tr>
+											<td align="right" valign="center">
+													输入验证码:
+												</td>
+											<td>
+												  
+											</td>
+											 <td>
+											    <span class="feedback" id="scd">*</span>
+											 </td>
+									    </tr>
+									    
+									    
+									    
+									    <tr>
+										    <td></td>
+									    	<td valign="bottom" style="PADDING-LEFT: 10px; ">
+									    	 <input name="submit" type="submit"  class="button" id="regsubmit" value="立即注册" tabindex="6"/>
+									    	</td>
+									         <td>
+											    
+											 </td>
+									    </tr>
+									   
+								  </table>
+								</form>
+							  <!--表单结束-->
+							</div>
+						</div>
+					</td>
+				  </tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" style="height: 30px;" valign="bottom"><hr/></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" style="font-size:12px;" valign="top">
+				<div style="width:60%; float:left;" align="left">
+					&copy;2014-2015&nbsp;<a href="http://sse.hust.edu.cn/" target="_blank" style="color:#3a6ea5">华中科技大软件学院</a> &nbsp;&nbsp;湖北省武汉市洪山区珞喻路1037号&nbsp;邮政编码：430074
+				</div>
+				<div style="width:40%; float:right;" align="right">
+					电话：027-87792252&nbsp;&nbsp;信箱：hubsupport@mail.hust.edu.cn				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
