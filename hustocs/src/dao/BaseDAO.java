@@ -12,14 +12,16 @@ import dao.HibeSesnFacy;
 import entity.Acay;
 
 public class BaseDAO{
-
+ 
 	private Session s = null;
+	
 	public BaseDAO() {
 		s = HibeSesnFacy.getSession();
 	}
 	public void Close() {
 		s.close();
 	}
+	
 	public List dc(DetachedCriteria dc) {
 		Criteria c = dc.getExecutableCriteria(s);
 		List rs = c.list();

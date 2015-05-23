@@ -9,14 +9,12 @@ import java.util.Set;
  */
 
 public class Tear implements java.io.Serializable {
-
 	// Fields
-
-	private String id;
-	private String email;
-	private String passwd;
-	private Timestamp time;
-	private Short status;
+	private String id;  //教工号
+	private String email;  //邮箱
+	private String passwd;  //密码
+	private Timestamp time;  //注册时间
+	private Short status;   
 	private Set tearInfos = new HashSet(0);
 	private Set stutFolws = new HashSet(0);
 	private Set lesns = new HashSet(0);

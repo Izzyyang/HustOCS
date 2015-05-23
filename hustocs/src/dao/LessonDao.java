@@ -5,35 +5,32 @@ import java.util.List;
 import entity.Lesn;
 
 public class LessonDao implements LessonDaoer {
-
+    private static BaseDAO baseDAO = new BaseDAO();
 	@Override
 	public boolean insert(Lesn lesson) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.add(lesson);
 	}
 
 	@Override
 	public boolean delete(String lessonId) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.deleObject(lessonId);
 	}
 
 	@Override
 	public boolean update(Lesn lesson) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.updateObject(lesson);
 	}
 
 	@Override
 	public void view(String lessonId) {
-		// TODO Auto-generated method stub
-		
+         Lesn lesn = (Lesn) baseDAO.getById(Lesn.class, lessonId);	
+         System.out.println(lesn.getId()+"     lession id ");
 	}
 
 	@Override
-	public List list(String teacherId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List list(String lessonId) {
+		String hqlString = "select * from Lesn ls where ls.id=?";
+		return baseDAO.find(Lesn.class, hqlString, lessonId);
 	}
 
 }

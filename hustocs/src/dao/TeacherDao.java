@@ -3,23 +3,21 @@ package dao;
 import entity.Tear;
 
 public class TeacherDao implements TeacherDaoer {
-
+    private static BaseDAO baseDAO = new BaseDAO();
+    
 	@Override
 	public boolean insert(Tear teacher) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.add(teacher);
 	}
 
 	@Override
 	public boolean update(Tear teacher) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.updateObject(teacher);
 	}
 
 	@Override
 	public Tear view(String tId) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Tear) baseDAO.getById(Tear.class, tId);
 	}
 
 }

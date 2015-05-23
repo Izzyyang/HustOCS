@@ -17,10 +17,4 @@ public class StudentService extends AbstractUserService {
 		return null;
 	}
 
-	@Override
-	public boolean update(UserServicer user) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
