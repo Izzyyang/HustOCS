@@ -24,12 +24,11 @@ public class LessonDao implements LessonDaoer {
 	@Override
 	public void view(String lessonId) {
          Lesn lesn = (Lesn) baseDAO.getById(Lesn.class, lessonId);	
-         System.out.println(lesn.getId()+"     lession id ");
+         System.out.println(lesn.getId()+" -- less ion id ");
 	}
 
 	@Override
-	public List list(String lessonId) {
-		String hqlString = "select * from Lesn ls where ls.id=?";
+	public List list(String hqlString,int lessonId) {
 		return baseDAO.find(Lesn.class, hqlString, lessonId);
 	}
 

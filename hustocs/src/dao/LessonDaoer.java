@@ -9,5 +9,5 @@ public interface LessonDaoer {
 	public boolean delete(String lessonId);
 	public boolean update(Lesn lesson);
 	public void view(String lessonId);
-	public List list(String lessonId);
+	public List list(String hqlString,int lessonId);
 }

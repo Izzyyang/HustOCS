@@ -22,6 +22,9 @@
         <property name="title" type="java.lang.String">
             <column name="TITLE" length="32" not-null="true" />
         </property>
+        <property name="picaddress" type="java.lang.String">
+            <column name="PICADDRESS" length="32" not-null="false" />
+        </property>
         <property name="brief" type="java.lang.String">
             <column name="BRIEF" length="65535" not-null="true" />
         </property>

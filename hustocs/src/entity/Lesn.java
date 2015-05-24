@@ -11,15 +11,15 @@ import java.util.Set;
 public class Lesn implements java.io.Serializable {
 
 	// Fields
-
 	private String id;
-	private Tear tear;
+	private Tear tear;  //授课老师
 	private Acay acay;
 	private Admn admn;
 	private String title;
 	private String brief;
 	private Timestamp time;
 	private Short status;
+	private String picaddress; //课程图片地址；
 	private Set stutHisies = new HashSet(0);
 	private Set reses = new HashSet(0);
 	private Set stutColts = new HashSet(0);
@@ -44,7 +44,7 @@ public class Lesn implements java.io.Serializable {
 
 	/** full constructor */
 	public Lesn(String id, Tear tear, Acay acay, Admn admn, String title,
-			String brief, Timestamp time, Short status, Set stutHisies,
+			String brief,String picaddress,Timestamp time, Short status, Set stutHisies,
 			Set reses, Set stutColts) {
 		this.id = id;
 		this.tear = tear;
@@ -53,6 +53,7 @@ public class Lesn implements java.io.Serializable {
 		this.title = title;
 		this.brief = brief;
 		this.time = time;
+		this.picaddress = picaddress;
 		this.status = status;
 		this.stutHisies = stutHisies;
 		this.reses = reses;
@@ -149,4 +150,11 @@ public class Lesn implements java.io.Serializable {
 		this.stutColts = stutColts;
 	}
 
+	public String getPicaddress() {
+		return picaddress;
+	}
+
+	public void setPicaddress(String picaddress) {
+		this.picaddress = picaddress;
+	}
 }

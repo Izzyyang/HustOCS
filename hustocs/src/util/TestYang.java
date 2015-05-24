@@ -16,15 +16,15 @@ public class TestYang {
 		
 		TeacherDao tDao = new TeacherDao();
 		Tear tear = tDao.view("0001");
-		
-		LessonDao ld = new LessonDao();
-		Lesn lesson = new Lesn();
-		lesson.setTear(tear);
-		lesson.setId("0001");
-		lesson.setBrief("111111111111");
-		lesson.setStatus(new Short("1"));
-		ld.insert(lesson);
-		ld.view("0001");
+		System.out.println(tear.getPic());
+//		LessonDao ld = new LessonDao();
+//		Lesn lesson = new Lesn();
+//		lesson.setTear(tear);
+//		lesson.setId("0002");
+//		lesson.setBrief("111111111111");
+//		lesson.setStatus(new Short("1"));
+//		ld.insert(lesson);
+//		ld.view("0002");
 		
 		System.out.println();
 	}
