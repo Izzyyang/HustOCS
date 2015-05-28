@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class Tear implements java.io.Serializable {
 	// Fields
-	private String id;  //教工号
+	private String id;  //id
 	private String email;  //邮箱
 	private String passwd;  //密码
 	private String pic;  //头像

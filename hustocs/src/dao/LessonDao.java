@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import entity.Lesn;
@@ -22,7 +23,7 @@ public class LessonDao implements LessonDaoer {
 	}
 
 	@Override
-	public void view(String lessonId) {
+	public void view(Serializable lessonId) {
          Lesn lesn = (Lesn) baseDAO.getById(Lesn.class, lessonId);	
          System.out.println(lesn.getId()+" -- less ion id ");
 	}

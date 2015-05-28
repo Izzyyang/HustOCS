@@ -21,8 +21,13 @@ public class BaseDAO{
 	public void Close() {
 		s.close();
 	}
+	public Session initSession(){
+		return HibeSesnFacy.getSession();
+	}
 	
 	public List dc(DetachedCriteria dc) {
+		Session s = null;
+        s = initSession();
 		Criteria c = dc.getExecutableCriteria(s);
 		List rs = c.list();
 		s.close();
@@ -33,6 +38,8 @@ public class BaseDAO{
 	 * 插入一个Object
 	 */
 	public boolean add(Object o){
+		Session s = null;
+        s = initSession();
 		try{
 			s.beginTransaction();
 			s.save(o);
@@ -44,21 +51,47 @@ public class BaseDAO{
 		}
 		return true;
 	}
-	
+	/**
+	 * 带条件的查询
+	 * @param c
+	 * @param strList
+	 * @param value
+	 * @return
+	 */
 	public List find(Class c, List<String> strList, List<Object> value){
+		Session s = null;
+        s = initSession();
 		DetachedCriteria dc = DetachedCriteria.forClass(c);
 		for(int i = 0; i < strList.size(); i++){
 			dc.add(Restrictions.eq(strList.get(i), value.get(i)));
 		}
 		List ls = dc(dc);
+		if (ls.size()>0) {
+			return ls;
+		}else{
+			return null;
+		}
+		
+	}
+	/*
+	 * 通过Unique键l或外键list Objects
+	 */
+	public List find(Class c, String field, Object value){
+		Session s = null;
+        s = initSession();
+		DetachedCriteria dc = DetachedCriteria.forClass(c);
+		dc.add(Restrictions.eq(field, value));
+		List ls = dc(dc);
 		return ls;
 	}
+	
 	
 	/*
 	 * 通过主键获取一个Object
 	 */
 	public Object getById(Class c, Serializable id) {
-		Session s = HibeSesnFacy.getSession();
+		Session s = null;
+        s = initSession();
 		s.beginTransaction();
 		Object o = s.get(c, id);
 		s.getTransaction().commit();
@@ -69,24 +102,18 @@ public class BaseDAO{
 	 * 通过主键加载一个Object
 	 */
 	public Object load(Class c,  Serializable id) {
+		Session s = null;
+        s = initSession();
 		Object o  = s.load(c,  id);
 		return o;
 	}
 		
 	/*
-	 * 通过Unique键l或外键list Objects
-	 */
-	public List find(Class c, String field, Object value){
-		DetachedCriteria dc = DetachedCriteria.forClass(c);
-		dc.add(Restrictions.eq(field, value));
-		List ls = dc(dc);
-		return ls;
-	}
-	
-	/*
 	 * 删除一个Object
 	 */
 	public boolean deleObject(Object o){
+		Session s = null;
+        s = initSession();
 		try{
 			s.beginTransaction();
 			s.delete(o);
@@ -102,6 +129,8 @@ public class BaseDAO{
 	 * 通过ID删除一个Object
 	 */
 	public boolean deleteById(Class c, Serializable id) {
+		Session s = null;
+        s = initSession();
 	    Object obj =s.load(c, id);
 	    if (obj != null) {
 	    	s.beginTransaction();
@@ -117,6 +146,8 @@ public class BaseDAO{
 	 * 更新Object
 	 */
 	public boolean updateObject(Object o){
+		Session s = null;
+        s = initSession();
 		try{
 			s.beginTransaction();
 			s.update(o);
@@ -132,6 +163,8 @@ public class BaseDAO{
 	
 	
 	public List listAll(Class c) {
+		Session s = null;
+        s = initSession();
 		DetachedCriteria dc = DetachedCriteria.forClass(c);
 		List ls = dc(dc);
 		return ls;
@@ -140,9 +173,9 @@ public class BaseDAO{
 	
 	public static void main(String args[]) {
 		//Test deleteById
-		Acay a = new Acay();
-		a.setId((short) 4);
-		a.setName("软件学院");
-		System.out.println(new BaseDAO().add(a));		
+//		Acay a = new Acay();
+//		a.setId((short) 4);
+//		a.setName("软件学院");
+//		System.out.println(new BaseDAO().add(a));
 	}
 }

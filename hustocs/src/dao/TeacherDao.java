@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import entity.Tear;
 
 public class TeacherDao implements TeacherDaoer {
@@ -20,4 +22,8 @@ public class TeacherDao implements TeacherDaoer {
 		return (Tear) baseDAO.getById(Tear.class, tId);
 	}
 
+	@Override
+	public List find(Class c, List<String> strList, List<Object> value) {
+		return baseDAO.find(c, strList, value);
+	}
 }

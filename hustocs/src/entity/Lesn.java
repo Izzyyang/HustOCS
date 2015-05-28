@@ -12,18 +12,19 @@ public class Lesn implements java.io.Serializable {
 
 	// Fields
 	private String id;
+	private String pid; //课程父id，大的分类；
 	private Tear tear;  //授课老师
-	private Acay acay;
-	private Admn admn;
+	private Acay acay;  //
+	private Admn admn;  //管理员
 	private String title;
 	private String brief;
 	private Timestamp time;
 	private Short status;
 	private String picaddress; //课程图片地址；
-	private Set stutHisies = new HashSet(0);
-	private Set reses = new HashSet(0);
-	private Set stutColts = new HashSet(0);
-
+	private Set stutHisies = new HashSet(0);  //浏览历史记录
+	private Set reses = new HashSet(0); 
+	private Set stutColts = new HashSet(0);  //收藏学生集合
+    
 	// Constructors
 
 	/** default constructor */
@@ -43,10 +44,11 @@ public class Lesn implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Lesn(String id, Tear tear, Acay acay, Admn admn, String title,
+	public Lesn(String id,String pid,Tear tear, Acay acay, Admn admn, String title,
 			String brief,String picaddress,Timestamp time, Short status, Set stutHisies,
 			Set reses, Set stutColts) {
 		this.id = id;
+		this.pid = pid;
 		this.tear = tear;
 		this.acay = acay;
 		this.admn = admn;
@@ -157,4 +159,13 @@ public class Lesn implements java.io.Serializable {
 	public void setPicaddress(String picaddress) {
 		this.picaddress = picaddress;
 	}
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+	
 }

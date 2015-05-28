@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 	$(document).ready(function(){ 
       	//$(".tablesorter").tablesorter(); 
-      	$("#courseSecond").append("<option value='1'>算法</option>");
+      	 $("#courseSecond").append("<option value='1'>算法</option>");
 		 $("#courseSecond").append("<option value='2'>语言</option>");
 		 $("#courseSecond").append("<option value='3'>数据库</option>");
 		 $("#courseSecond").append("<option value='4'>移动开发</option>");
@@ -30,14 +30,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 $("#courseSecond").append("<option value='7'>大数据</option>");
 		 $("#courseSecond").append("<option value='8'>机器学习</option>");
 		 $("#courseSecond").append("<option value='9'>其他</option>");
-      	
       	//When page loads...
-		$(".tab_content").hide(); //Hide all content
-		$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-		$(".tab_content:first").show(); //Show first tab content
+		 $(".tab_content").hide(); //Hide all content
+		 $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+		 $(".tab_content:first").show(); //Show first tab content
 		
-		$(".tablesorter").tablesorter(); 
-		$(".tog").hide();
+		 $(".tablesorter").tablesorter(); 
+		 $(".tog").hide();
       	
    	 });
 	//On Click Event
@@ -64,9 +63,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    $(this).next('.tog').toggle();
 	});
 
+    $(document).ready(function() {
 	//when choose course type
 	$("#courseFirst").change(function(){
-	  alert("1234567890");
 	  if($("#courseFirst").val()=="外教课程"){
 		 $("#courseSecond").empty(); 
 		 $("#courseSecond").append("<option value='1'>典型程序设计与应用</option>");
@@ -130,6 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      alert("请填写完整课程信息后提交！");
 		  return false;
 	  }
+   });
    });
 </script>
 
@@ -217,8 +217,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</aside><!-- end of sidebar -->
 	
 	<span style="width:75%; float:left">
-	     <section id="main" class="column">
-      <article class="module width_full">
+	     <section id="main">
+           <article class="module width_full">
 			<header><h3>课程信息</h3></header>
 				<div class="module_content">
 						<fieldset>

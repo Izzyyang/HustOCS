@@ -10,7 +10,6 @@ import java.util.Set;
 public class Acay implements java.io.Serializable {
 
 	// Fields
-
 	private Short id;
 	private String name;
 	private Set lesns = new HashSet(0);

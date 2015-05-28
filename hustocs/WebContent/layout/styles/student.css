@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+#studentinfo{ font-size:13px;}
+#studentinfotab{min-height:250px;}
+#studentinfo input[type="text"],#studentinfo input[type="password"]{
+   border:1px solid #ddd; height:25px;
+}
