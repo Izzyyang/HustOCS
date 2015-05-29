@@ -8,35 +8,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 
 <head>
+    <base href="<%=basePath%>"> 
 	<meta charset="utf-8"/>      
 	<title>Dashboard I Admin Panel</title>
 	
-	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="Teacher/css/layout.css" type="text/css" media="screen" />
 	<!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
-	<script src="js/hideshow.js" type="text/javascript"></script>
-	<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/jquery.equalHeight.js"></script>
+	<script type="text/javascript" src="Teacher/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="Teacher/js/hideshow.js" ></script>
+	<script type="text/javascript" src="Teacher/js/jquery.tablesorter.min.js" ></script>
+	<script type="text/javascript" src="Teacher/js/jquery.equalHeight.js"></script>
 	
 	<script type="text/javascript">
-	$(document).ready(function() 
-    	{ 
-      	  $(".tablesorter").tablesorter(); 
-   	 } 
-	);
-	$(document).ready(function() {
-
-	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
-
-	//On Click Event
+	$(function(){
+	    //1、
+	   // $(".tablesorter").tablesorter(); 
+		//When page loads...
+		//$(".tab_content").hide(); //Hide all content
+	//	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
+		//$(".tab_content:first").show(); //Show first tab content
+	
+    $(".tog").hide();
+	
+	//2、On Click Event show course;
 	$("ul.tabs li").click(function() {
-
 		$("ul.tabs li").removeClass("active"); //Remove any "active" class
 		$(this).addClass("active"); //Add "active" class to selected tab
 		$(".tab_content").hide(); //Hide all tab content
@@ -45,18 +43,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(activeTab).fadeIn(); //Fade in the active ID content
 		return false;
 	});
-
-});
+	
+	
+	}); //end of the outermost js;
+	 
     </script>
 
 	<script type="text/javascript">
-	$(document).ready(function() 
-    	{ 
-      	  $(".tablesorter").tablesorter(); 
-		  $("#ifm").attr("src","NewLesson.jsp");
-		  $(".tog").hide();
-   	 } 
-	);
 	$(document).ready(function() {
 
 	//When page loads...
@@ -78,9 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$("#logout").click(function (){
          confirm("你确认要退出系统？");
 	});
-    $("#courses>li>a").click(function(){
-	    $(this).next('.tog').toggle();
-	});
+  
 });
     </script>
     <script type="text/javascript">
@@ -96,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="index.jsp">华中大公开课教师系统</a></h1>
+			<h1 class="site_title"><a href="Teacher/index.jsp">华中大公开课教师系统</a></h1>
 			<h2 class="section_title">&nbsp;</h2>
 			<div class="btn_view_site"><a href="../teacherpage/teacher.jsp">个人主页</a></div>
 		</hgroup>
@@ -108,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开始新课</a></article>
+			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开始新课</a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
@@ -119,9 +110,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<hr/>
 		<h3>工具</h3>
 		<ul class="toggle">
-			<li class="icn_new_article" id="addnewCourse"><a href="index.jsp">开设新课程</a></li>
-			<li class="icn_edit_article" id="personInform"><a href="personalinfo.jsp">个人资料</a></li>
-			<li class="icn_categories" id="personSafe"><a href='securityinfo.jsp'">账号安全</a></li>
+			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
+			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
+			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
 			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
 		</ul>
 		<h3>课程状态</h3>
@@ -135,30 +126,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_folder">
 			    <a>数据库技术与应用</a>
 			    <ul class="tog">
-				     <li><a href="updateCourse.jsp" style="background:url(images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
 			</li>
 			<li class="icn_photo"><a>算法分析与设计</a>
 			       <ul class="tog">
-				     <li><a href="updateCourse.jsp" style="background:url(images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
 			</li>
 			<li class="icn_audio"><a>高级操作系统</a>
 			     <ul class="tog">
-				     <li><a href="updateCourse.jsp" style="background:url(images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
 			</li>
 			<li class="icn_video"><a>数据结构</a>
 			     <ul class="tog">
-				     <li><a href="updateCourse.jsp" style="background:url(images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -171,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<footer>
 			<hr />
 			<p><strong>Copyright &copy; 2011 Website Admin</strong></p>
-			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
+			<p>Theme by MediaLoot</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->
 	
@@ -231,30 +222,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</footer>
 		</article><!-- end of post new article -->
-		
-		<!--article class="module width_half">
-			<header><h3>留言</h3></header>
-			<div class="message_list">
-				<div class="module_content">
-					<div class="message"><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-					<p><strong>John Doe</strong></p></div>
-					<div class="message"><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-					<p><strong>John Doe</strong></p></div>
-					<div class="message"><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-					<p><strong>John Doe</strong></p></div>
-					<div class="message"><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-					<p><strong>John Doe</strong></p></div>
-					<div class="message"><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor.</p>
-					<p><strong>John Doe</strong></p></div>
-				</div>
-			</div>
-			<footer>
-				<form class="post_message">
-					<input type="text" value="Message" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
-					<input type="submit" class="btn_post_message" value=""/>
-				</form>
-			</footer>
-		</article><!-- end of messages article -->
 </span>
 
 </body>

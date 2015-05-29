@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <h3>欢迎登录华科软院视频站后台！</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" method="post">
+                        <form role="form" method="post" id="loginform">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" id="name" placeholder="请输入教工号" name="name">
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <input class="form-control" id="verify" placeholder="验证码" name="verify" type="input" style="width:100px;float:left;">
                                     <span style="float:left;"><img src="Teacher/image.jsp" name="validateCodeImg" border=0 id="validateCodeImg" style="width:60px;margin:0px 10px;"/><a href="javascript:void(0);" onClick="changeimg()">换一张 </a></span> 
                                 </div>
-                                <div id="vcode" style="margin-left:13px;line-height:16px;vertical-align:middle;clear:both;"></div>
+                                <div id="vcode" style="margin-left:13px;line-height:20px;vertical-align:middle;clear:both;margin-top:-10px;"></div>
                                 <!-- <div class="checkbox">
                                     <label>
                                         <input name="remember" type="checkbox" value="Remember Me">记住我
@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                                  -->
                                 <!-- Change this to a button or input when using this as a form -->
-                                <input type="submit" class="btn btn-lg btn-success btn-block" value="登录"/>
+                                <input id="sub" type="button" class="btn btn-lg btn-success btn-block" value="登录"/>
                             </fieldset>
                         </form>
                     </div>

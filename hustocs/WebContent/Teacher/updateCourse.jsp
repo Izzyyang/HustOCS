@@ -16,10 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
-	<script src="js/hideshow.js" type="text/javascript"></script>
-	<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/jquery.equalHeight.js"></script>
+	<script type="text/javascript" src="Teacher/js/jquery-1.11.1.js"></script>
+	<script src="Teacher/js/hideshow.js" type="text/javascript"></script>
+	<script src="Teacher/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="Teacher/js/jquery.equalHeight.js"></script>
 	
 	<script type="text/javascript">
 	$(document).ready(function() 
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$(document).ready(function() 
     	{ 
       	  $(".tablesorter").tablesorter(); 
-		  $("#ifm").attr("src","NewLesson.html");
+		  $("#ifm").attr("src","Teacher/NewLesson.html");
 		  $(".tog").hide();
    	 } 
 	);
@@ -202,7 +202,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="index.jsp">华中大公开课教师系统</a></h1>
+			<h1 class="site_title"><a href="Teacher/index.jsp">华中大公开课教师系统</a></h1>
 			<h2 class="section_title">&nbsp;</h2>
 			<div class="btn_view_site"><a href="../teacherpage/teacher.jsp">个人主页</a></div>
 		</hgroup>
@@ -214,7 +214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开始新课</a></article>
+			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开始新课</a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
@@ -225,9 +225,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<hr/>
 		<h3>工具</h3>
 		<ul class="toggle">
-			<li class="icn_new_article" id="addnewCourse"><a href="index.jsp">开设新课程</a></li>
-			<li class="icn_edit_article" id="personInform"><a href="personalinfo.jsp">个人资料</a></li>
-			<li class="icn_categories" id="personSafe"><a href='securityinfo.jsp'">账号安全</a></li>
+			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
+			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
+			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
 			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
 		</ul>
 		<h3>课程状态</h3>

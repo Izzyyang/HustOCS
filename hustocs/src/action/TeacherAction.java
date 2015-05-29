@@ -31,8 +31,6 @@ public class TeacherAction extends ActionSupport implements RequestAware,
 	protected HttpServletRequest servletRequest;
 	private HttpServletResponse servletresponse;
 	private TeacherInfoServicer teacherinfoService = TeacherServiceFactory.produceTeacherInfoService();
-			//new TeacherInfoService(new TeacherInfoDao());
-	//private TeacherServicer teacherServicer = TeacherServiceFactory.produceTeacherService();
     //登录时验证用户名
 	@SuppressWarnings("null")
 	public void verifyname() {
@@ -77,7 +75,6 @@ public class TeacherAction extends ActionSupport implements RequestAware,
 	}
 
 	public void verifypsw(){
-		System.out.println("------------------------------进入验证密码函数-----");
 		String teacheridcard;
 		String password;
 		// 获得OgnlValueStack 对象
@@ -91,7 +88,6 @@ public class TeacherAction extends ActionSupport implements RequestAware,
         
         password=servletRequest.getParameter("password").trim();
         teacheridcard=servletRequest.getParameter("idcard").trim();
-        System.out.println("------hhhhhhhhhhhhhhh------"+password+ "   " + teacheridcard);
         PrintWriter writer = null;
         
         try {
@@ -104,8 +100,7 @@ public class TeacherAction extends ActionSupport implements RequestAware,
         if(password !="" && teacheridcard !=""){
         	if(teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,teacheridcard ).size()>0){
         	    teacherinfo= (TearInfo)teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,teacheridcard ).get(0);
-        	    
-        	    System.out.println(teacherinfo.getIdcard()+"   --pass--  "+teacherinfo.getTear().getPasswd());
+        	    //System.out.println(teacherinfo.getIdcard()+"   --pass--  "+teacherinfo.getTear().getPasswd());
         	}
         	
         	if(teacherinfo!=null&&teacherinfo.getTear().getPasswd().equals(password)){
@@ -116,7 +111,7 @@ public class TeacherAction extends ActionSupport implements RequestAware,
         }else{
         	System.out.println("teachername is null");
         	if(password =="" && teacheridcard ==""){
-        		writer.print("empty！");
+        		writer.print("empty");
         	}else if(password ==""){
         		writer.print("* 密码不能为空！");
         	}
@@ -125,14 +120,12 @@ public class TeacherAction extends ActionSupport implements RequestAware,
       			writer.close();
 	}
 	 
-	//String rand = (String) servletRequest.getSession().getAttribute("rand");
 	/**
 	 * 验证码验证
 	 */
 	public void verifycode(){
-		System.out.println("-----------验证码---------");
-		String teacheridcard;
-		String password;
+		String code="";
+		String rand = (String) servletRequest.getSession().getAttribute("rand");
 		// 获得OgnlValueStack 对象
         OgnlValueStack stack = (OgnlValueStack)request.get("struts.valueStack");
         // 获得HttpServletResponse对象
@@ -142,9 +135,7 @@ public class TeacherAction extends ActionSupport implements RequestAware,
         servletresponse.setContentType("application/json");
         servletresponse.setCharacterEncoding("UTF-8");
         
-        password=servletRequest.getParameter("password").trim();
-        teacheridcard=servletRequest.getParameter("idcard").trim();
-        System.out.println("------hhhhhhhhhhhhhhh------"+password+ "   " + teacheridcard);
+        code=servletRequest.getParameter("code").trim();
         PrintWriter writer = null;
         
         try {
@@ -152,34 +143,66 @@ public class TeacherAction extends ActionSupport implements RequestAware,
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
-        TearInfo teacherinfo = null;
-        if(password !="" && teacheridcard !=""){
-        	if(teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,teacheridcard ).size()>0){
-        	    teacherinfo= (TearInfo)teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,teacheridcard ).get(0);
-        	    
-        	    System.out.println(teacherinfo.getIdcard()+"   --pass--  "+teacherinfo.getTear().getPasswd());
-        	}
-        	
-        	if(teacherinfo!=null&&teacherinfo.getTear().getPasswd().equals(password)){
-            	writer.print("* √密码正确");
-            }else{
-            	writer.print("* 教工号或者密码错误！");
-            }
-        }else{
-        	System.out.println("teachername is null");
-        	if(password =="" && teacheridcard ==""){
-        		writer.print("empty！");
-        	}else if(password ==""){
-        		writer.print("* 密码不能为空！");
-        	}
+        if(code !="" && code.equals(rand)){
+        	writer.print("* √验证码正确！");
+        }else if(code==""||code==null){
+        	writer.print("* 验证码不能为空！");
+        	System.out.println(" 22222");
+      	}else{
+      		System.out.println(" 33333333 back code wrong");
+      		writer.print("* 验证码不正确，请重新输入！");
       	}
       			writer.flush();
       			writer.close();
-	
 	}
-	 
-	
+	/**
+	 * 提交验证
+	 */
+	public void verifysubcode(){
+		String code="";
+		String idcard="";
+		String password="";
+		String rand = (String) servletRequest.getSession().getAttribute("rand");
+		// 获得OgnlValueStack 对象
+        OgnlValueStack stack = (OgnlValueStack)request.get("struts.valueStack");
+        // 获得HttpServletResponse对象
+		servletresponse = (HttpServletResponse)stack.getContext().get(StrutsStatics.HTTP_RESPONSE);
+        servletresponse.setContentType("text/xml;charset=UTF-8");   
+        servletresponse.setHeader("Cache-Control", "no-cache"); 
+        servletresponse.setContentType("application/json");
+        servletresponse.setCharacterEncoding("UTF-8");
+        
+        code=servletRequest.getParameter("code").trim();
+        idcard=servletRequest.getParameter("idcard").trim();
+        password=servletRequest.getParameter("password").trim();
+        PrintWriter writer = null;
+        TearInfo teacherinfo=null;
+        
+        try {
+			writer = servletresponse.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        //用户名存在
+        if(teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,idcard ).size()>0){
+    	    teacherinfo= (TearInfo)teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,idcard ).get(0);
+    	    //用户名和密码后台验证通过；
+    	    if(teacherinfo.getTear().getPasswd().equals(password)){
+    	    	if(code.equals(rand)){
+	    	    	servletRequest.getSession().setAttribute("tear", teacherinfo);
+	    	    	writer.print("success");
+    	    	}else{
+    	    		writer.print("codewrong");
+    	    	}
+    	    }else{
+    	    	writer.print("nameOrpass");
+    	    }
+        }else{
+        	writer.print("noIdCard");
+        }
+      			writer.flush();
+      			writer.close();
+	}
 	
 	@Override
 	public void setServletRequest(HttpServletRequest servletRequest) {

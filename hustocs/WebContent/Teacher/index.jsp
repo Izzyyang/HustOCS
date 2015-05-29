@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -7,20 +8,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!doctype html>
 <html lang="en">
 <head>
+    <base href="<%=basePath%>">  
 	<meta charset="utf-8"/>    
 	<title>Dashboard I Admin Panel</title>
-	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+	<link type="text/css" rel="stylesheet" href="Teacher/css/layout.css" media="screen" />
 	<!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
-	<script src="js/hideshow.js" type="text/javascript"></script>
-	<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/jquery.equalHeight.js"></script>
+	<script type="text/javascript" src="Teacher/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="Teacher/js/hideshow.js"></script>
+	<script type="text/javascript" src="Teacher/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="Teacher/js/jquery.equalHeight.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){ 
-      	//$(".tablesorter").tablesorter(); 
       	 $("#courseSecond").append("<option value='1'>算法</option>");
 		 $("#courseSecond").append("<option value='2'>语言</option>");
 		 $("#courseSecond").append("<option value='3'>数据库</option>");
@@ -30,40 +31,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 $("#courseSecond").append("<option value='7'>大数据</option>");
 		 $("#courseSecond").append("<option value='8'>机器学习</option>");
 		 $("#courseSecond").append("<option value='9'>其他</option>");
-      	//When page loads...
-		 $(".tab_content").hide(); //Hide all content
-		 $("ul.tabs li:first").addClass("active").show(); //Activate first tab
-		 $(".tab_content:first").show(); //Show first tab content
-		
-		 $(".tablesorter").tablesorter(); 
 		 $(".tog").hide();
-      	
-   	 });
-	//On Click Event
-	$("ul.tabs li").click(function() {
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab_content").hide(); //Hide all tab content
-
-		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active ID content
-		return false;
-	});
-	
-    $(function(){
-        $('.column').equalHeight();
-    });
-    </script>
-
-	<script type="text/javascript">
-	$("#logout").click(function (){
-         confirm("你确认要退出系统？");
-	});
-    $("#courses>li>a").click(function(){
-	    $(this).next('.tog').toggle();
-	});
-
-    $(document).ready(function() {
+		 
+		$("#logout").click(function (){confirm("你确认要退出系统？");});
+	    $("#courses>li>a").click(function(){
+		    $(this).next('.tog').toggle();
+		}); 
+			
+		
 	//when choose course type
 	$("#courseFirst").change(function(){
 	  if($("#courseFirst").val()=="外教课程"){
@@ -88,6 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    $("#courseSecond").append("<option value='10'>其他</option>");
 	   }
 	});
+	
 	//course related valid
 	$("input[name='courseName']").blur(function (){
 	   $("#feedback").css("display","block");
@@ -130,17 +106,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  return false;
 	  }
    });
-   });
+   
+   
+});
+   
+  $(function(){$('.column').equalHeight();});
 </script>
 
 </head>
-
-
 <body>
-
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="index.jsp">华中大公开课教师系统</a></h1>
+			<h1 class="site_title"><a href="Teacher/index.jsp">华中大公开课教师系统</a></h1>
 			<h2 class="section_title">&nbsp;</h2>
 			<div class="btn_view_site"><a href="../teacherpage/teacher.jsp">个人主页</a></div>
 		</hgroup>
@@ -148,20 +125,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>李杰 (<a href="#">3 条消息 </a>)</p>
+		 <s:if test="#session.user!=null">
+			<p><s:property value="%{#session.tear.name}"/> (<a href="#">欢迎您！ </a>)</p>
+		  </s:if>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开始新课</a></article>
+			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开设新课</a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column" style="min-height:660px; max-height:800px;">
 		<h3>工具</h3>
 		<ul class="toggle">
-			<li class="icn_new_article" id="addnewCourse"><a href="index.jsp">开设新课程</a></li>
-			<li class="icn_edit_article" id="personInform"><a href="personalinfo.jsp">个人资料</a></li>
-			<li class="icn_categories" id="personSafe"><a href='securityinfo.jsp'">账号安全</a></li>
+			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
+			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
+			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
 			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
 		</ul>
 		<h3>课程状态</h3>
@@ -173,32 +152,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h3>课程管理</h3>
 		<ul class="toggle" id="courses">
 			<li class="icn_folder">
-			    <a>数据库技术与应用</a>
+			   <a>数据库原理</a>
 			    <ul class="tog">
-				     <li><a href="updateCourse.jsp" style="background:url(images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload" style="background:url(Teacher/images/icn_folder.png) no-repeat scroll left center rgba(0, 0, 0, 0);">上传课件</a></li>
 				</ul>
 			</li>
-			<li class="icn_photo"><a>算法分析与设计</a>
-			       <ul class="tog">
-				     <li><a href="updateCourse.jsp" style="background:url(images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+			
+			<li class="icn_audio"><a>算法分析</a>
+			     <ul class="tog">
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
 			</li>
+			
 			<li class="icn_audio"><a>高级操作系统</a>
 			     <ul class="tog">
-				     <li><a href="updateCourse.jsp" style="background:url(images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
 			</li>
 			<li class="icn_video"><a>数据结构</a>
 			     <ul class="tog">
-				     <li><a href="updateCourse.jsp" style="background:url(images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -212,7 +193,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<footer>
 			<hr />
 			<p><strong>Copyright &copy; 2011 Website Admin</strong></p>
-			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
+			<p>Theme by MediaLoot</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->
 	
@@ -264,7 +245,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </article><!-- end of post new article -->
 </section>
 </span>
-
 </body>
-
 </html>
