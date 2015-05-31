@@ -23,14 +23,15 @@ public class LessonDao implements LessonDaoer {
 	}
 
 	@Override
-	public void view(Serializable lessonId) {
-         Lesn lesn = (Lesn) baseDAO.getById(Lesn.class, lessonId);	
-         System.out.println(lesn.getId()+" -- less ion id ");
+	public Lesn view(Class c, Serializable lessonId) {
+		// TODO Auto-generated method stub
+		return (Lesn) baseDAO.getById(c, lessonId);
 	}
 
 	@Override
-	public List list(String hqlString,int lessonId) {
-		return baseDAO.find(Lesn.class, hqlString, lessonId);
+	public List list(Class c, List<String> strList, List<Object> value) {
+		// TODO Auto-generated method stub
+		return baseDAO.find(c, strList, value);
 	}
 
 }

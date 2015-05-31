@@ -9,6 +9,6 @@ public interface LessonDaoer {
 	public boolean insert(Lesn lesson);
 	public boolean delete(String lessonId);
 	public boolean update(Lesn lesson);
-	public void view(Serializable lessonId);
-	public List list(String hqlString,int lessonId);
+	public Lesn view(Class c,Serializable lessonId);
+	public List list(Class c, List<String> strList, List<Object> value);
 }

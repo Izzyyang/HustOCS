@@ -12,7 +12,9 @@ public class Lesn implements java.io.Serializable {
 
 	// Fields
 	private String id;
-	private String pid; //课程父id，大的分类；
+	private String fclassify; //一级分类；
+	private String sclassify; //课程二级分类
+	; //课程父id，二级分类；
 	private Tear tear;  //授课老师
 	private Acay acay;  //
 	private Admn admn;  //管理员
@@ -32,9 +34,11 @@ public class Lesn implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Lesn(String id, Tear tear, Admn admn, String title, String brief,
+	public Lesn(String id,String fclassify,String sclassify, Tear tear, Admn admn, String title, String brief,
 			Timestamp time, Short status) {
 		this.id = id;
+		this.fclassify = fclassify;
+		this.sclassify = sclassify;
 		this.tear = tear;
 		this.admn = admn;
 		this.title = title;
@@ -44,11 +48,12 @@ public class Lesn implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Lesn(String id,String pid,Tear tear, Acay acay, Admn admn, String title,
+	public Lesn(String id,String fclassify,String sclassify,Tear tear, Acay acay, Admn admn, String title,
 			String brief,String picaddress,Timestamp time, Short status, Set stutHisies,
 			Set reses, Set stutColts) {
 		this.id = id;
-		this.pid = pid;
+		this.fclassify = fclassify;
+		this.sclassify = sclassify;
 		this.tear = tear;
 		this.acay = acay;
 		this.admn = admn;
@@ -160,12 +165,20 @@ public class Lesn implements java.io.Serializable {
 		this.picaddress = picaddress;
 	}
 
-	public String getPid() {
-		return pid;
+	public String getFclassify() {
+		return fclassify;
 	}
 
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setFclassify(String fclassify) {
+		this.fclassify = fclassify;
+	}
+
+	public String getSclassify() {
+		return sclassify;
+	}
+
+	public void setSclassify(String sclassify) {
+		this.sclassify = sclassify;
 	}
 	
 }

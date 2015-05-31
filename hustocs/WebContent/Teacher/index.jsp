@@ -22,15 +22,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="Teacher/js/jquery.equalHeight.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){ 
-      	 $("#courseSecond").append("<option value='1'>算法</option>");
-		 $("#courseSecond").append("<option value='2'>语言</option>");
-		 $("#courseSecond").append("<option value='3'>数据库</option>");
-		 $("#courseSecond").append("<option value='4'>移动开发</option>");
-		 $("#courseSecond").append("<option value='5'>web开发</option>");
-		 $("#courseSecond").append("<option value='6'>嵌入式</option>");
-		 $("#courseSecond").append("<option value='7'>大数据</option>");
-		 $("#courseSecond").append("<option value='8'>机器学习</option>");
-		 $("#courseSecond").append("<option value='9'>其他</option>");
+      	 $("#courseSecond").append("<option value='21'>算法</option>");
+		 $("#courseSecond").append("<option value='22'>语言</option>");
+		 $("#courseSecond").append("<option value='23'>数据库</option>");
+		 $("#courseSecond").append("<option value='24'>移动开发</option>");
+		 $("#courseSecond").append("<option value='25'>web开发</option>");
+		 $("#courseSecond").append("<option value='26'>嵌入式</option>");
+		 $("#courseSecond").append("<option value='27'>大数据</option>");
+		 $("#courseSecond").append("<option value='28'>机器学习</option>");
+		 $("#courseSecond").append("<option value='29'>其他</option>");
 		 $(".tog").hide();
 		 
 		$("#logout").click(function (){confirm("你确认要退出系统？");});
@@ -41,13 +41,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	//when choose course type
 	$("#courseFirst").change(function(){
-	  if($("#courseFirst").val()=="外教课程"){
+	  if($("#courseFirst").val()=="2"){
 		 $("#courseSecond").empty(); 
 		 $("#courseSecond").append("<option value='1'>典型程序设计与应用</option>");
 		 $("#courseSecond").append("<option value='2'>软件项目管理</option>");
 		 $("#courseSecond").append("<option value='3'>分布式程序设计</option>");
 		 $("#courseSecond").append("<option value='4'>英语听说强化</option>");
-	   }else if($("#courseFirst").val()=="学院课程"){
+	   }else if($("#courseFirst").val()=="1"){
 	     $("#courseSecond").empty(); 
 		 $("#courseSecond").append("<option value='1'>算法</option>");
 		 $("#courseSecond").append("<option value='2'>语言</option>");
@@ -65,9 +65,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 	
 	//course related valid
-	$("input[name='courseName']").blur(function (){
+	$("#coursename").blur(function (){
 	   $("#feedback").css("display","block");
-	   if($("input[name='courseName']").val()=="" || $("input[name='courseName']").val()==null){
+	   if($(this).val()=="" || $(this).val()==null){
 		 $("#ctitle").css("display","block");
 		 $("#ctitle").html("");
 		 $("#ctitle").html("课程题目不能为空！");
@@ -78,9 +78,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 	
 							
-	$("textarea[name='coursedes']").blur(function (){
+	$("#coursedes").blur(function (){
 	   $("#feedback").css("display","block");
-	   if($("textarea[name='coursedes']").val()=="" || $("textarea[name='coursedes']").val()==null){
+	   if($(this).val()=="" || $(this).val()==null){
 		 $("#cdes").css("display","block");
 		 $("#cdes").html("");
 		 $("#cdes").html("课程描述不能为空！");
@@ -200,33 +200,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<span style="width:75%; float:left">
 	     <section id="main">
            <article class="module width_full">
+           <form action="lesson/addCourse_Action" method="post" enctype="multipart/form-data">
 			<header><h3>课程信息</h3></header>
 				<div class="module_content">
+				
 						<fieldset>
 							<label>课程名称</label>
-							<input type="text" id="coursename" name="courseName" style=" width:96%;">
+							<input type="text" id="coursename" name="lesson.title" style=" width:96%;">
 						</fieldset>
 						<fieldset>
 						    <span style="float:left; width:60%; margin-left:10px;">
 								<label>课程简介</label>
-								<textarea rows="12" name="coursedes"></textarea>
+								<textarea rows="12" name="lesson.brief" id="coursedes"></textarea>
 							</span>
 							<span style="float:left; width:30%;">
 							    <label>课程图片</label>
-							    <input type="file">
+							    <input type="file" name="image">
 							</span>
 						</fieldset>
 						<fieldset style="width:48%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
 							<label>一级分类</label>
-							<select style="width:92%;" id="courseFirst">
-								<option>学院课程</option>
-								<option>外教课程</option>
-								<option>其他</option>
+							<select style="width:92%;" id="courseFirst" name="lesson.fclassify">
+								<option value="1">学院课程</option>
+								<option value="2">外教课程</option>
+								<option value="3">其他</option>
 							</select>
 						</fieldset>
 						<fieldset style="width:48%; float:left;">
 							<label>二级分类</label>
-							<select style="width:92%;" id="courseSecond">
+							<select style="width:92%;" id="courseSecond" name="lesson.sclassify">
 							</select>
 						</fieldset>
 						<div class="clear"></div>
@@ -238,10 +240,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			<footer>
 				<div class="submit_link">
-				   <input type="submit" value="添加课程" class="alt_btn" name="csub">
-					<input type="submit" value="重置">
+				    <input type="submit" value="添加课程" class="alt_btn" name="csub">
+					<input type="reset" value="重置">
 				</div>
 			</footer>
+	    </form>
 	  </article><!-- end of post new article -->
 </section>
 </span>

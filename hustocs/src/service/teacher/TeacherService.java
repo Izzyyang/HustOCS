@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.TeacherDaoer;
 import entity.Tear;
+import entity.TearInfo;
 
 public class TeacherService implements TeacherServicer {
 	
@@ -42,7 +43,8 @@ public class TeacherService implements TeacherServicer {
 	}
     //查找教师
 	@Override
-	public void viewInfo() {
+	public TearInfo viewInfo() {
+		return null;
 	}
 
 	@Override

@@ -8,6 +8,6 @@ import service.UserServicer;
 
 public interface TeacherServicer extends UserServicer {
 	public boolean updateInfo();
-	public void viewInfo();
+	public TearInfo viewInfo();
 	public List<Tear> findTeacherByStr(Class c, List<String> strList, List<Object> value);
 }

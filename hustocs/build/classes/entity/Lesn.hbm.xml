@@ -8,10 +8,15 @@
     <class name="entity.Lesn" table="T_LESSON" catalog="HUSTOCS">
         <id name="id" type="java.lang.String">
             <column name="ID" length="32" />
-            <generator class="assigned"></generator>
+            <!--native能够根据底层数据库自动选择主键生成方式 
+            <generator class="assigned"></generator>-->
+            <generator class="uuid"> </generator>
         </id>
-        <property name="pid" type="java.lang.String">
-            <column name="PID" length="32" not-null="true" />
+        <property name="fclassify" type="java.lang.String">
+            <column name="Fclassify" length="32" not-null="true" />
+        </property>
+        <property name="sclassify" type="java.lang.String">
+            <column name="Sclassify" length="32" not-null="true" />
         </property>
         <many-to-one name="tear" class="entity.Tear" fetch="select">
             <column name="TEACHERID" length="32" not-null="true" />
@@ -20,7 +25,7 @@
             <column name="ACADEMYID" />
         </many-to-one>
         <many-to-one name="admn" class="entity.Admn" fetch="select">
-            <column name="CHECKADMINID" length="32" not-null="true" />
+            <column name="CHECKADMINID" length="32" not-null="false" />
         </many-to-one>
         <property name="title" type="java.lang.String">
             <column name="TITLE" length="32" not-null="true" />

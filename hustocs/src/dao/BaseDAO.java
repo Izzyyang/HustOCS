@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -10,6 +11,9 @@ import org.hibernate.criterion.Restrictions;
 
 import dao.HibeSesnFacy;
 import entity.Acay;
+import entity.Admn;
+import entity.Lesn;
+import entity.Tear;
 
 public class BaseDAO{
  
@@ -41,11 +45,13 @@ public class BaseDAO{
 		Session s = null;
         s = initSession();
 		try{
-			s.beginTransaction();
+			//s.beginTransaction();
+			s.getTransaction().begin();
 			s.save(o);
 			s.getTransaction().commit();
-			s.close();
+			//s.close();
 		}catch(Exception e){
+			s.getTransaction().rollback();
 			e.printStackTrace();
 			return false;
 		}
@@ -174,8 +180,19 @@ public class BaseDAO{
 	public static void main(String args[]) {
 		//Test deleteById
 //		Acay a = new Acay();
-//		a.setId((short) 4);
-//		a.setName("软件学院");
+//		a.setId((short) 5);
+//		a.setName("计算机学院");
 //		System.out.println(new BaseDAO().add(a));
+		Tear tear = (Tear) new BaseDAO().getById(Tear.class,"1");
+		//Lesn less = new Lesn("2", "1", "2", tear, null, "12345678", "2345678", new Timestamp(System.currentTimeMillis()), (short)1);
+		Lesn less = new Lesn();
+		less.setTear(tear);
+		less.setBrief("111");
+		less.setFclassify("1");
+		less.setSclassify("2");
+		less.setTitle("23457890-=");
+		less.setStatus((short) 0);
+		less.setTime(new Timestamp(System.currentTimeMillis()));
+		new BaseDAO().add(less);
 	}
 }
