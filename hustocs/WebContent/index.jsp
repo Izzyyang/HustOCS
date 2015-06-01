@@ -105,7 +105,7 @@
         </ul>
       </li>
 	  
-      <li><a href="#">学院课程</a>
+      <li><a href="#">本科生课程</a>
        
 	   <ul>
           <li ><a class="drop" href="#" >数学/算法</a>
@@ -141,29 +141,37 @@
       </li>
 	  
 	  
-      <li><a href="#">外教课程</a>
+      <li><a href="#">研究生课程</a>
 	  
         <ul>
-          <li><a href="#">典型程序设计与应用</a></li>
-          <li><a href="#">软件项目管理</a></li>
-          <li><a href="#">分布式程序设计</a></li>
-		  <li><a href="#">英语听说强化</a></li>
+          <li><a href="#">面向对象</a></li>
+          <li><a href="#">高级软件工程</a></li>
+          <li><a href="#">高级软件测试</a></li>
+		  <li><a href="#">外教课程</a>
+		         <ul> 
+                  <li><a href="#">典型程序设计与应用</a></li>
+                  <li><a href="#">软件项目管理</a></li>
+                  <li><a href="#">分布式程序设计</a></li>
+				  <li><a href="#">英语听说强化</a></li>
+              </ul>
+		  </li>
         </ul>
       </li>
 	  
-	  <li><a href="#">关于我们/联系我们</a>
+	  <li><a href="#">其他</a>
 	  
         <ul>
           <li><a href="http://sse.hust.edu.cn/">学院首页</a></li>
-          <li><a href="#footer">邮箱</a></li>
-          <li><a href="#footer">电话</a></li>
+          <li><a href="#footer">成人教育</a></li>
+          <li><a href="#footer">自考专业</a></li>
         </ul>
       </li>
 	  
-     <li><a href="#">个人中心</a>
+     <li><a href="#">联系我们</a>
 	  
         <ul>
-          <li><a href="#">我的课程</a></li>
+          <li><a href="#">学院首页</a></li>
+          <li><a href="#">邮箱</a></li>
         </ul>
       </li>
 	  

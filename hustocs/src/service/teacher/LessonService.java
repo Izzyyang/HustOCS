@@ -31,7 +31,7 @@ public class LessonService implements LessonServicer{
 		return lessonDao.delete(lessonId);
 	}
 	@Override
-	public List listLessons(Class c, List<String> strList, List<Object> value) {
+	public List listLessons(Class c, List<Object> strList, List<Object> value) {
 		return lessonDao.list(c, strList, value);
 	}
 	@Override

@@ -52,6 +52,9 @@
 			<param name="savePath">/Teacher/uploadFiles</param>
             <result name="success">/Teacher/index.jsp</result>
             <result name="failaddLes">/Teacher/login.jsp</result>
+            <!-- query teacher's all lesson -->
+            <result name="teacherHaveLess">/Teacher/TeacherLess.jsp</result>
+            <result name="teacherNoLess">/Teacher/noLess.jsp</result>
          </action>
   </package>
 </struts>    

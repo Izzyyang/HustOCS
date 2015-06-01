@@ -9,5 +9,5 @@ import service.UserServicer;
 public interface TeacherServicer extends UserServicer {
 	public boolean updateInfo();
 	public TearInfo viewInfo();
-	public List<Tear> findTeacherByStr(Class c, List<String> strList, List<Object> value);
+	public List<Tear> findTeacherByStr(Class c, List<Object> strList, List<Object> value);
 }

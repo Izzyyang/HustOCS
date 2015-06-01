@@ -48,7 +48,7 @@ public class TeacherService implements TeacherServicer {
 	}
 
 	@Override
-	public List<Tear> findTeacherByStr(Class c, List<String> strList, List<Object> value){
+	public List<Tear> findTeacherByStr(Class c, List<Object> strList, List<Object> value){
 		return teacherDao.find(c, strList, value);
 	}
 }

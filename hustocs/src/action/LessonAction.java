@@ -3,7 +3,11 @@ package action;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,8 +46,7 @@ public class LessonAction extends ActionSupport implements RequestAware,ServletR
 	 * @return
 	 */
 	public String addCourse(){
-		System.out.println("123456789");
-		System.out.println(" 文件名字   "+imageFileName);
+		//System.out.println(" 文件名字   "+imageFileName);
 		try {
 			lesson.setPicaddress(this.getFilePath(image, imageFileName));
 		} catch (Exception e) {
@@ -56,18 +59,6 @@ public class LessonAction extends ActionSupport implements RequestAware,ServletR
 		lesson.setTear(teacher.getTear());
 		//(new Date()).getTime();
 		lesson.setTime(new Timestamp(System.currentTimeMillis()));
-		
-		
-//		Lesn less = new Lesn();
-//		less.setTear((Tear) new BaseDAO().getById(Tear.class,"1"));
-//		less.setBrief("111");
-//		less.setFclassify("1");
-//		less.setSclassify("2");
-//		less.setTitle("23457890-=");
-//		less.setStatus((short) 0);
-//		less.setTime(new Timestamp(System.currentTimeMillis()));
-		
-//		//lessonService.openLesson(less);
 		if(lessonService.openLesson(lesson)){
 			System.out.println("  add lesson success  !");
 		   return "success";
@@ -90,7 +81,54 @@ public class LessonAction extends ActionSupport implements RequestAware,ServletR
 			FileUtils.copyFile(file, saveFile);
 		}
 		System.out.println(savePath + "\\" + fileName);
-		return savePath + "\\" + fileName;
+		return fileName;
+	}
+	/**
+	 * query teacher's all lesson
+	 * @return
+	 */
+	public String queryTeacherLesson(){
+		TearInfo teacherInfo = (TearInfo) servletRequest.getSession().getAttribute("tear");
+		Tear teacher = null;
+		if(teacherInfo!=null){
+		   teacher = teacherInfo.getTear();
+		}
+		if(teacher!=null){
+			if(teacher.getLesns()!=null){
+				Set<Lesn> flesSet = new HashSet<>();
+				Set<Lesn> slesSet = new HashSet<>();
+				
+				List<Object> fQueryList  = new ArrayList<>();
+				List<Object> fVlueList  = new ArrayList<>();
+				fQueryList.add("tear");
+				fVlueList.add(teacher);
+				fQueryList.add("fclassify");
+				fVlueList.add("1");
+				
+				List<Object> sQueryList  = new ArrayList<>();
+				List<Object> sVlueList  = new ArrayList<>();
+				sQueryList.add("tear");
+				sVlueList.add(teacher);
+				sQueryList.add("fclassify");
+				sVlueList.add("2");
+				
+				List<Lesn> fLessList = lessonService.listLessons(Lesn.class, fQueryList, fVlueList);
+				flesSet =new HashSet<Lesn>();
+				flesSet.addAll(fLessList);
+				
+				List<Lesn> sLessList = lessonService.listLessons(Lesn.class, sQueryList, sVlueList);
+				slesSet =new HashSet<Lesn>();
+				slesSet.addAll(sLessList);
+				
+				servletRequest.getSession().setAttribute("flesSet", flesSet);// bachelor lesson
+				servletRequest.getSession().setAttribute("slesSet", slesSet);// master lesson
+			    return "teacherHaveLess";
+			}else{
+			    return "teacherNoLess";
+			}
+		}else{
+		    return "failaddLes";
+		}
 	}
 	
 	

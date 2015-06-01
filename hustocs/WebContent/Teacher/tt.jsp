@@ -140,10 +140,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column" style="min-height:660px; max-height:800px;">
-	    <form class="quick_search">
+		<h3>工具</h3>
+		<form class="quick_search">
 			<input type="text" value="快速搜索" onFocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
 		</form>
-		<h3>工具</h3>
 		<ul class="toggle">
 			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
 			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
@@ -152,7 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</ul>
 		<h3>我的课程</h3>
 		<ul class="toggle">
-			<li class="icn_add_user"><a href="tear/queryTeacherLesson_Action">课程列表</a></li>
+			<li class="icn_add_user"><a href="#">课程列表</a></li>
 			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
 			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
@@ -201,48 +201,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	     <section id="main">
            <article class="module width_full">
            <form action="lesson/addCourse_Action" method="post" enctype="multipart/form-data">
-			<header><h3>课程信息</h3></header>
-				<div class="module_content">
-				
+			<header><h3>所有课程</h3></header>
+				<div class="module_content" style="min-height: 400px;">
 						<fieldset>
-							<label>课程名称</label>
-							<input type="text" id="coursename" name="lesson.title" style=" width:96%;">
+							<table> 
+							     <thead><tr><td colspan="4"><label>本科课程</label></td></tr></thead>
+							     <tr><td>java</td><td>上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							     <tr><td>XML</td><td>上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							     <tr><td>操作系统</td><td>上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							</table>
 						</fieldset>
-						<fieldset>
-						    <span style="float:left; width:60%; margin-left:10px;">
-								<label>课程简介</label>
-								<textarea rows="12" name="lesson.brief" id="coursedes"></textarea>
-							</span>
-							<span style="float:left; width:30%;">
-							    <label>课程图片</label>
-							    <input type="file" name="image">
-							</span>
-						</fieldset>
-						<fieldset style="width:48%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
-							<label>一级分类</label>
-							<select style="width:92%;" id="courseFirst" name="lesson.fclassify">
-								<option value="1">学院课程</option>
-								<option value="2">外教课程</option>
-								<option value="3">其他</option>
-							</select>
-						</fieldset>
-						<fieldset style="width:48%; float:left;">
-							<label>二级分类</label>
-							<select style="width:92%;" id="courseSecond" name="lesson.sclassify">
-							</select>
+					<fieldset>
+							<label>本科课程</label>
+							<table>
+							     <tr><td>java</td><td>上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							     <tr><td>XML</td><td>上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							     <tr><td>操作系统</td><td>上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							</table>
 						</fieldset>
 						<div class="clear"></div>
-						<div id="feedback" style="display:none">
-							<h4 class="alert_error" id="ctitle" style="display:none"></h4>
-							<h4 class="alert_error" id="cdes" style="display:none"></h4>
-	                    </div>
-						
 				</div>
 			<footer>
-				<div class="submit_link">
-				    <input type="submit" value="添加课程" class="alt_btn" name="csub">
-					<input type="reset" value="重置">
-				</div>
 			</footer>
 	    </form>
 	  </article><!-- end of post new article -->

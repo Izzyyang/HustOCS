@@ -2,7 +2,11 @@ package dao;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -64,12 +68,12 @@ public class BaseDAO{
 	 * @param value
 	 * @return
 	 */
-	public List find(Class c, List<String> strList, List<Object> value){
+	public List find(Class c, List<Object> strList, List<Object> value){
 		Session s = null;
         s = initSession();
 		DetachedCriteria dc = DetachedCriteria.forClass(c);
 		for(int i = 0; i < strList.size(); i++){
-			dc.add(Restrictions.eq(strList.get(i), value.get(i)));
+			dc.add(Restrictions.eq((String) strList.get(i), value.get(i)));
 		}
 		List ls = dc(dc);
 		if (ls.size()>0) {
@@ -184,15 +188,36 @@ public class BaseDAO{
 //		a.setName("计算机学院");
 //		System.out.println(new BaseDAO().add(a));
 		Tear tear = (Tear) new BaseDAO().getById(Tear.class,"1");
+	
+		// test add lesson;
 		//Lesn less = new Lesn("2", "1", "2", tear, null, "12345678", "2345678", new Timestamp(System.currentTimeMillis()), (short)1);
-		Lesn less = new Lesn();
-		less.setTear(tear);
-		less.setBrief("111");
-		less.setFclassify("1");
-		less.setSclassify("2");
-		less.setTitle("23457890-=");
-		less.setStatus((short) 0);
-		less.setTime(new Timestamp(System.currentTimeMillis()));
-		new BaseDAO().add(less);
+//		Lesn less = new Lesn();
+//		less.setTear(tear);
+//		less.setBrief("111");
+//		less.setFclassify("1");
+//		less.setSclassify("2");
+//		less.setTitle("23457890-=");
+//		less.setStatus((short) 0);
+//		less.setTime(new Timestamp(System.currentTimeMillis()));
+//		new BaseDAO().add(less);
+		
+		//测试查找老师课程分类；
+//		List<Object> fQueryList  = new ArrayList<>();
+//		List<Object> fVlueList  = new ArrayList<>();
+//		fQueryList.add("tear");
+//		fVlueList.add(tear);
+//		fQueryList.add("fclassify");
+//		fVlueList.add("1");
+//		
+//		List<Lesn> fLessList = new BaseDAO().find(Lesn.class, fQueryList, fVlueList);
+//		System.out.println(fLessList.size());
+//		Set<Lesn> lesns = new HashSet<>();
+//		lesns.addAll(fLessList);
+//		Iterator<Lesn>  iterator = lesns.iterator();
+//		while(iterator.hasNext()){
+//			System.out.println(iterator.next().getId());
+//		}
+		
+		
 	}
 }

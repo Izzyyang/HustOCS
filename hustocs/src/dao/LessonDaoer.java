@@ -10,5 +10,5 @@ public interface LessonDaoer {
 	public boolean delete(String lessonId);
 	public boolean update(Lesn lesson);
 	public Lesn view(Class c,Serializable lessonId);
-	public List list(Class c, List<String> strList, List<Object> value);
+	public List list(Class c, List<Object> strList, List<Object> value);
 }

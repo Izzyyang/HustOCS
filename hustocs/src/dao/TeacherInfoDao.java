@@ -22,7 +22,7 @@ public class TeacherInfoDao implements TeacherInfoDaoer {
 	}
 
 	@Override
-	public List find(Class c, List<String> strList, List<Object> value) {
+	public List find(Class c, List<Object> strList, List<Object> value) {
 		return baseDAO.find(c, strList, value);
 	}
 

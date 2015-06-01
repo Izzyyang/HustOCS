@@ -29,7 +29,7 @@ public class LessonDao implements LessonDaoer {
 	}
 
 	@Override
-	public List list(Class c, List<String> strList, List<Object> value) {
+	public List list(Class c, List<Object> strList, List<Object> value) {
 		// TODO Auto-generated method stub
 		return baseDAO.find(c, strList, value);
 	}
