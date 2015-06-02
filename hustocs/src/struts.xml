@@ -49,12 +49,22 @@
 			<!-- 配置系统默认的拦截器 -->
 			<interceptor-ref name="defaultStack"/>
 			<!-- 动态设置Action的属性值 -->
+			<!-- teacher add lesson -->
 			<param name="savePath">/Teacher/uploadFiles</param>
-            <result name="success">/Teacher/index.jsp</result>
-            <result name="failaddLes">/Teacher/login.jsp</result>
+            <result name="success">/Teacher/TeacherLess.jsp</result>
+            <result name="failaddLes">/Teacher/index.jsp</result>
             <!-- query teacher's all lesson -->
             <result name="teacherHaveLess">/Teacher/TeacherLess.jsp</result>
             <result name="teacherNoLess">/Teacher/noLess.jsp</result>
+         </action>
+  </package>
+  <!-- look、search、upload lesson's resource -->
+  <package name="resource" namespace="/resource" extends="struts-default">
+         <action name="*_Action" class="action.ResourceAction" method="{1}">
+              <result name="lookFileSuccess">/Teacher/lessoninfo.jsp</result>
+              <!-- 后期完善给出提示后跳转到老师课程页下面 -->
+              <result name="lookFileFail">/Teacher/TeacherLess.jsp</result>
+              
          </action>
   </package>
 </struts>    

@@ -152,7 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</ul>
 		<h3>我的课程</h3>
 		<ul class="toggle">
-			<li class="icn_add_user"><a href="tear/queryTeacherLesson_Action">课程列表</a></li>
+			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
 			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
 			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
@@ -221,8 +221,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<fieldset style="width:48%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
 							<label>一级分类</label>
 							<select style="width:92%;" id="courseFirst" name="lesson.fclassify">
-								<option value="1">学院课程</option>
-								<option value="2">外教课程</option>
+								<option value="1">本科生课程</option>
+								<option value="2">研究生课程</option>
 								<option value="3">其他</option>
 							</select>
 						</fieldset>

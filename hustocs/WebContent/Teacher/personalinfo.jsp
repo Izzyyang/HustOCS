@@ -115,37 +115,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
 			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
 		</ul>
-		<h3>课程状态</h3>
+		<h3>我的课程</h3>
 		<ul class="toggle">
-			<li class="icn_add_user"><a href="#">课程浏览统计</a></li>
-			<li class="icn_view_users"><a href="#">课程审核状态</a></li>
-			<li class="icn_profile"><a href="#">Your Profile</a></li>
+			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
+			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
+			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
 		<h3>课程管理</h3>
 		<ul class="toggle" id="courses">
 			<li class="icn_folder">
-			    <a>数据库技术与应用</a>
+			   <a>本科生课程</a>
 			    <ul class="tog">
 				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
-					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
+					 <li><a href="Teacher/lessoninfo.jsp" id="upload" style="background:url(Teacher/images/icn_folder.png) no-repeat scroll left center rgba(0, 0, 0, 0);">上传课件</a></li>
 				</ul>
 			</li>
-			<li class="icn_photo"><a>算法分析与设计</a>
-			       <ul class="tog">
-				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
-					 </li>
-					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
-				</ul>
-			</li>
-			<li class="icn_audio"><a>高级操作系统</a>
+			
+			<li class="icn_audio"><a>研究生课程</a>
 			     <ul class="tog">
 				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
 					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
 			</li>
-			<li class="icn_video"><a>数据结构</a>
+			
+			<li class="icn_audio"><a>其他课程</a>
 			     <ul class="tog">
 				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>

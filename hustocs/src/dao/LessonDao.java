@@ -24,14 +24,18 @@ public class LessonDao implements LessonDaoer {
 
 	@Override
 	public Lesn view(Class c, Serializable lessonId) {
-		// TODO Auto-generated method stub
 		return (Lesn) baseDAO.getById(c, lessonId);
 	}
 
 	@Override
 	public List list(Class c, List<Object> strList, List<Object> value) {
-		// TODO Auto-generated method stub
 		return baseDAO.find(c, strList, value);
+	}
+
+	@Override
+	public List list(Class c, String cascadeClass, List<Object> strList,
+			List<Object> value) {
+		return baseDAO.find(c,cascadeClass, strList, value);
 	}
 
 }

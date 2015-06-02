@@ -46,7 +46,7 @@ public class LessonAction extends ActionSupport implements RequestAware,ServletR
 	 * @return
 	 */
 	public String addCourse(){
-		//System.out.println(" 文件名字   "+imageFileName);
+		System.out.println(" 文件名字   "+imageFileName);
 		try {
 			lesson.setPicaddress(this.getFilePath(image, imageFileName));
 		} catch (Exception e) {
@@ -122,7 +122,8 @@ public class LessonAction extends ActionSupport implements RequestAware,ServletR
 				
 				servletRequest.getSession().setAttribute("flesSet", flesSet);// bachelor lesson
 				servletRequest.getSession().setAttribute("slesSet", slesSet);// master lesson
-			    return "teacherHaveLess";
+			    
+				return "teacherHaveLess";
 			}else{
 			    return "teacherNoLess";
 			}
@@ -130,8 +131,14 @@ public class LessonAction extends ActionSupport implements RequestAware,ServletR
 		    return "failaddLes";
 		}
 	}
-	
-	
+	/**
+	 * choose lesson then look and upload files
+	 * @return
+	 */
+	public String goUploadFile(){
+		
+		return "";
+	}
 	@Override
 	public void setServletRequest(HttpServletRequest servletRequest) {
 		this.servletRequest = servletRequest;

@@ -38,4 +38,8 @@ public class LessonService implements LessonServicer{
 	public Lesn viewLesson(Class c,Serializable lessonId) {
 		return lessonDao.view(c, lessonId);
 	}
+	@Override
+	public List listLessons(Class c, String cascadeClass,List<Object> fQueryList, List<Object> value) {
+		return lessonDao.list(c,cascadeClass,fQueryList,value);
+	}
 }

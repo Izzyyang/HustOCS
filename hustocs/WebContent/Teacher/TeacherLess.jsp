@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 	$(document).ready(function(){ 
 		$("#logout").click(function (){confirm("你确认要退出系统？");});
+		$(".tog").hide();
 	    $("#courses>li>a").click(function(){
 		    $(this).next('.tog').toggle();
 		}); 
@@ -67,8 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
 		</ul>
 		<h3>我的课程</h3>
-		<ul class="toggle">
-			<li class="icn_add_user"><a href="#">课程列表</a></li>
+	<ul class="toggle">
+			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
 			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
 			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
@@ -119,18 +120,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <form action="lesson/addCourse_Action" method="post" enctype="multipart/form-data">
 			<header><h3>所有课程</h3></header>
 				<div class="module_content" style="min-height: 400px;">
-					<fieldset class="lesson">
+					<fieldset class="lesson" style="min-width: 400px;">
 							<table id="tearles"> 
 							     <tr><td colspan="4">本科课程</td></tr>
-							     <tr><td>java</td><td>上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							      <c:forEach var="les" items="${sessionScope.flesSet}">
+							         <tr><td><c:out value="${les.title}" /></td><td><a href="resource/lookFile_Action?lesid=${les.id}&fileType=1">查看/上传资源</a></td><td>修改课程信息</td><td>删除课程</td></tr>
+							      </c:forEach>
 							</table>
 						</fieldset>
-					<fieldset class="lesson" style="margin-left: 20px">
+					<fieldset class="lesson" style="margin-left: 20px; min-width: 400px;">
 							<table id="tearles"> 
 							     <tr><td colspan="4">研究生课程</td></tr>
 							     
-							      <c:forEach var="les" items="${sessionScope.lesSet}">
-							         <tr><td><c:out value="${les.title}" /></td><td>上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							      <c:forEach var="les" items="${sessionScope.slesSet}">
+							         <tr><td><c:out value="${les.title}" /></td><td>查看/上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
 							      </c:forEach>
 							
 							</table>

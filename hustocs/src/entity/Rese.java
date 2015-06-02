@@ -13,13 +13,13 @@ public class Rese implements java.io.Serializable {
 	// Fields
 
 	private String id;
-	private Lesn lesn;
-	private ReseSort reseSort;
 	private Admn admn;
 	private String title;
 	private Short status;
 	private Timestamp time;
-	private Set reseFilses = new HashSet(0);
+	private Lesn lesn;
+	private ReseSort reseSort; // 资源分类；
+	private Set reseFilses = new HashSet(0);  //资源文件
 
 	// Constructors
 

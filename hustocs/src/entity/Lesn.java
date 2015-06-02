@@ -14,7 +14,6 @@ public class Lesn implements java.io.Serializable {
 	private String id;
 	private String fclassify; //一级分类；
 	private String sclassify; //课程二级分类
-	; //课程父id，二级分类；
 	private Tear tear;  //授课老师
 	private Acay acay;  //
 	private Admn admn;  //管理员
@@ -24,7 +23,7 @@ public class Lesn implements java.io.Serializable {
 	private Short status;
 	private String picaddress; //课程图片地址；
 	private Set stutHisies = new HashSet(0);  //浏览历史记录
-	private Set reses = new HashSet(0); 
+	private Set reses = new HashSet(0);   //课程资源
 	private Set stutColts = new HashSet(0);  //收藏学生集合
     
 	// Constructors

@@ -17,6 +17,7 @@ import dao.HibeSesnFacy;
 import entity.Acay;
 import entity.Admn;
 import entity.Lesn;
+import entity.Rese;
 import entity.Tear;
 
 public class BaseDAO{
@@ -81,7 +82,29 @@ public class BaseDAO{
 		}else{
 			return null;
 		}
-		
+	}
+	/**
+	 * 带条件的级联查询
+	 * @param c
+	 * @param strList
+	 * @param value
+	 * @return
+	 */
+	public List find(Class c,String cascadeClass, List<Object> strList, List<Object> value){
+		Session s = null;
+        s = initSession();
+		DetachedCriteria dc = DetachedCriteria.forClass(c);
+		dc.createAlias(cascadeClass, cascadeClass);
+		System.out.println(cascadeClass+"------------------------"+cascadeClass);
+		for(int i = 0; i < strList.size(); i++){
+			dc.add(Restrictions.eq((String) strList.get(i), value.get(i)));
+		}
+		List ls = dc(dc);
+		if (ls.size()>0) {
+			return ls;
+		}else{
+			return null;
+		}
 	}
 	/*
 	 * 通过Unique键l或外键list Objects
@@ -90,6 +113,18 @@ public class BaseDAO{
 		Session s = null;
         s = initSession();
 		DetachedCriteria dc = DetachedCriteria.forClass(c);
+		dc.add(Restrictions.eq(field, value));
+		List ls = dc(dc);
+		return ls;
+	}
+	/*
+	 * 有级联关系的查询
+	 */
+	public List find(Class c,String cascadeClass, String field, Object value){
+		Session s = null;
+        s = initSession();
+		DetachedCriteria dc = DetachedCriteria.forClass(c);
+		dc.createAlias(cascadeClass, cascadeClass);
 		dc.add(Restrictions.eq(field, value));
 		List ls = dc(dc);
 		return ls;
@@ -218,6 +253,7 @@ public class BaseDAO{
 //			System.out.println(iterator.next().getId());
 //		}
 		
-		
+		List<Rese> lest = new BaseDAO().find(Rese.class, "reseSort","reseSort.name", "files");
+		System.out.println(lest.size());
 	}
 }

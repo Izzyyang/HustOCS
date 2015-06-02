@@ -1,39 +1,41 @@
 package dao;
 
+import java.io.Serializable;
 import java.util.List;
 
+import entity.Lesn;
 import entity.Rese;
 
 public class ResourceDao implements ResourceDaoer {
-
+	private static BaseDAO baseDAO = new BaseDAO();
 	@Override
 	public boolean insert(Rese resource) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.add(resource);
 	}
 
 	@Override
 	public boolean delete(String resourceId) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.deleObject(resourceId);
 	}
 
 	@Override
 	public boolean update(Rese resource) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.updateObject(resource);
 	}
 
 	@Override
-	public void view(String resourceId) {
-		// TODO Auto-generated method stub
-		
+	public List list(Class c, List<Object> strList, List<Object> value) {
+		return baseDAO.find(c, strList, value);
 	}
 
 	@Override
-	public List list(String lessonId, int type) {
-		// TODO Auto-generated method stub
-		return null;
+	public Rese view(Class c, Serializable resId) {
+		return (Rese) baseDAO.getById(c, resId);
+	}
+
+	@Override
+	public List list(Class c, String cascadeClass, List<Object> strList,List<Object> value) {
+		return baseDAO.find(c, cascadeClass, strList, value);
 	}
 
 }
