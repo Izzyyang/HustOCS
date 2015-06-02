@@ -1,17 +1,21 @@
 package net.SunLnx.ffaver;
 
 public class DefaultFfmpegLocate implements FfmpegLocater{
+	
 	private DefaultFfmpegLocate(){}
-	private static DefaultFfmpegLocate locater = new DefaultFfmpegLocate();
+	
+	private static  class holder {
+		private static final DefaultFfmpegLocate instance = new DefaultFfmpegLocate();
+	}
+	public static DefaultFfmpegLocate getInstance() {
+		return holder.instance;
+	};
 	
 	// TODO 将ffmpeg和ffprobe可执行文件复制到本地计算机
 	static {
 		
 	}
 	
-	public static FfmpegLocater getInstance(){
-		return locater;
-	}
 	/*
 	 * 获取ffmpeg可执行文件路径
 	 * @see net.SunLnx.Ffav.IFfmpegLocater#getFfmpegExecutablePath()

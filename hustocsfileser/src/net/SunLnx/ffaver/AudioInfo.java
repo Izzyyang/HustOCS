@@ -9,7 +9,6 @@ import java.io.Serializable;
  */
 
 public class AudioInfo extends AbstractFfmpegOption implements Serializable {
-
 	
 	/*
 	 * 默认的音频bitrate 128 kbps
@@ -43,11 +42,6 @@ public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 		this.preOptioner = preOption;
 	}
 	
-	public AudioInfo(AbstractFfmpegOption preOption, String output) {
-		this.preOptioner =preOption;
-		this.output = output;
-	}
-
 	public AudioInfo(AbstractFfmpegOption preOption, int bitRate, int channel,
 			int samplingRate, String codec, String output) {
 		this.preOptioner = preOption;
@@ -107,26 +101,26 @@ public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 	public String toOption() throws InvalidOptionException {
 		StringBuilder sb = new StringBuilder();
 		// samplecoding -ar
-		if (this.samplingRate < 0) {
+		if (this.samplingRate <= 0) {
 			throw new InvalidOptionException("Invalid audio sampling  rate");
-		} else if (this.samplingRate > 0) {
+		} else {
 			sb.append(" -ar ").append(this.samplingRate);
 		}
 
 		// channel -ac: 1, 2
-		if (this.channel < 0 || this.channel > 2) {
+		if (this.channel <= 0 || this.channel > 2) {
 			throw new InvalidOptionException("Invalid audio channel");
-		} else if (this.channel > 0) {
+		} else {
 			sb.append(" -ac ").append(this.channel);
 		}
 
 		// bitrate -ab:
-
-		if (this.bitRate < 0) {
+		if (this.bitRate <= 0) {
 			throw new InvalidOptionException("Invalid audio bitrate");
-		} else if (this.bitRate > 0) {
+		} else {
 			sb.append(" -ab ").append(this.bitRate);
 		}
+		
 		// codec -acodec
 		if (!"".equals(this.codec)) {
 			sb.append(" -acodec ").append(this.codec);
@@ -146,5 +140,11 @@ public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 			e.printStackTrace();
 		}
 		System.out.println(audio.codec);
+	}
+
+	@Override
+	public void fromFfprobe() {
+		// TODO Auto-generated method stub
+		
 	}
 }

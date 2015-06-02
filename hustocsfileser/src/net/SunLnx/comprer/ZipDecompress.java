@@ -17,7 +17,9 @@ import util.StringUtil;
 
 public class ZipDecompress extends AbstractChecksumContainer implements Decomprer {
 
-	public ZipDecompress() {}
+	public ZipDecompress() {
+		super.checksum = new Adler32();
+	}
 	
 	public ZipDecompress(Checksum checksum) {
 		super.checksum = checksum;

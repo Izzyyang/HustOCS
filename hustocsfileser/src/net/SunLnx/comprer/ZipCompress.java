@@ -17,7 +17,9 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipCompress extends AbstractChecksumContainer implements Comprer {
 	
-	public ZipCompress() {}
+	public ZipCompress() {
+		super.checksum = new Adler32();
+	}
 	
 	public ZipCompress(Checksum checksum) {
 		super.checksum = checksum;

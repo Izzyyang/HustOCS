@@ -12,7 +12,7 @@ public abstract class AbstractFfmpegOption {
 	}
 
 	public String toOptions() throws InvalidOptionException {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		if (this.preOptioner != null) {
 			sb.append(this.preOptioner.toOptions());
 		}
@@ -21,5 +21,6 @@ public abstract class AbstractFfmpegOption {
 	}
 	
 	// Ffmpeg 选项
-		public abstract String toOption() throws InvalidOptionException;
+	public abstract String toOption() throws InvalidOptionException;
+	public abstract void fromFfprobe();
 }
