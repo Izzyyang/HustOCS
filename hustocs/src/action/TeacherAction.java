@@ -33,7 +33,8 @@ public class TeacherAction extends ActionSupport implements RequestAware,
 	protected HttpServletRequest servletRequest;
 	private HttpServletResponse servletresponse;
 	private TeacherInfoServicer teacherinfoService = TeacherServiceFactory.produceTeacherInfoService();
-    //登录时验证用户名
+    
+	//登录时验证用户名
 	@SuppressWarnings("null")
 	public void verifyname() {
 		String teacheridcard="";
@@ -63,8 +64,8 @@ public class TeacherAction extends ActionSupport implements RequestAware,
 //             List<Object> queryValue = new ArrayList<>();
 //             queryValue.add(teacheridcard);
         	
-            if(teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" , teacheridcard)!=null){
-        	    teacher= (TearInfo)teacherinfoService.findTeacherByStr(TearInfo.class,"idcard" , teacheridcard).get(0);
+            if(teacherinfoService.findTeacherInfoByStr(TearInfo.class, "idcard" , teacheridcard)!=null){
+        	    teacher= (TearInfo)teacherinfoService.findTeacherInfoByStr(TearInfo.class,"idcard" , teacheridcard).get(0);
         	    writer.print("* √正确教工号");
         	}else{
             	writer.print("* 此教工号不存在");
@@ -100,8 +101,8 @@ public class TeacherAction extends ActionSupport implements RequestAware,
         
         TearInfo teacherinfo = null;
         if(password !="" && teacheridcard !=""){
-        	if(teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,teacheridcard ).size()>0){
-        	    teacherinfo= (TearInfo)teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,teacheridcard ).get(0);
+        	if(teacherinfoService.findTeacherInfoByStr(TearInfo.class, "idcard" ,teacheridcard ).size()>0){
+        	    teacherinfo= (TearInfo)teacherinfoService.findTeacherInfoByStr(TearInfo.class, "idcard" ,teacheridcard ).get(0);
         	    //System.out.println(teacherinfo.getIdcard()+"   --pass--  "+teacherinfo.getTear().getPasswd());
         	}
         	
@@ -186,8 +187,8 @@ public class TeacherAction extends ActionSupport implements RequestAware,
 			e.printStackTrace();
 		}
         //用户名存在
-        if(teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,idcard ).size()>0){
-    	    teacherinfo= (TearInfo)teacherinfoService.findTeacherByStr(TearInfo.class, "idcard" ,idcard ).get(0);
+        if(teacherinfoService.findTeacherInfoByStr(TearInfo.class, "idcard" ,idcard ).size()>0){
+    	    teacherinfo= (TearInfo)teacherinfoService.findTeacherInfoByStr(TearInfo.class, "idcard" ,idcard ).get(0);
     	    //用户名和密码后台验证通过；
     	    if(teacherinfo.getTear().getPasswd().equals(password)){
     	    	if(code.equals(rand)){
@@ -205,7 +206,33 @@ public class TeacherAction extends ActionSupport implements RequestAware,
       			writer.flush();
       			writer.close();
 	}
-	
+	/**
+	 * update teacher's password
+	 * @return
+	 */
+	public String updatePsw(){
+		String psw = servletRequest.getParameter("psw");
+		String newpsw = servletRequest.getParameter("newpsw");
+		String cnewpsw = servletRequest.getParameter("newpsw");
+		TearInfo teacherInfor = (TearInfo) servletRequest.getSession().getAttribute("tear");
+		System.out.println(psw + "  --  "+newpsw+"   ---   "+cnewpsw);
+		if(teacherInfor!=null){
+		   Tear teacher = teacherInfor.getTear();
+		
+				if(psw!="" && newpsw!="" && cnewpsw !=""){
+					if(psw==teacher.getPasswd() && newpsw==cnewpsw){
+						teacher.setPasswd(newpsw);
+						teacherInfor.setTear(teacher);
+						if(teacherinfoService.updateTeacherInfo(teacherInfor)){
+						     return "updatePsdSuccess";
+						}
+					}else{
+						return "updatePsdFail";
+					}
+				}
+	     }
+		 return "updatePsdFail";
+	}
 	@Override
 	public void setServletRequest(HttpServletRequest servletRequest) {
 		this.servletRequest = servletRequest;

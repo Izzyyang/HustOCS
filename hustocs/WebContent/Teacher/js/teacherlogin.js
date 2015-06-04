@@ -209,7 +209,7 @@ $("#sub").click(function() {
 			async : false,
 			success : showSubMsg,
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
-                  alert("返回失败!状态码："+XMLHttpRequest.status+" - "+XMLHttpRequest.readyState+" - "+textStatus);
+                 // alert("返回失败!状态码："+XMLHttpRequest.status+" - "+XMLHttpRequest.readyState+" - "+textStatus);
               }
 		});
 	}

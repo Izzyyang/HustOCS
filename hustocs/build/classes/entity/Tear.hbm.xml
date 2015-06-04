@@ -37,7 +37,7 @@
             </key>
             <one-to-many class="entity.StutFolw" />
         </set>
-        <set name="lesns" inverse="true">
+        <set name="lesns"  lazy='false' inverse="false" cascade="all">
             <key>
                 <column name="TEACHERID" length="32"/>
             </key>

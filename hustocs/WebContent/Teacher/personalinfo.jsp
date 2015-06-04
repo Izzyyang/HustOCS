@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
 			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
 			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
-			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
+			<li class="icn_tags" id="logout"><a href="Teacher/login.jsp">退出</a></li>
 		</ul>
 		<h3>我的课程</h3>
 		<ul class="toggle">

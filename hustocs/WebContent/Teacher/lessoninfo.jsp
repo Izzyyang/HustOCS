@@ -24,98 +24,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="Teacher/js/jquery.tablesorter.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="Teacher/js/jquery.equalHeight.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() 
-    	{ 
-      	  $(".tablesorter").tablesorter(); 
-   	 } 
-	);
-	$(document).ready(function() {
-
-	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
-
-	//On Click Event
-	$("ul.tabs li").click(function() {
-
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab_content").hide(); //Hide all tab content
-
-		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active ID content
-		return false;
-	});
-
-});
-    </script>
-    <script type="text/javascript">
-    $(function(){
-        $('.column').equalHeight();
-		
-		//$("#cedit").click(function (){
-		//});
-    });
-</script>
-	<script type="text/javascript">
-	$(document).ready(function() 
-    	{ 
-      	  $(".tablesorter").tablesorter(); 
-   	 } 
-	);
-	$(document).ready(function() {
-
-	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
-
-	//On Click Event
-	$("ul.tabs li").click(function() {
-
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab_content").hide(); //Hide all tab content
-
-		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active ID content
-		return false;
-	});
+	$(document).ready(function(){ 
+	    $(".tablesorter").tablesorter(); 
+	    
+	    $("#logout").click(function (){confirm("你确认要退出系统？");});
+		$(".tog").hide();
+	    $("#courses>li>a").click(function(){
+		    $(this).next('.tog').toggle();
+		}); 
+	    
+		//When page loads...
+		$(".tab_content").hide(); //Hide all content
+		$("ul.tabs li:first").addClass("active").show(); //Activate first tab
+		$(".tab_content:first").show(); //Show first tab content
+	
+		//On Click Event
+		$("ul.tabs li").click(function() {
+			$("ul.tabs li").removeClass("active"); //Remove any "active" class
+			$(this).addClass("active"); //Add "active" class to selected tab
+			$(".tab_content").hide(); //Hide all tab content
+			var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+			$(activeTab).fadeIn(); //Fade in the active ID content
+			return false;
+		});
 
 });
-    </script>
-
-	<script type="text/javascript">
-	$(document).ready(function() {
-	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
-
-	//On Click Event
-	$("ul.tabs li").click(function() {
-
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab_content").hide(); //Hide all tab content
-
-		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active ID content
-		return false;
-	});
-	$("#logout").click(function (){
-         confirm("你确认要退出系统？");
-	});
-    $("#courses>li>a").click(function(){
-	    $(this).next('.tog').toggle();
-	});
-});
-    </script>
-    <script type="text/javascript">
-    $(function(){
-        $('.column').equalHeight();
-    });
 </script>
 
 </head>
@@ -147,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
 			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
 			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
-			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
+			<li class="icn_tags" id="logout"><a href="Teacher/login.jsp">退出</a></li>
 		</ul>
 		<h3>我的课程</h3>
 		<ul class="toggle">
@@ -228,8 +161,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <article class="module width_3_quarter" style="width:95%; margin:20px 3% 0;">
 		<header><h3 class="tabs_involved">课程资源列表</h3>
 		<ul class="tabs">
-   			<li><a href="#tab1">视频资源</a></li>
-    		<li><a href="#tab2">文档资源</a></li>
+   			<li><a href="#tab1">文档资源</a></li>
+    		<li><a href="#tab2">视频资源</a></li>
 		</ul>
 		</header>
 
@@ -248,19 +181,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr> 
 			</thead> 
 			<tbody> 
-				<c:forEach var="rese" items="${sessionScope.fileSet}">
+				<c:forEach var="rese" items="${sessionScope.fileSet.objectsList}">
 				       <tr> 
-	   					<td><input type="checkbox" name="subcheck"></td> 
+	   					<td><input type="checkbox" name="subcheckf"></td> 
 	    				<td><c:out value="${rese.title}" /></td> 
-					    <td>未上传
-					    <c:choose>
-						    <c:when test="${empty rese.reseSort}">
-						                 未上传
-						    </c:when>
-						    <c:otherwise>
-						                已上传
-						    </c:otherwise>
-						</c:choose>
+					    <td>
+						  <c:choose>
+							    <c:when test="${empty rese.reseSort}">
+							                 未上传
+							    </c:when>
+							    <c:otherwise>
+							                已上传
+							    </c:otherwise>
+							</c:choose>
 					    </td>
 	    				<td><c:out value="${rese.status}" /></td> 
 	    				<td><c:out value="${rese.time}" /></td> 
@@ -268,7 +201,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   </tr> 
 			    </c:forEach>
 			</tbody> 
-			
+		   <tr>
+    		  <td colspan="6" style="text-align: center;">
+    		         <c:if test="${sessionScope.fileSet.currentPage>1}">
+    		            <a href="resource/lookFile_Action?lesid=${les.id}&currentPage=${sessionScope.fileSet.currentPage-1}">上一页</a>
+    		         </c:if> 
+    				 
+    				 <c:forEach begin="1" end="${sessionScope.fileSet.totalPage}" step="1" var="x" >
+    				         <a href="resource/lookFile_Action?lesid=${les.id}&currentPage=${x}"> ${x}</a>
+    				 </c:forEach>
+    				 
+    				  <c:if test="${sessionScope.fileSet.currentPage<sessionScope.fileSet.totalPage}">
+    				          <a href="resource/lookFile_Action?lesid=${les.id}&currentPage=${sessionScope.fileSet.currentPage+1}">下一页</a>
+    		         </c:if> 
+    		  </td> 
+    		</tr>
 			</table>
 <div class="clear"></div>
 			<footer>
@@ -288,25 +235,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<tr> 
    					<th></th> 
     				<th>资源名称</th> 
-    				<th>Posted by</th> 
+    				<th>附件</th> 
+					<th>审核状态</th> 
     				<th>上传时间</th> 
     				<th>操作</th> 
 				</tr> 
 			</thead> 
 			<tbody> 
-				<c:forEach var="rese" items="${sessionScope.vidwoSet}">
+				<c:forEach var="rese" items="${sessionScope.videoSet.objectsList}">
 				       <tr> 
-	   					<td><input type="checkbox" name="subcheck"></td> 
+	   					<td><input type="checkbox" name="subcheckv"></td> 
 	    				<td><c:out value="${rese.title}" /></td> 
-					    <td>未上传
-					    <c:choose>
-						    <c:when test="${empty rese.reseSort}">
-						                 未上传
-						    </c:when>
-						    <c:otherwise>
-						                已上传
-						    </c:otherwise>
-						</c:choose>
+					    <td>
+						    <c:choose>
+							    <c:when test="${empty rese.reseSort}">
+							                 未上传
+							    </c:when>
+							    <c:otherwise>
+							                已上传
+							    </c:otherwise>
+							</c:choose>
 					    </td>
 	    				<td><c:out value="${rese.status}" /></td> 
 	    				<td><c:out value="${rese.time}" /></td> 
@@ -318,7 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="clear"></div>
 			<footer>
 				<div class="submit_link">
-					<input type="checkbox" id="SelectAllf" onClick="selectAll();">
+					<input type="checkbox" id="SelectAllf">
 					<input type="submit" value="添加" class="alt_btn">
 					<input type="submit" value="删除">
 				</div>
@@ -361,18 +309,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 //弹出隐藏层
 function ShowDiv(show_div,bg_div){
-document.getElementById(show_div).style.display='block';
-document.getElementById(bg_div).style.display='block' ;
-var bgdiv = document.getElementById(bg_div);
-bgdiv.style.width = document.body.scrollWidth;
-// bgdiv.style.height = $(document).height();
-$("#"+bg_div).height($(document).height());
+	document.getElementById(show_div).style.display='block';
+	document.getElementById(bg_div).style.display='block' ;
+	var bgdiv = document.getElementById(bg_div);
+	bgdiv.style.width = document.body.scrollWidth;
+	// bgdiv.style.height = $(document).height();
+	$("#"+bg_div).height($(document).height());
 };
 //关闭弹出层
 function CloseDiv(show_div,bg_div)
 {
-document.getElementById(show_div).style.display='none';
-document.getElementById(bg_div).style.display='none';
+	document.getElementById(show_div).style.display='none';
+	document.getElementById(bg_div).style.display='none';
 };
 
 //子复选框的事件  
@@ -380,30 +328,34 @@ $(function(){
         //复选框事件  
 		//全选、取消全选的事件   
      	$("#SelectAll").click(function(){
-	     if ($("#SelectAll").attr("checked")) {  
-            $("input[name='subcheck']").attr("checked", true);  
-        } else {  
-            $("input[name='subcheck']").attr("checked", false);  
-        }  
+     	var all = document.getElementById("SelectAll");
+     	var a = document.getElementsByName("subcheckf");
+     	if(all){
+		    for (var i=0;i<a.length;i++){
+		       a[i].checked = this.checked;
+		    }
+		 }
 	});
 
-     $("input[name='subcheck']").change(function() {
-        if (!$("input[name='subcheck']").checked) {  
-            $("#SelectAll").attr("checked", false);  
-        }  
-        var chsub = $("input[type='checkbox'][name='subcheck']").length; //获取subcheck的个数  
-        var checkedsub = $("input[type='checkbox'][name='subcheck']:checked").length; //获取选中的subcheck的个数  
-        if (checkedsub == chsub) {  
-            $("#SelectAll").attr("checked", true);  
-        }  
-    });
+    // $("input[name='subcheck']").change(function() {
+        //if (!$("input[name='subcheck']").checked) {  
+          //  $("#SelectAll").attr("checked", false);  
+      //  }  
+      //  var chsub = $("input[type='checkbox'][name='subcheck']").length; //获取subcheck的个数  
+      //  var checkedsub = $("input[type='checkbox'][name='subcheck']:checked").length; //获取选中的subcheck的个数  
+       // if (checkedsub == chsub) {  
+          //  $("#SelectAll").attr("checked", true);  
+      //  }  
+   // });
 	//choose all files
 	$("#SelectAllf").click(function(){
-	     if ($("#SelectAllf").attr("checked")) {  
-            $("input[name='subcheck2']").attr("checked", true);  
-        } else {  
-            $("input[name='subcheck2']").attr("checked", false);  
-        }  
+	    var all = document.getElementById("SelectAllf");
+     	var a = document.getElementsByName("subcheckv");
+     	if(all){
+		    for (var i=0;i<a.length;i++){
+		       a[i].checked = this.checked;
+		    }
+		 }
 	});
 	//single file choose
 	  $("input[name='subcheck2']").change(function() {

@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,124 +10,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 
 <head>
+    <base href="<%=basePath%>">  
 	<meta charset="utf-8"/>      
-	<title>Dashboard I Admin Panel</title>
-	
-	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+	<title>修改课程信息</title>
+	<link type="text/css" rel="stylesheet" href="Teacher/css/layout.css" media="screen" />
 	<!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<script type="text/javascript" src="Teacher/js/jquery-1.11.1.js"></script>
-	<script src="Teacher/js/hideshow.js" type="text/javascript"></script>
-	<script src="Teacher/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="Teacher/js/hideshow.js" ></script>
+	<script type="text/javascript" src="Teacher/js/jquery.tablesorter.min.js"></script>
 	<script type="text/javascript" src="Teacher/js/jquery.equalHeight.js"></script>
-	
-	<script type="text/javascript">
-	$(document).ready(function() 
-    	{ 
-      	  $(".tablesorter").tablesorter(); 
-   	 } 
-	);
-	$(document).ready(function() {
-
-	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
-
-	//On Click Event
-	$("ul.tabs li").click(function() {
-
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab_content").hide(); //Hide all tab content
-
-		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active ID content
-		return false;
-	});
-
-});
-    </script>
-
-	<script type="text/javascript">
-	$(document).ready(function() 
-    	{ 
-      	  $(".tablesorter").tablesorter(); 
-		  $("#ifm").attr("src","Teacher/NewLesson.html");
-		  $(".tog").hide();
-   	 } 
-	);
-	$(document).ready(function() {
-
-	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
-
-	//On Click Event
-	$("ul.tabs li").click(function() {
-
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab_content").hide(); //Hide all tab content
-
-		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active ID content
-		return false;
-	});
-	
-    $("#courses>li>a").click(function(){
-	    $(this).next('.tog').toggle();
-	});
-});
-    </script>
-	<script type="text/javascript">
-	$(document).ready(function() 
-    	{ 
-      	  $(".tablesorter").tablesorter(); 
-      	 //initial select secondar option
-         $("#courseSecond").append("<option value='1'>算法</option>");
-		 $("#courseSecond").append("<option value='2'>语言</option>");
-		 $("#courseSecond").append("<option value='3'>数据库</option>");
-		 $("#courseSecond").append("<option value='4'>移动开发</option>");
-		 $("#courseSecond").append("<option value='5'>web开发</option>");
-		 $("#courseSecond").append("<option value='6'>嵌入式</option>");
-		 $("#courseSecond").append("<option value='7'>大数据</option>");
-		 $("#courseSecond").append("<option value='8'>机器学习</option>");
-		 $("#courseSecond").append("<option value='9'>其他</option>");
-		  
-   	 } 
-	);
-	$(document).ready(function() {
-
-	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
-
-	//On Click Event
-	$("ul.tabs li").click(function() {
-
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab_content").hide(); //Hide all tab content
-
-		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active ID content
-		return false;
-	});
-
+		<script type="text/javascript">
+	$(document).ready(function(){ 
+      	 $("#courseSecond").append("<option value='21'>算法</option>");
+		 $("#courseSecond").append("<option value='22'>语言</option>");
+		 $("#courseSecond").append("<option value='23'>数据库</option>");
+		 $("#courseSecond").append("<option value='24'>移动开发</option>");
+		 $("#courseSecond").append("<option value='25'>web开发</option>");
+		 $("#courseSecond").append("<option value='26'>嵌入式</option>");
+		 $("#courseSecond").append("<option value='27'>大数据</option>");
+		 $("#courseSecond").append("<option value='28'>机器学习</option>");
+		 $("#courseSecond").append("<option value='29'>其他</option>");
+		 $(".tog").hide();
+		 
+		$("#logout").click(function (){confirm("你确认要退出系统？");});
+	    $("#courses>li>a").click(function(){
+		    $(this).next('.tog').toggle();
+		}); 
+			
+		
 	//when choose course type
 	$("#courseFirst").change(function(){
-	  if($("#courseFirst").val()=="外教课程"){
+	  if($("#courseFirst").val()=="2"){
 		 $("#courseSecond").empty(); 
 		 $("#courseSecond").append("<option value='1'>典型程序设计与应用</option>");
 		 $("#courseSecond").append("<option value='2'>软件项目管理</option>");
 		 $("#courseSecond").append("<option value='3'>分布式程序设计</option>");
 		 $("#courseSecond").append("<option value='4'>英语听说强化</option>");
-	   }else if($("#courseFirst").val()=="学院课程"){
+	   }else if($("#courseFirst").val()=="1"){
 	     $("#courseSecond").empty(); 
 		 $("#courseSecond").append("<option value='1'>算法</option>");
 		 $("#courseSecond").append("<option value='2'>语言</option>");
@@ -141,10 +65,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    $("#courseSecond").append("<option value='10'>其他</option>");
 	   }
 	});
+	
 	//course related valid
-	$("input[name='courseName']").blur(function (){
+	$("#coursename").blur(function (){
 	   $("#feedback").css("display","block");
-	   if($("input[name='courseName']").val()=="" || $("input[name='courseName']").val()==null){
+	   if($(this).val()=="" || $(this).val()==null){
 		 $("#ctitle").css("display","block");
 		 $("#ctitle").html("");
 		 $("#ctitle").html("课程题目不能为空！");
@@ -155,9 +80,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 	
 							
-	$("textarea[name='coursedes']").blur(function (){
+	$("#coursedes").blur(function (){
 	   $("#feedback").css("display","block");
-	   if($("textarea[name='coursedes']").val()=="" || $("textarea[name='coursedes']").val()==null){
+	   if($(this).val()=="" || $(this).val()==null){
 		 $("#cdes").css("display","block");
 		 $("#cdes").html("");
 		 $("#cdes").html("课程描述不能为空！");
@@ -182,19 +107,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      alert("请填写完整课程信息后提交！");
 		  return false;
 	  }
-	  alert("111111111");
    });
-	
-
- 
 });
 </script>
-    <script type="text/javascript">
-    $(function(){
-        $('.column').equalHeight();
-    });
-</script>
-
 </head>
 
 
@@ -210,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>李杰 (<a href="#">3 条消息 </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">3 条消息 </a>)</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -228,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
 			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
 			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
-			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
+			<li class="icn_tags" id="logout"><a href="Teacher/login.jsp">退出</a></li>
 		</ul>
 		<h3>我的课程</h3>
 		<ul class="toggle">
@@ -278,35 +193,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<span style="width:75%; float:left">
 	    <section id="main" class="column">
+	          <form action="lesson/updateLess_Action" method="post" enctype="multipart/form-data">
 			  <article class="module width_full">
 					<header><h3>课程信息</h3></header>
 						<div class="module_content">
 								<fieldset>
 									<label>课程名称</label>
-									<input type="text" id="coursename" name="courseName" style=" width:96%;" value="数据库">
+									<input type="hidden" name="updateLess.id" value="${requestScope.updateLess.id}">
+									<input type="text" id="coursename" name="updateLess.title" style=" width:96%;" value="${requestScope.updateLess.title}">
 								</fieldset>
 								<fieldset>
 									<span style="float:left; width:60%; margin-left:10px;">
 										<label>课程简介</label>
-										<textarea rows="12" name="coursedes">数据库（Database）是按照数据结构来组织、存储和管理数据的仓库，它产生于距今六十多年前，随着信息技术和市场的发展，特别是二十世纪九十年代以后，数据管理不再仅仅是存储和管理数据，而转变成用户所需要的各种数据管理的方式。数据库有很多种类型，从最简单的存储有各种数据的表格到能够进行海量数据存储的大型数据库系统都在各个方面得到了广泛的应用。
+										<textarea rows="12" id="coursedes" name="updateLess.brief">
+										    ${requestScope.updateLess.brief}
 										</textarea>
 									</span> 
 									<span style="float:left; width:30%;">
 										<label>课程图片</label>
 										<input type="file">
+										<img alt="课程图片" src="Teacher/uploadFiles/${requestScope.updateLess.picaddress}">
 									</span>
 								</fieldset>
 								<fieldset style="width:48%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
 									<label>一级分类</label>
-									<select style="width:92%;" id="courseFirst">
-										<option>学院课程</option>
-										<option>外教课程</option>
-										<option>其他</option>
+									<select style="width:92%;" id="courseFirst" name="updateLess.fclassify">
+										<option value="1">本科生课程</option>
+										<option value="2">研究生课程</option>
+										<option value="3">其他</option>
 									</select>
 								</fieldset>
 								<fieldset style="width:48%; float:left;">
 									<label>二级分类</label>
-									<select style="width:92%;" id="courseSecond">
+									<select style="width:92%;" id="courseSecond" name="updateLess.sclassify">
 									</select>
 								</fieldset>
 								<div class="clear"></div>
@@ -318,11 +237,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					<footer>
 						<div class="submit_link">
-						   <input type="submit" value="添加课程" class="alt_btn" name="csub">
+						    <input type="submit" value="修改课程信息" class="alt_btn" name="csub">
 							<input type="submit" value="重置">
 						</div>
 					</footer>
 			  </article><!-- end of post new article -->
+			  </form>
 	</section>
 </span>
 

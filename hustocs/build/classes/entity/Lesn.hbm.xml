@@ -19,7 +19,7 @@
             <column name="Sclassify" length="32" not-null="true" />
         </property>
         <property name="picaddress" type="java.lang.String">
-            <column name="PICADDRESS" length="128" not-null="true" />
+            <column name="PICADDRESS" length="128" not-null="false" />
         </property>
         <many-to-one name="tear" class="entity.Tear" fetch="select">
             <column name="TEACHERID" length="32" not-null="true" />

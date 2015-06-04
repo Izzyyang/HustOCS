@@ -15,8 +15,8 @@ public class TestYang {
 	public static void main(String[] args) {
 		
 		TeacherDao tDao = new TeacherDao();
-		Tear tear = tDao.view("1");
-		System.out.println(tear.getId());
+		//Tear tear = tDao.view("1");
+		//System.out.println(tear.getId());
 		LessonDao ld = new LessonDao();
 //		Lesn lesson = new Lesn();
 //		lesson.setTear(tear);

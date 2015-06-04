@@ -11,13 +11,18 @@ import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+
+import util.Page;
+import util.PageUtil;
 
 import dao.HibeSesnFacy;
 import entity.Acay;
 import entity.Admn;
 import entity.Lesn;
 import entity.Rese;
+import entity.ReseSort;
 import entity.Tear;
 
 public class BaseDAO{
@@ -33,7 +38,11 @@ public class BaseDAO{
 	public Session initSession(){
 		return HibeSesnFacy.getSession();
 	}
-	
+	/**
+	 * no paging;
+	 * @param dc
+	 * @return
+	 */
 	public List dc(DetachedCriteria dc) {
 		Session s = null;
         s = initSession();
@@ -41,6 +50,21 @@ public class BaseDAO{
 		List rs = c.list();
 		s.close();
 		return rs;
+	}
+	
+	public Page dc(DetachedCriteria dc,int pageNo,int pageSize) {
+		pageNo=(pageNo==0)?1:pageNo;
+		Session s = null;
+        s = initSession();
+		Criteria c = dc.getExecutableCriteria(s);
+		int rowCount = ((Long) c.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		c.setFirstResult((pageNo-1)*pageSize);
+		c.setMaxResults(pageSize);
+		c.setProjection(null);
+		List rs = c.list();
+		System.out.println(rowCount+"-----总的记录数--------查询结果数-------------第一次查询出来的结果--------"+rs.size());
+		s.close();
+		return new PageUtil().createPage(pageSize, rowCount, pageNo,rs);
 	}
 	
 	/*
@@ -61,6 +85,27 @@ public class BaseDAO{
 			return false;
 		}
 		return true;
+	}
+	/**
+	 * 带条件的分页查询
+	 * @param c
+	 * @param strList
+	 * @param value
+	 * @return
+	 */
+	public Page findPage(Class c, List<Object> strList, List<Object> value,int pageNo,int pageSize){
+		Session s = null;
+        s = initSession();
+		DetachedCriteria dc = DetachedCriteria.forClass(c);
+		for(int i = 0; i < strList.size(); i++){
+			dc.add(Restrictions.eq((String) strList.get(i), value.get(i)));
+		}
+		Page ls = dc(dc,pageNo,pageSize);
+		if (ls!=null) {
+			return ls;
+		}else{
+			return null;
+		}
 	}
 	/**
 	 * 带条件的查询
@@ -95,7 +140,7 @@ public class BaseDAO{
         s = initSession();
 		DetachedCriteria dc = DetachedCriteria.forClass(c);
 		dc.createAlias(cascadeClass, cascadeClass);
-		System.out.println(cascadeClass+"------------------------"+cascadeClass);
+		//System.out.println(cascadeClass+"------------------------"+cascadeClass);
 		for(int i = 0; i < strList.size(); i++){
 			dc.add(Restrictions.eq((String) strList.get(i), value.get(i)));
 		}
@@ -253,7 +298,13 @@ public class BaseDAO{
 //			System.out.println(iterator.next().getId());
 //		}
 		
-		List<Rese> lest = new BaseDAO().find(Rese.class, "reseSort","reseSort.name", "files");
-		System.out.println(lest.size());
+		ReseSort rSort = (ReseSort) new BaseDAO().getById(ReseSort.class, (short)1);
+		
+		List<Object> rQueryList  = new ArrayList<>();
+		List<Object> rVlueList  = new ArrayList<>();
+		rQueryList.add("reseSort");
+		rVlueList.add(rSort);
+		Page page = new BaseDAO().findPage(Rese.class, rQueryList,rVlueList,0,6);
+		System.out.println(page.getTotalPage()+"=======---总页数-------===========");
 	}
 }
