@@ -3,6 +3,8 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 
+import util.Page;
+
 import entity.Lesn;
 import entity.Rese;
 
@@ -32,10 +34,13 @@ public class ResourceDao implements ResourceDaoer {
 	public Rese view(Class c, Serializable resId) {
 		return (Rese) baseDAO.getById(c, resId);
 	}
-
 	@Override
 	public List list(Class c, String cascadeClass, List<Object> strList,List<Object> value) {
 		return baseDAO.find(c, cascadeClass, strList, value);
+	}
+	@Override
+	public Page listPage(Class c, List<Object> strList, List<Object> value,int pageNo, int pageSize) {
+		return baseDAO.findPage(c, strList, value , pageNo , pageSize );
 	}
 
 }

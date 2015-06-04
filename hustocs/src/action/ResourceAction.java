@@ -9,6 +9,8 @@ import com.sun.faces.application.resource.ResourceInfo;
 
 import service.*;
 import service.teacher.*;
+import util.Page;
+import util.PageUtil;
 import entity.*;
 
 @SuppressWarnings("serial")
@@ -20,7 +22,7 @@ public class ResourceAction extends ActionSupport implements RequestAware,Servle
 	private ResourceSortServicer resourcSortService = TeacherServiceFactory.produceResourceSortService();
 	//lesson id
 	private String lesid;
-	private String fileType;
+	private String currentPage;
 	/**
 	 * look lesson's resorce
 	 * default show the files resource also you can choose the video resource;
@@ -28,47 +30,54 @@ public class ResourceAction extends ActionSupport implements RequestAware,Servle
 	 */
 	public String lookFile(){
 		Lesn lesson = null;
-		short filetype = Short.parseShort(fileType);
-		if(lesid!=null && lesid!="" && !lesid.equals("")){
-				lesson = lessonService.viewLesson(Lesn.class, lesid);
-				if(lesson!=null){
-					//query file resource;
-					ReseSort rSort = resourcSortService.viewResourceSort(ReseSort.class, (short)1);
-					Set<Rese> filesSet = new HashSet<>();
-					
-					List<Object> rQueryList  = new ArrayList<>();
-					List<Object> rVlueList  = new ArrayList<>();
-					rQueryList.add("lesn");
-					rVlueList.add(lesson);
-					//Resource classification:default show files not video; 
-					rQueryList.add("reseSort");
-					rVlueList.add(rSort);
-					
-					List<Rese> fLessList = resourcService.listLessons(Rese.class, rQueryList, rVlueList);
-					filesSet =new HashSet<Rese>();
-					if(fLessList!=null){
-					   filesSet.addAll(fLessList);
-					}
-					servletRequest.getSession().setAttribute("fileSet", filesSet);
-					
-					//query video resource;
-					ReseSort vSort = resourcSortService.viewResourceSort(ReseSort.class, (short)2);
-					Set<Rese> videoSet = new HashSet<>();
-					
-					List<Object> vVlueList  = new ArrayList<>();
-					vVlueList.add(lesson);
-					//Resource classification:default show files not video; 
-					vVlueList.add(vSort);
-					
-					List<Rese> vLessList = resourcService.listLessons(Rese.class, rQueryList, vVlueList);
-					videoSet =new HashSet<Rese>();
-					if(vLessList!=null){
-						videoSet.addAll(vLessList);
-					}
-					servletRequest.getSession().setAttribute("vidwoSet", videoSet);
-					return "lookFileSuccess";
-				}
-		}
+		    if(servletRequest.getSession().getAttribute("currentLesson")==null||servletRequest.getSession().getAttribute("currentLesson")==""){
+		    	if(lesid!=null && lesid!="" && !lesid.equals("")){
+		    		lesson = lessonService.viewLesson(Lesn.class, lesid);
+		    		servletRequest.getSession().setAttribute("currentLesson",lesson);
+		    		System.out.println("---1111111111111111111111111111111111------");
+		    	}else{
+		    		return "lookFileSuccess";
+		    	}
+		    }else{
+		    	lesson =  (Lesn) servletRequest.getSession().getAttribute("currentLesson");
+		    	System.out.println("---2222222222222222222222222222222-----");
+		    }
+		    
+			//currentPage = (currentPage.equals("") || currentPage==null || currentPage.equals(null))?"0":currentPage;
+		   // currentPage = (currentPage=="")?"0":currentPage;
+		    if(currentPage==null){
+		    	currentPage = "0";
+		    	System.out.println("----当前页为0的时候-----------");
+		    }
+		    if(lesson!=null){
+				//query file resource;
+				ReseSort rSort = resourcSortService.viewResourceSort(ReseSort.class, (short)1);
+							
+				List<Object> rQueryList  = new ArrayList<>();
+				List<Object> rVlueList  = new ArrayList<>();
+				rQueryList.add("lesn");
+				rVlueList.add(lesson);
+				//Resource classification:default show files not video; 
+				rQueryList.add("reseSort");
+				rVlueList.add(rSort);
+							
+				Page fLessPage =  resourcService.listLessons(Rese.class, rQueryList, rVlueList,Integer.parseInt(currentPage),6);
+				servletRequest.getSession().setAttribute("fileSet", fLessPage);
+				System.out.println(fLessPage.getObjectsList().size()+"-------======文件列表====---------");
+							
+				////////////////////////////////   video  /////////////////////////////////////////////////////////
+				//query video resource;
+				ReseSort vSort = resourcSortService.viewResourceSort(ReseSort.class, (short)2);
+				List<Object> vVlueList  = new ArrayList<>();
+				vVlueList.add(lesson);
+				vVlueList.add(vSort);
+							
+				Page vLessPage = resourcService.listLessons(Rese.class, rQueryList, vVlueList,Integer.parseInt(currentPage),6);
+				servletRequest.getSession().setAttribute("videoSet", vLessPage);
+							
+				System.out.println(fLessPage.getObjectsList().size()+"-------======视频列表====---------");
+				return "lookFileSuccess";
+			}
 		return "lookFileFail";
 	}
 	@Override
@@ -86,11 +95,11 @@ public class ResourceAction extends ActionSupport implements RequestAware,Servle
 	public void setLesid(String lesid) {
 		this.lesid = lesid;
 	}
-	public String getFileType() {
-		return fileType;
+	public String getCurrentPage() {
+		return currentPage;
 	}
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
+	public void setCurrentPage(String currentPage) {
+		this.currentPage = currentPage;
 	}
 	
 }

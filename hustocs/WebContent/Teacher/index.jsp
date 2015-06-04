@@ -1,6 +1,5 @@
-<%@page import="entity.TearInfo"%>
-<%@page import="entity.Tear"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
@@ -128,8 +127,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<section id="secondary_bar">
 		<div class="user">
 		 <s:if test="#session.user!=null">
-		    <%TearInfo t =(TearInfo) request.getSession().getAttribute("tear"); System.out.print(" -- "+t.getTear().getEmail());%>
-		     ----------<%=t.getTear().getEmail()%>=-----------
 			<p><s:property value="%{#session.tear.name}"/> (<a href="#">欢迎您！ </a>)</p>
 		  </s:if>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
@@ -147,8 +144,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<ul class="toggle">
 			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
 			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
-			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
-			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
+			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">修改登录密码</a></li>
+			<li class="icn_tags" id="logout"><a href="Teacher/login.jsp">退出</a></li>
 		</ul>
 		<h3>我的课程</h3>
 		<ul class="toggle">
@@ -161,7 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_folder">
 			   <a>本科生课程</a>
 			    <ul class="tog">
-				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec">查看本科课程</a>
 					 </li>
 					 <li><a href="Teacher/lessoninfo.jsp" id="upload" style="background:url(Teacher/images/icn_folder.png) no-repeat scroll left center rgba(0, 0, 0, 0);">上传课件</a></li>
 				</ul>
@@ -169,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<li class="icn_audio"><a>研究生课程</a>
 			     <ul class="tog">
-				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec">查看研究生课程</a>
 					 </li>
 					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>

@@ -24,6 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="Teacher/js/jquery.equalHeight.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){ 
+	    $(".tablesorter").tablesorter(); 
 		$("#logout").click(function (){confirm("你确认要退出系统？");});
 		$(".tog").hide();
 	    $("#courses>li>a").click(function(){
@@ -47,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<section id="secondary_bar">
 		<div class="user">
 		 <s:if test="#session.user!=null">
-			<p><s:property value="%{#session.tear.name}"/> (<a href="#">欢迎您！ </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
 		  </s:if>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
@@ -65,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
 			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
 			<li class="icn_categories" id="personSafe"><a href="Teacher/securityinfo.jsp">账号安全</a></li>
-			<li class="icn_tags" id="logout"><a href="#">退出</a></li>
+			<li class="icn_tags" id="logout"><a href="Teacher/login.jsp">退出</a></li>
 		</ul>
 		<h3>我的课程</h3>
 	<ul class="toggle">
@@ -120,20 +121,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <form action="lesson/addCourse_Action" method="post" enctype="multipart/form-data">
 			<header><h3>所有课程</h3></header>
 				<div class="module_content" style="min-height: 400px;">
-					<fieldset class="lesson" style="min-width: 400px;">
+					<fieldset class="lesson" style="min-width: 400px; min-height: 400px;">
 							<table id="tearles"> 
 							     <tr><td colspan="4">本科课程</td></tr>
 							      <c:forEach var="les" items="${sessionScope.flesSet}">
-							         <tr><td><c:out value="${les.title}" /></td><td><a href="resource/lookFile_Action?lesid=${les.id}&fileType=1">查看/上传资源</a></td><td>修改课程信息</td><td>删除课程</td></tr>
+							         <tr><td><c:out value="${les.title}" /></td><td><a href="resource/lookFile_Action?lesid=${les.id}">查看/上传资源</a></td><td><a href="lesson/goUpdateLess_Action?lesid=${les.id}">修改课程信息</a></td><td><a href="lesson/deleteLesson_Action?lesid=${les.id}">删除课程</a></td></tr>
 							      </c:forEach>
 							</table>
 						</fieldset>
-					<fieldset class="lesson" style="margin-left: 20px; min-width: 400px;">
+					<fieldset class="lesson" style="margin-left: 20px; min-width: 400px;min-height: 400px;">
 							<table id="tearles"> 
 							     <tr><td colspan="4">研究生课程</td></tr>
 							     
 							      <c:forEach var="les" items="${sessionScope.slesSet}">
-							         <tr><td><c:out value="${les.title}" /></td><td>查看/上传资源</td><td>修改课程信息</td><td>删除课程</td></tr>
+							         <tr><td><c:out value="${les.title}" /></td><td><a href="resource/lookFile_Action?lesid=${les.id}">查看/上传资源</a></td><td><a href="lesson/goUpdateLess_Action?lesid=${les.id}">修改课程信息</a></td><td><a href="lesson/deleteLesson_Action?lesid=${les.id}">删除课程</a></td></tr>
 							      </c:forEach>
 							
 							</table>

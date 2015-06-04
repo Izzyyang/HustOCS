@@ -3,6 +3,8 @@ package service.teacher;
 import java.io.Serializable;
 import java.util.List;
 
+import util.Page;
+
 import dao.ResourceDaoer;
 import entity.Rese;
 
@@ -41,5 +43,9 @@ public class ResourceService implements ResourceServicer{
 	@Override
 	public List listLessons(Class c, String cascadeClass,List<Object> fQueryList, List<Object> value) {
 		return resourceDao.list(c, cascadeClass,fQueryList, value);
+	}
+	@Override
+	public Page listLessons(Class c, List<Object> fQueryList,List<Object> value, int pageNo, int pageSize) {
+		return resourceDao.listPage(c, fQueryList, value, pageNo, pageSize);
 	}
 }

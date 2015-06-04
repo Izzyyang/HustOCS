@@ -969,3 +969,6 @@ width:90%;
 .updatecourse table{
 margin:0 auto;
 }
+.tab_content a{
+ width: 20px;
+}

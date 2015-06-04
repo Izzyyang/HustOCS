@@ -1,5 +1,6 @@
 package service.teacher;
 
+import java.io.Serializable;
 import java.util.List;
 
 import dao.TeacherDaoer;
@@ -32,23 +33,32 @@ public class TeacherService implements TeacherServicer {
 
 	@Override
 	public String login(String id, String password) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean updateInfo() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-    //查找教师
-	@Override
-	public TearInfo viewInfo() {
-		return null;
+	public boolean add(Tear teacher) {
+		return teacherDao.insert(teacher);
 	}
 
 	@Override
-	public List<Tear> findTeacherByStr(Class c, List<Object> strList, List<Object> value){
-		return teacherDao.find(c, strList, value);
+	public boolean updateTeacher(Tear teacher) {
+		return teacherDao.update(teacher);
 	}
+
+	@Override
+	public boolean deleteTeacherByID(Class c,Serializable teacherid) {
+		return teacherDao.delete(c,teacherid);
+	}
+
+	@Override
+	public List listTeacher(Class c, List<Object> fQueryList, List<Object> value) {
+		return teacherDao.find(c, fQueryList, value);
+	}
+
+	@Override
+	public Tear viewTeacher(Class c, Serializable TeacherId) {
+		return teacherDao.view(c,TeacherId);
+	}
+
 }

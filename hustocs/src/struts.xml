@@ -16,12 +16,7 @@
             <exception-mapping exception="java.lang.Exception" result="error"/>
         </global-exception-mappings>
         
-		  <!--action name="index">
-            <result type="redirectAction">
-                <param name="actionName">HelloWorld</param>
-                <param name="namespace">/example</param>
-            </result>
-        </action-->
+        
        <action name="login" class="action.UserAction" method="login">
 			<result name="succ">/error.jsp</result>
 		</action>
@@ -33,6 +28,9 @@
 			<result name="input">/Teacher/login.jsp</result>
 			<result name="success">/Teacher/index.jsp</result>
 			<result name="cPwd" >/Teacher/mySafe.jsp</result>
+			<!-- update teacher's password -->
+			<result name="updatePsdSuccess">/Teacher/personalinfo.jsp</result>
+			<result name="updatePsdFail">/Teacher/securityinfo.jsp</result>
 		</action>
 	</package>
 	
@@ -51,11 +49,39 @@
 			<!-- 动态设置Action的属性值 -->
 			<!-- teacher add lesson -->
 			<param name="savePath">/Teacher/uploadFiles</param>
-            <result name="success">/Teacher/TeacherLess.jsp</result>
+			
+            <result name="success" type="redirectAction">
+               <param name="actionName">queryTeacherLesson_Action</param>
+			   <param name="namespace">/lesson</param>
+            </result>
+            
             <result name="failaddLes">/Teacher/index.jsp</result>
             <!-- query teacher's all lesson -->
             <result name="teacherHaveLess">/Teacher/TeacherLess.jsp</result>
             <result name="teacherNoLess">/Teacher/noLess.jsp</result>
+            <!-- delete teacher's lesson -->
+            <result name="dLessSuccess" type="redirectAction">
+               <param name="actionName">queryTeacherLesson_Action</param>
+			   <param name="namespace">/lesson</param>
+            </result>
+            <result name="dLessFail">/Teacher/TeacherLess.jsp</result>
+            <!-- go update lesson  -->
+            <result name="goUpdateLess">/Teacher/updateCourse.jsp</result>
+            <result name="goUpdateFail" type="redirectAction">
+               <param name="actionName">queryTeacherLesson_Action</param>
+			   <param name="namespace">/lesson</param>
+            </result>
+            
+            <result name="updateLessSuccess" type="redirectAction">
+               <param name="actionName">queryTeacherLesson_Action</param>
+			   <param name="namespace">/lesson</param>
+            </result>
+            <result name="updateLessFail" type="redirectAction">
+               <param name="actionName">queryTeacherLesson_Action</param>
+			   <param name="namespace">/lesson</param>
+            </result>
+            
+            <result name="input">Teacher/index.jsp</result>
          </action>
   </package>
   <!-- look、search、upload lesson's resource -->
