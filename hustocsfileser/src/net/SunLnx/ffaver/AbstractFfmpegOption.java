@@ -22,5 +22,4 @@ public abstract class AbstractFfmpegOption {
 	
 	// Ffmpeg 选项
 	public abstract String toOption() throws InvalidOptionException;
-	public abstract void fromFfprobe();
 }

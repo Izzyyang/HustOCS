@@ -32,7 +32,7 @@ public class ZipCompress extends AbstractChecksumContainer implements Comprer {
 	 * @see net.SunLnx.Comprer.Comprer#compress(java.util.List, java.lang.String)
 	 */
 	@Override
-	public boolean compress(List<String> srcFilePaths, String desFilePath) {
+	public boolean compress(String desFilePath, String... srcFilePaths) {
 		File desFile = new File(desFilePath);
 		File srcFile = null;
 		BufferedInputStream bis;
@@ -69,28 +69,11 @@ public class ZipCompress extends AbstractChecksumContainer implements Comprer {
 		return false;
 	}
 
-	/*
-	 * Compress a file to a zip file
-	 * srcpath: source file path, desfile: destination zip file path 
-	 * @see net.SunLnx.Comprer.Comprer#compress(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public boolean compress(String srcpath, String desfile) {
-		List<String> srcPaths = new LinkedList<String>();
-		srcPaths.add(srcpath);
-		return compress(srcPaths, desfile);
-	}
-
 	
 	public static void main(String agrs[]) {
 		ZipCompress zipC = new ZipCompress(new Adler32());
-		List<String> strs = new LinkedList<String>();
-		strs.add("D:/movie.mp4");
-		//strs.add("D:/rmvb.rmvb");
-		//strs.add("D:/mkv.mkv");
-		//strs.add("D:/avi.avi");
 		long time = System.currentTimeMillis();
-		zipC.compress(strs, "D:/mkv.zip");
+		zipC.compress("D:/mkv.zip", "D:/Video/mkv.mkv", "D:/Video/movie.mp4");
 		time = System.currentTimeMillis() - time;
 		System.out.println("cost time " + time + " check sum is" + zipC.getChecksumNumber());
 	}

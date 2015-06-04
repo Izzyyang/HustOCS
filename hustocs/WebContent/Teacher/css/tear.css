@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+#tearles{padding-left: 10px;}
+#tearles tr:first-child{
+	height: 25px;
+    line-height: 25px;
+	text-shadow: 0 1px 0 #fff;
+	font-weight: bold;
+	padding-left: 10px;
+	margin: -5px 0 5px 0;
+	text-transform: uppercase;
+}
+#tearles tr td{
+	width: 90px;
+	height: 35px;
+}
+.lesson{
+	float:left;
+}

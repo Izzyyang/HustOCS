@@ -11,19 +11,21 @@ import java.util.Set;
 public class Lesn implements java.io.Serializable {
 
 	// Fields
-
 	private String id;
-	private Tear tear;
-	private Acay acay;
-	private Admn admn;
+	private String fclassify; //一级分类；
+	private String sclassify; //课程二级分类
+	private Tear tear;  //授课老师
+	private Acay acay;  //
+	private Admn admn;  //管理员
 	private String title;
 	private String brief;
 	private Timestamp time;
 	private Short status;
-	private Set stutHisies = new HashSet(0);
-	private Set reses = new HashSet(0);
-	private Set stutColts = new HashSet(0);
-
+	private String picaddress; //课程图片地址；
+	private Set stutHisies = new HashSet(0);  //浏览历史记录
+	private Set reses = new HashSet(0);   //课程资源
+	private Set stutColts = new HashSet(0);  //收藏学生集合
+    
 	// Constructors
 
 	/** default constructor */
@@ -31,9 +33,11 @@ public class Lesn implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Lesn(String id, Tear tear, Admn admn, String title, String brief,
+	public Lesn(String id,String fclassify,String sclassify, Tear tear, Admn admn, String title, String brief,
 			Timestamp time, Short status) {
 		this.id = id;
+		this.fclassify = fclassify;
+		this.sclassify = sclassify;
 		this.tear = tear;
 		this.admn = admn;
 		this.title = title;
@@ -43,16 +47,19 @@ public class Lesn implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Lesn(String id, Tear tear, Acay acay, Admn admn, String title,
-			String brief, Timestamp time, Short status, Set stutHisies,
+	public Lesn(String id,String fclassify,String sclassify,Tear tear, Acay acay, Admn admn, String title,
+			String brief,String picaddress,Timestamp time, Short status, Set stutHisies,
 			Set reses, Set stutColts) {
 		this.id = id;
+		this.fclassify = fclassify;
+		this.sclassify = sclassify;
 		this.tear = tear;
 		this.acay = acay;
 		this.admn = admn;
 		this.title = title;
 		this.brief = brief;
 		this.time = time;
+		this.picaddress = picaddress;
 		this.status = status;
 		this.stutHisies = stutHisies;
 		this.reses = reses;
@@ -149,4 +156,28 @@ public class Lesn implements java.io.Serializable {
 		this.stutColts = stutColts;
 	}
 
+	public String getPicaddress() {
+		return picaddress;
+	}
+
+	public void setPicaddress(String picaddress) {
+		this.picaddress = picaddress;
+	}
+
+	public String getFclassify() {
+		return fclassify;
+	}
+
+	public void setFclassify(String fclassify) {
+		this.fclassify = fclassify;
+	}
+
+	public String getSclassify() {
+		return sclassify;
+	}
+
+	public void setSclassify(String sclassify) {
+		this.sclassify = sclassify;
+	}
+	
 }

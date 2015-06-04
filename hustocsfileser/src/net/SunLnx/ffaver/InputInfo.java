@@ -40,5 +40,4 @@ public class InputInfo extends AbstractFfmpegOption{
 			e.printStackTrace();
 		}
 	}
-
 }

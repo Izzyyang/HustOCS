@@ -1,39 +1,41 @@
 package dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import entity.Lesn;
 
 public class LessonDao implements LessonDaoer {
-
+    private static BaseDAO baseDAO = new BaseDAO();
 	@Override
 	public boolean insert(Lesn lesson) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.add(lesson);
 	}
 
 	@Override
 	public boolean delete(String lessonId) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.deleObject(lessonId);
 	}
 
 	@Override
 	public boolean update(Lesn lesson) {
-		// TODO Auto-generated method stub
-		return false;
+		return baseDAO.updateObject(lesson);
 	}
 
 	@Override
-	public void view(String lessonId) {
-		// TODO Auto-generated method stub
-		
+	public Lesn view(Class c, Serializable lessonId) {
+		return (Lesn) baseDAO.getById(c, lessonId);
 	}
 
 	@Override
-	public List list(String teacherId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List list(Class c, List<Object> strList, List<Object> value) {
+		return baseDAO.find(c, strList, value);
+	}
+
+	@Override
+	public List list(Class c, String cascadeClass, List<Object> strList,
+			List<Object> value) {
+		return baseDAO.find(c,cascadeClass, strList, value);
 	}
 
 }

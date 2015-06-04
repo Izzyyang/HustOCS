@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Encrypte implements Encrypter {
 	@SuppressWarnings("finally")
 	public String encrypt(Salter salt) {
-		String str = salt.saltPlain();
+		String str = null;//salt.saltPlain();
 		if (!str.equals(null)) {
 			String result = null;
 			try {

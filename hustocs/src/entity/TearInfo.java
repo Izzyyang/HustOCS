@@ -9,14 +9,13 @@ import java.sql.Timestamp;
 public class TearInfo implements java.io.Serializable {
 
 	// Fields
-
 	private String id;
+	private String idcard;
 	private Tear tear;
 	private Acay acay;
 	private String name;
 	private String phone;
 	private String brief;
-	private String idcard;
 	private Timestamp time;
 
 	// Constructors

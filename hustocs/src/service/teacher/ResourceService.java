@@ -1,8 +1,10 @@
 package service.teacher;
 
+import java.io.Serializable;
 import java.util.List;
 
 import dao.ResourceDaoer;
+import entity.Rese;
 
 public class ResourceService implements ResourceServicer{
 	private ResourceDaoer resourceDao;
@@ -17,29 +19,27 @@ public class ResourceService implements ResourceServicer{
 		this.resourceDao = resourceDao;
 	}
 	@Override
-	public boolean addResource() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addResource(Rese resource) {
+		return resourceDao.insert(resource);
 	}
 	@Override
-	public boolean deleteResource() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteResource(String resourceId) {
+		return resourceDao.delete(resourceId);
 	}
 	@Override
-	public boolean updateResource() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateResource(Rese resource) {
+		return resourceDao.update(resource);
 	}
 	@Override
-	public void viewResource() {
-		// TODO Auto-generated method stub
-		
+	public Rese viewResource(Class c, Serializable resId) {
+		return resourceDao.view(c, resId);
 	}
 	@Override
-	public List listLessonResource() {
-		// TODO Auto-generated method stub
-		return null;
+	public List listLessons(Class c, List<Object> fQueryList, List<Object> value) {
+		return resourceDao.list(c, fQueryList, value);
 	}
-
+	@Override
+	public List listLessons(Class c, String cascadeClass,List<Object> fQueryList, List<Object> value) {
+		return resourceDao.list(c, cascadeClass,fQueryList, value);
+	}
 }

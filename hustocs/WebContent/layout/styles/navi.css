@@ -1,0 +1,90 @@
+@charset "utf-8";
+/*一级菜单*/
+#topnav{height:75px;}
+#topnav ul li{float:left;display:block;list-style-type:none;text-decoration:none;}
+#topnav ul{display:block;width:100%; height:75px; margin:0; padding:0;list-style-type:none;} 
+#topnav ul li a{color:#FFFFFF; display:block;}
+
+
+
+
+
+/*#topnav li{position:relative; margin:0; padding:0; text-transform:uppercase;}*/
+
+
+/*#topnav > ul > li > a{ font-size:14px; float:left;}*/
+#topnav > ul > li > a:link, #topnav > ul > li > a:visited, #topnav > ul > li > a:hover{display:block;height:25px; padding:10px 15px 0 15px; color:#333333; background-color:#E5E2C9; }  
+ 
+/*添加后面半截*/
+#topnav > ul > li.active > a, #topnav > ul > li > a:hover{color:#FFFFFF; background-color:#591434;} 
+#topnav ul ul ul> li > a, #topnav ul ul ul> li > a:visited, #topnav ul ul ul> li > a:link {background:rgba(0, 0, 0, 0.6); color:#FFFFFF;float:none;list-style-type:none;}
+#topnav ul ul ul> li > a:hover {background:#48282F;}
+/*二级菜单*/
+/*#topnav ul ul> li > a:link, #topnav  ul ul > li > a:visited, #topnav ul ul > li > a:hover{display:block; float:left; height:30px; padding:10px 15px 0 15px;} */
+#topnav ul ul> li > a{display:block; float:left; height:30px; padding:10px 15px 0 15px;}
+
+
+
+
+#topnav ul li  ul{display:none;}
+#topnav ul li:hover ul{
+display:block; 
+position:absolute;  /*生成绝对定位的元素，相对于static定位元素以外的第一个父元素进行定位；*/
+}
+
+
+
+
+/*#topnav ul ul ul {display:block; position:relative; top:40px; left:-30px; color:#FF0000; z-index:999;}*/
+/*二级菜单显示*/
+#topnav > ul > li.active > ul{display:block; position:absolute; top:35px; left:0; width:100%; height:40px; margin:0; padding:0; list-style:none;z-index:100; background:#591434} 
+#topnav > li.last{margin-right:0;}
+/*三级菜单*/
+#topnav ul ul ul{
+display:none;
+}
+#topnav ul li:hover ul li ul { 
+    display:none;
+}
+/*三级菜单显示*/
+#topnav ul li:hover ul li:hover ul{display:block; width:300px; position:absolute; width:110px; top:40px;}
+#topnav ul ul ul li{ width:140px;}
+#topnav ul > ul > li a:link, #topnav ul > ul > li a:visited, #topnav ul > ul > li a:hover{height:40px; line-height:40px; margin:0px 15px 0 0; padding:0 13px 0 0; color:#FFFFFF; background:rgba(0, 0, 0, 0.6);} 
+#topnav ul > ul > li.last a{margin-right:0; padding:0;}
+/* ----------------------------------------------Column Navigation------------------------------------- */
+
+
+
+#column .subnav{display:block; width:250px; padding:25px; background-color:#FFFFFF; margin-bottom:30px;}
+
+#column .subnav h2{margin:0 0 20px 0; padding:0 0 14px 0; font-size:20px; font-weight:normal; font-family:Georgia, "Times New Roman", Times, serif; color:#666666; background-color:#FFFFFF; line-height:normal; border-bottom:1px dotted #666666;}
+
+#column .subnav ul{margin:0; padding:0; list-style:none;}
+
+#column .subnav li{margin:0 0 3px 0; padding:0;}
+
+#column .subnav ul ul, #column .subnav ul ul ul, #column .subnav ul ul ul ul, #column .subnav ul ul ul ul ul{border-top:none; padding-top:0;}
+
+#column .subnav a{display:block; margin:0; padding:5px 10px 5px 20px; color:#777777; background:url("images/purple_file.gif") no-repeat 10px center #FFFFFF; text-decoration:none; border-bottom:1px dotted #666666;}
+
+#column .subnav a:hover{color:#591434; background-color:#FFFFFF;}
+
+#column .subnav ul ul a, #column .subnav ul ul ul a, #column .subnav ul ul ul ul a, #column .subnav ul ul ul ul ul a{background:url("images/black_file.gif") no-repeat #FFFFFF;}
+
+#column .subnav ul ul a{padding-left:40px; background-position:30px center;}
+
+#column .subnav ul ul ul a{padding-left:50px; background-position:40px center;}
+
+#column .subnav ul ul ul ul a{padding-left:60px; background-position:50px center;}
+
+#column .subnav ul ul ul ul ul a{padding-left:70px; background-position:60px center;}
+
+/*#################--------左侧导航栏-----##############*/
+.leftnav{ display:block; float:left;position:relative; width:170px; height:220px; padding:10px; overflow:hidden; color:#333333; background-color:#F8F7DF;}
+.leftnav .ui-tabs-hide{display:none;}
+.leftnav .lefttable{display:block; position:absolute; top:10px; left:10px; width:150px; height:180px; padding:10px; overflow:hidden; font-size:12px; color:#CCCCCC; background:url("images/trans.png") transparent; z-index:1;text-align:center;}
+.leftnav .lefttable li{display:block; width:150px; height:30px; margin:0; padding:13px 0 0 0; border-bottom:2px dotted #7B7774;}
+.leftnav .lefttable li.last{border-bottom:none;}
+.leftnav .lefttable li a{display:block; width:150px; height:30px; margin:0; padding:0; font-size:18px; font-weight:normal; font-family:Georgia, "Times New Roman", Times, serif; color:#CCCCCC; background: top right no-repeat transparent;}
+.leftnav .lefttable li a span{display:block; margin:10px 0 0 0; padding:0; font-size:12px; font-weight:normal; font-family:Verdana, Arial, Helvetica, sans-serif;}
+.leftnav .lefttable li a:hover, .leftnav .lefttable li.ui-tabs-active a{color:#D6D1A9; background-color:transparent; }

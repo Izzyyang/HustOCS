@@ -9,14 +9,13 @@ import java.util.Set;
  */
 
 public class Tear implements java.io.Serializable {
-
 	// Fields
-
-	private String id;
-	private String email;
-	private String passwd;
-	private Timestamp time;
-	private Short status;
+	private String id;  //id
+	private String email;  //邮箱
+	private String passwd;  //密码
+	private String pic;  //头像
+	private Timestamp time;  //注册时间
+	private Short status;   
 	private Set tearInfos = new HashSet(0);
 	private Set stutFolws = new HashSet(0);
 	private Set lesns = new HashSet(0);
@@ -38,7 +37,7 @@ public class Tear implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Tear(String id, String email, String passwd, Timestamp time,
+	public Tear(String id, String email, String passwd, String pic,Timestamp time,
 			Short status, Set tearInfos, Set stutFolws, Set lesns) {
 		this.id = id;
 		this.email = email;
@@ -48,6 +47,7 @@ public class Tear implements java.io.Serializable {
 		this.tearInfos = tearInfos;
 		this.stutFolws = stutFolws;
 		this.lesns = lesns;
+		this.pic = pic;
 	}
 
 	// Property accessors
@@ -114,6 +114,14 @@ public class Tear implements java.io.Serializable {
 
 	public void setLesns(Set lesns) {
 		this.lesns = lesns;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 }
