@@ -120,14 +120,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<hgroup>
 			<h1 class="site_title"><a href="Teacher/index.jsp">华中大公开课教师系统</a></h1>
 			<h2 class="section_title">&nbsp;</h2>
-			<div class="btn_view_site"><a href="../teacherpage/teacher.jsp">个人主页</a></div>
+			<div class="btn_view_site"><a href="teacherpage/teacher.html">个人主页</a></div>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
 	<section id="secondary_bar">
 		<div class="user">
 		 <s:if test="#session.user!=null">
-			<p><s:property value="%{#session.tear.name}"/> (<a href="#">欢迎您！ </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
 		  </s:if>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>

@@ -115,4 +115,9 @@ public class TearInfo implements java.io.Serializable {
 		this.time = time;
 	}
 
+	@Override
+	public String toString() {
+		return "id:"+getId()+"  password:"+getTear().getPasswd();
+	}
+	
 }

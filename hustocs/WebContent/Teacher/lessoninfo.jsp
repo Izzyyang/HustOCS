@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<hgroup>
 			<h1 class="site_title"><a href="Teacher/index.jsp">华中大公开课教师系统</a></h1>
 			<h2 class="section_title">&nbsp;</h2>
-			<div class="btn_view_site"><a href="../teacherpage/teacher.html">个人主页</a></div>
+			<div class="btn_view_site"><a href="<%=basePath%>/teacherpage/teacher.html">个人主页</a></div>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -212,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				 </c:forEach>
     				 
     				  <c:if test="${sessionScope.fileSet.currentPage<sessionScope.fileSet.totalPage}">
-    				          <a href="resource/lookFile_Action?lesid=${les.id}&currentPage=${sessionScope.fileSet.currentPage+1}">下一页</a>
+    				          <a href="resource/lookFile_Action?currentPage=${sessionScope.fileSet.currentPage+1}">下一页</a>
     		         </c:if> 
     		  </td> 
     		</tr>
