@@ -29,7 +29,6 @@ public class ResourceAction extends ActionSupport implements RequestAware,Servle
 	 * @return
 	 */
 	public String lookFile(){
-		System.out.println("--进入 查看资料---");
 		Lesn lesson = null;
 		    	if(lesid!=null && lesid!="" && !lesid.equals("")){
 		    		lesson = lessonService.viewLesson(Lesn.class, lesid);
