@@ -47,16 +47,6 @@ public class TeacherInfoService implements TeacherInfoServicer{
 	}
 
 	@Override
-	public boolean deleteTeacherInfoById(Serializable tearinfoID) {
-		return teacherInfoDao.delete(tearinfoID);
-	}
-
-	@Override
-	public boolean deleteTeacherInfo(Serializable tearinfoID) {
-		return teacherInfoDao.delete(tearinfoID);
-	}
-
-	@Override
 	public TearInfo viewTeacherInfo(Class c, Serializable teacherInfoID) {
 		return teacherInfoDao.view(c, teacherInfoID);
 	}
@@ -81,7 +71,11 @@ public class TeacherInfoService implements TeacherInfoServicer{
 	@Override
 	public List listLessons(Class c, String cascadeClass,
 			List<Object> fQueryList, List<Object> value) {
-		return null;
+		return teacherInfoDao.list(c, cascadeClass, fQueryList, value);
 	}
 
+	@Override
+	public boolean deleteTeacherInfoById(Class c, Serializable tearinfoID) {
+		return teacherInfoDao.delete(c, tearinfoID);
+	}
 }

@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -6,9 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!doctype html>
 <html lang="en">
-
 <head>
-    <base href="<%=basePath%>"> 
+    <base href="<%=basePath%>">  
 	<meta charset="utf-8"/>      
 	<title>Dashboard I Admin Panel</title>
 	
@@ -89,13 +90,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<hgroup>
 			<h1 class="site_title"><a href="Teacher/index.jsp">华中大公开课教师系统</a></h1>
 			<h2 class="section_title">&nbsp;</h2>
-			<div class="btn_view_site"><a href="../teacherpage/teacher.jsp">个人主页</a></div>
+			<div class="btn_view_site"><a href="<%=basePath%>/teacherpage/teacher.html">个人主页</a>个人主页</a></div>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>李杰 (<a href="#">3 条消息 </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -118,8 +119,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h3>我的课程</h3>
 		<ul class="toggle">
 			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
-			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
-			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
 		<h3>课程管理</h3>
 		<ul class="toggle" id="courses">
@@ -166,17 +165,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<header><h3>基本资料</h3></header>
 			<div class="module_content">
 				<article class="stats_graph">
-                    <label>姓名：</label><input type="text" value="李杰" style="width:70px"/>
-                    <label>实名认证：</label><input type="text" value="363478196712301514"/>
+                    <label>姓名：</label><input type="text" value="${sessionScope.tear.name}" style="width:40px"/>
+                    <label>电话：</label><input type="text" value="${sessionScope.tear.phone}"/>
                     
-                    <label>注册时间：</label><input type="text" value="2014-05-01"/>
+                    <label>注册时间：</label><input type="text" value="${sessionScope.tear.time}"/>
 				</article>
 				
 				<article class="stats_overview">
 					<div class="overview_previous">
 						<p class="overview_day">被关注次数</p>
-						<p class="overview_count">1,646</p>
-						<p class="overview_type">人</p>
+						<p class="overview_count">1,646人</p>
 					</div>
 				</article>
 				<div class="clear"></div>
@@ -184,33 +182,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</article><!-- end of stats article -->
        
 		<article class="module width_full">
-			<header><h3>详细资料</h3></header>
-               <form>
+			<header><h3 style="padding-left: 10px">详细资料</h3></header>
+               <form action="">
 				<div class="module_content">
 						<fieldset>
-							<label style="width:50px;">邮箱：</label>
-							<input type="text" value="34567890@qq.com">
+							<label style="width:70px;">教师编号：</label>
+							<input type="text" value="${sessionScope.tear.idcard}">
 						</fieldset>
 						<fieldset>
 							<label>个人简介</label>
 							<textarea rows="12">
-							    
-
-1995年通过美国Knight Ridder公司DIALOG信息检索系统培训和认证，1999年通过IBM AIX系统管理员培训和认证，2000年通过IBM DB2/UDB系统管理员培训和认证，2001年通过Lotus Knowledge Management培训和认证，2002年在香港参加美国Innovative公司INNOPAC图书馆集成信息系统国际会议。
-
-曾从事系统管理、软件开发以及大型文献检索镜像站建设，参加211图书馆网络集成信息系统项目，负责数据库参数设计。完成机读目录MARC数据处理、全文电子期刊统一检索等软件项目及其他MIS项目。出版教材、光盘教材和网络版电子教材各1部，发表论文若干篇。
-
-1995年通过美国Knight Ridder公司DIALOG信息检索系统培训和认证，1999年通过IBM AIX系统管理员培训和认证，2000年通过IBM DB2/UDB系统管理员培训和认证，2001年通过Lotus Knowledge Management培训和认证，2002年在香港参加美国Innovative公司INNOPAC图书馆集成信息系统国际会议。
-
-曾从事系统管理、软件开发以及大型文献检索镜像站建设，参加211图书馆网络集成信息系统项目，负责数据库参数设计。完成机读目录MARC数据处理、全文电子期刊统一检索等软件项目及其他MIS项目。出版教材、光盘教材和网络版电子教材各1部，发表论文若干篇。
-
+                                ${sessionScope.tear.brief}
 							</textarea>
 						</fieldset>
 					  	<div class="clear"></div>
 				</div>
 			<footer>
 				<div class="submit_link">
-					
 					<input type="submit" value="发布" class="alt_btn">
 					<input type="reset" value="重置">
 					</form>

@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
+			<p>李杰 (<a href="#">3 条消息 </a>)</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -85,6 +85,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h3>我的课程</h3>
 		<ul class="toggle">
 			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
+			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
+			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
 		<h3>课程管理</h3>
 		<ul class="toggle" id="courses">
@@ -125,14 +127,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<p>Theme by MediaLoot</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->
-	
-	<span style="width:75%; float:left">
+
+
+<span style="width:75%; float:left">
 	  <section id="main" class="column">
 		<article class="module width_full">
 			<header><h3>课程状态</h3></header>
 			<div class="module_content">
 				<article class="stats_graph">
-					<img src="Teacher/uploadFiles/${sessionScope.currentLesson.picaddress}" width="200" height="140" alt="课程图片"/>
+				<!-- Teacher/uploadFiles/${sessionScope.currentLesson.picaddress} -->
+					<img src="" width="520" height="140" alt="课程图片"/>
 				</article>
 				
 				<article class="stats_overview">
@@ -214,7 +218,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		  </td> 
     		</tr>
 			</table>
-<div class="clear"></div>
 			<footer>
 				<div class="submit_link">
 					<input type="checkbox" id="SelectAll">
@@ -222,52 +225,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input type="submit" value="删除">
 				</div>
 			</footer>
-		</div><!-- end of #tab2 -->
-			
-			<div id="tab2" class="tab_content">
-			<table class="tablesorter"> 
-			<thead> 
-				<tr> 
-   					<th></th> 
-    				<th>资源名称</th> 
-    				<th>附件</th> 
-					<th>审核状态</th> 
-    				<th>上传时间</th> 
-    				<th>操作</th> 
-				</tr> 
-			</thead> 
-			<tbody> 
-				<c:forEach var="rese" items="${sessionScope.videoSet.objectsList}">
-				       <tr> 
-	   					<td><input type="checkbox" name="subcheckv"></td> 
-	    				<td><c:out value="${rese.title}" /></td> 
-					    <td>
-						    <c:choose>
-							    <c:when test="${empty rese.reseSort}">
-							                 未上传
-							    </c:when>
-							    <c:otherwise>
-							                已上传
-							    </c:otherwise>
-							</c:choose>
-					    </td>
-	    				<td><c:out value="${rese.status}" /></td> 
-	    				<td><c:out value="${rese.time}" /></td> 
-	    				<td><input type="image" src="Teacher/images/icn_edit.png" title="Edit" id="cedit" onClick="ShowDiv('MyDiv','fade')" ><input type="image" src="Teacher/images/icn_trash.png" title="Trash"></td> 
-				   </tr> 
-			    </c:forEach>
-			</tbody> 
-			</table>
-<div class="clear"></div>
-			<footer>
-				<div class="submit_link">
-					<input type="checkbox" id="SelectAllf">
-					<input type="submit" value="添加" class="alt_btn">
-					<input type="submit" value="删除">
-				</div>
-			</footer>
-    </div><!-- end of #tab2 -->
-			
+		</div>
+		<!-- end of #tab2 -->
 		</div><!-- end of .tab_container -->
 		
 	  </article><!-- end of content manager article -->
@@ -281,73 +240,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="fade" class="black_overlay">
 	</div>
 	<div id="MyDiv" class="white_content">
-		<div style="text-align: right; cursor: default; height: 20px; left: 747px;">
+		<div style="text-align: right; cursor: default; height: 40px; left: 747px;">
 			<span style="font-size:16px;" onClick="CloseDiv('MyDiv','fade')">
 			    <img src="Teacher/images/icn_logout.png" style="margin:5px;">
 			</span>
 		</div>
 		<div class="updatecourse">
+		   <form>
 		      <table width="600px;">
-			     <tr><td class="tabright">课程名称：</td><td><input type="text" placeholder="请输入资源名称"></td></tr>
+			     <tr><td class="tabright">课程名称：</td><td><input type="text" value="第一课时 数据库简介"></td></tr>
 				 <tr><td class="tabright">资源附件：</td><td><input type="file" style="overflow:hidden; width:350px;"></td></tr>
 				 <tr><td class="tabright">审核状态：</td><td><input type="text" value="审核通过" disabled="disabled"></td></tr>
 				 <tr><td class="tabright">上传时间：</td><td><input type="text" value="5th April 2011" disabled="disabled"></td></tr>
 				 <tr><td class="tabright"></td><td><input type="submit" value="提交" style="width:100px"></td></tr>
 			  </table>
+		   </form>
 		</div>
 	</div>
 	<!--弹出层介绍-->
 </body>
+</html>
+
 <script type="text/javascript">
 //弹出隐藏层
 function ShowDiv(show_div,bg_div){
-	document.getElementById(show_div).style.display='block';
-	document.getElementById(bg_div).style.display='block' ;
-	var bgdiv = document.getElementById(bg_div);
-	bgdiv.style.width = document.body.scrollWidth;
-	// bgdiv.style.height = $(document).height();
-	$("#"+bg_div).height($(document).height());
+document.getElementById(show_div).style.display='block';
+document.getElementById(bg_div).style.display='block' ;
+var bgdiv = document.getElementById(bg_div);
+bgdiv.style.width = document.body.scrollWidth;
+// bgdiv.style.height = $(document).height();
+$("#"+bg_div).height($(document).height());
 };
 //关闭弹出层
 function CloseDiv(show_div,bg_div)
 {
-	document.getElementById(show_div).style.display='none';
-	document.getElementById(bg_div).style.display='none';
+document.getElementById(show_div).style.display='none';
+document.getElementById(bg_div).style.display='none';
 };
+//复选框事件  
+//全选、取消全选的事件  
+function selectAll(){  
+        if ($("#SelectAll").attr("checked")) {  
+            $("input[name='subcheck']").attr("checked", true);  
+        } else {  
+            $("input[name='subcheck']").attr("checked", false);  
+        }  
+    }  
 
 //子复选框的事件  
 $(function(){
-        //复选框事件  
-		//全选、取消全选的事件   
-     	$("#SelectAll").click(function(){
-     	var all = document.getElementById("SelectAll");
-     	var a = document.getElementsByName("subcheckf");
-     	if(all){
-		    for (var i=0;i<a.length;i++){
-		       a[i].checked = this.checked;
-		    }
-		 }
-	});
-
-    // $("input[name='subcheck']").change(function() {
-        //if (!$("input[name='subcheck']").checked) {  
-          //  $("#SelectAll").attr("checked", false);  
-      //  }  
-      //  var chsub = $("input[type='checkbox'][name='subcheck']").length; //获取subcheck的个数  
-      //  var checkedsub = $("input[type='checkbox'][name='subcheck']:checked").length; //获取选中的subcheck的个数  
-       // if (checkedsub == chsub) {  
-          //  $("#SelectAll").attr("checked", true);  
-      //  }  
-   // });
+     
+     $("input[name='subcheck']").change(function() {
+        if (!$("input[name='subcheck']").checked) {  
+            $("#SelectAll").attr("checked", false);  
+        }  
+        var chsub = $("input[type='checkbox'][name='subcheck']").length; //获取subcheck的个数  
+        var checkedsub = $("input[type='checkbox'][name='subcheck']:checked").length; //获取选中的subcheck的个数  
+        if (checkedsub == chsub) {  
+            $("#SelectAll").attr("checked", true);  
+        }  
+    });
 	//choose all files
 	$("#SelectAllf").click(function(){
-	    var all = document.getElementById("SelectAllf");
-     	var a = document.getElementsByName("subcheckv");
-     	if(all){
-		    for (var i=0;i<a.length;i++){
-		       a[i].checked = this.checked;
-		    }
-		 }
+	     if ($("#SelectAllf").attr("checked")) {  
+            $("input[name='subcheck2']").attr("checked", true);  
+        } else {  
+            $("input[name='subcheck2']").attr("checked", false);  
+        }  
 	});
 	//single file choose
 	  $("input[name='subcheck2']").change(function() {
@@ -363,4 +322,3 @@ $(function(){
 	
 }); 
 </script>
-</html>

@@ -30,25 +30,18 @@ public class ResourceAction extends ActionSupport implements RequestAware,Servle
 	 */
 	public String lookFile(){
 		Lesn lesson = null;
-		    if(servletRequest.getSession().getAttribute("currentLesson")==null||servletRequest.getSession().getAttribute("currentLesson")==""){
 		    	if(lesid!=null && lesid!="" && !lesid.equals("")){
 		    		lesson = lessonService.viewLesson(Lesn.class, lesid);
 		    		servletRequest.getSession().setAttribute("currentLesson",lesson);
-		    		System.out.println("---1111111111111111111111111111111111------");
 		    	}else{
-		    		return "lookFileSuccess";
+		    	   if(servletRequest.getSession().getAttribute("currentLesson")!=null||servletRequest.getSession().getAttribute("currentLesson")!=""){
+		    		   lesson =  (Lesn) servletRequest.getSession().getAttribute("currentLesson");
+		    		}else{
+		    		   return "lookFileSuccess";
+		    		}
 		    	}
-		    }else{
-		    	lesson =  (Lesn) servletRequest.getSession().getAttribute("currentLesson");
-		    	System.out.println("---2222222222222222222222222222222-----");
-		    }
 		    
-			//currentPage = (currentPage.equals("") || currentPage==null || currentPage.equals(null))?"0":currentPage;
-		   // currentPage = (currentPage=="")?"0":currentPage;
-		    if(currentPage==null){
-		    	currentPage = "0";
-		    	System.out.println("----当前页为0的时候-----------");
-		    }
+		    currentPage = (currentPage==null)?"0":currentPage;
 		    if(lesson!=null){
 				//query file resource;
 				ReseSort rSort = resourcSortService.viewResourceSort(ReseSort.class, (short)1);

@@ -239,10 +239,12 @@ public class BaseDAO{
 		Session s = null;
         s = initSession();
 		try{
-			s.beginTransaction();
+			//s.beginTransaction();
+			s.getTransaction().begin();
 			s.update(o);
 			s.getTransaction().commit();
-			s.close();
+			System.out.println(o);
+			//s.close();
 		}catch(Exception e){
 			e.printStackTrace();
 			return false;

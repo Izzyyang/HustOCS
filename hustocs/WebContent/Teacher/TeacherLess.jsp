@@ -47,9 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<section id="secondary_bar">
 		<div class="user">
-		 <s:if test="#session.user!=null">
 			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
-		  </s:if>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -71,8 +69,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h3>我的课程</h3>
 	<ul class="toggle">
 			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
-			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
-			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
 		<h3>课程管理</h3>
 		<ul class="toggle" id="courses">

@@ -41,15 +41,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<hgroup>
 			<h1 class="site_title"><a href="Teacher/index.jsp">华中大公开课教师系统</a></h1>
 			<h2 class="section_title">&nbsp;</h2>
-			<div class="btn_view_site"><a href="../teacherpage/teacher.jsp">个人主页</a></div>
+			<div class="btn_view_site"><a href="<%=basePath%>/teacherpage/teacher.html">个人主页</a></div>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
 	<section id="secondary_bar">
 		<div class="user">
-		 <s:if test="#session.user!=null">
 			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
-		  </s:if>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -71,8 +69,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h3>我的课程</h3>
 	<ul class="toggle">
 			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
-			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
-			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
 		<h3>课程管理</h3>
 		<ul class="toggle" id="courses">
@@ -116,12 +112,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</aside><!-- end of sidebar -->
 	
   <span style="width:75%; float:left">
-	 		<section id="main" class="column">
+	 <section id="main" class="column">
         <article class="module width_full">
+        <form action="tear/updatePsw_Action" method="post">
 			<header><h3>更改密码</h3></header>
             
 				<div class="module_content">
-				     <form action="tear/updatePsw_Action">
+				     
 						<fieldset>
 							<label style="width:70px; margin-right:0px;">原密码：</label>
 							<input type="text" style="width:40%; text-align:left;" name="psw">
@@ -137,7 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<span class="verify" id="pswc"></span>
 						</fieldset>
 						<div class="clear"></div>
-						</form>
+						
 				</div>
 			<footer>
 				<div class="submit_link">
@@ -146,6 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input type="submit" value="重置">
 				</div>
 			</footer>
+			</form>
 		</article><!-- end of post new article -->
   </span>
 </body>

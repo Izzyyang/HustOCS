@@ -215,15 +215,14 @@ public class TeacherAction extends ActionSupport implements RequestAware,
 		String newpsw = servletRequest.getParameter("newpsw");
 		String cnewpsw = servletRequest.getParameter("newpsw");
 		TearInfo teacherInfor = (TearInfo) servletRequest.getSession().getAttribute("tear");
-		System.out.println(psw + "  --  "+newpsw+"   ---   "+cnewpsw);
 		if(teacherInfor!=null){
 		   Tear teacher = teacherInfor.getTear();
-		
 				if(psw!="" && newpsw!="" && cnewpsw !=""){
-					if(psw==teacher.getPasswd() && newpsw==cnewpsw){
+					if(psw.equals(teacher.getPasswd()) && newpsw.equals(cnewpsw)){
 						teacher.setPasswd(newpsw);
 						teacherInfor.setTear(teacher);
 						if(teacherinfoService.updateTeacherInfo(teacherInfor)){
+							 System.out.println(teacherInfor.getTear().getPasswd()+"   ----更改密码----     ");
 						     return "updatePsdSuccess";
 						}
 					}else{
