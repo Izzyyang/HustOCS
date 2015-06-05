@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>李杰 (<a href="#">3 条消息 </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -85,8 +85,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h3>我的课程</h3>
 		<ul class="toggle">
 			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
-			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
-			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
 		<h3>课程管理</h3>
 		<ul class="toggle" id="courses">
@@ -134,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<header><h3>课程状态</h3></header>
 			<div class="module_content">
 				<article class="stats_graph">
-					<img src="Teacher/uploadFiles/${sessionScope.currentLesson.picaddress}" width="520" height="140" alt="课程图片"/>
+					<img src="Teacher/uploadFiles/${sessionScope.currentLesson.picaddress}" width="200" height="140" alt="课程图片"/>
 				</article>
 				
 				<article class="stats_overview">
@@ -168,7 +166,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<div class="tab_container" >
 	     <div id="tab1" class="tab_content">
-	        <form action="" method="post">
 			<table class="tablesorter"> 
 			<thead> 
 				<tr> 
@@ -225,7 +222,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input type="submit" value="删除">
 				</div>
 			</footer>
-			</form>
 		</div><!-- end of #tab2 -->
 			
 			<div id="tab2" class="tab_content">
@@ -291,7 +287,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</span>
 		</div>
 		<div class="updatecourse">
-		   <form action="" method="post">
 		      <table width="600px;">
 			     <tr><td class="tabright">课程名称：</td><td><input type="text" placeholder="请输入资源名称"></td></tr>
 				 <tr><td class="tabright">资源附件：</td><td><input type="file" style="overflow:hidden; width:350px;"></td></tr>
@@ -299,7 +294,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 <tr><td class="tabright">上传时间：</td><td><input type="text" value="5th April 2011" disabled="disabled"></td></tr>
 				 <tr><td class="tabright"></td><td><input type="submit" value="提交" style="width:100px"></td></tr>
 			  </table>
-		   </form>
 		</div>
 	</div>
 	<!--弹出层介绍-->

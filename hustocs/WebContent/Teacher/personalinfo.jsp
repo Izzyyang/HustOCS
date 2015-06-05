@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>${sessionScope.tear.name}(<a href="#">3 条消息 </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -119,8 +119,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h3>我的课程</h3>
 		<ul class="toggle">
 			<li class="icn_add_user"><a href="lesson/queryTeacherLesson_Action">课程列表</a></li>
-			<!--<li class="icn_view_users"><a href="#">课程审核状态</a></li>-->
-			<li class="icn_profile"><a href="#">课程审核状态</a></li>
 		</ul>
 		<h3>课程管理</h3>
 		<ul class="toggle" id="courses">
@@ -168,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="module_content">
 				<article class="stats_graph">
                     <label>姓名：</label><input type="text" value="${sessionScope.tear.name}" style="width:40px"/>
-                    <label>实名认证：</label><input type="text" value="363478196712301514"/>
+                    <label>电话：</label><input type="text" value="${sessionScope.tear.phone}"/>
                     
                     <label>注册时间：</label><input type="text" value="${sessionScope.tear.time}"/>
 				</article>
@@ -176,8 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<article class="stats_overview">
 					<div class="overview_previous">
 						<p class="overview_day">被关注次数</p>
-						<p class="overview_count">1,646</p>
-						<p class="overview_type">人</p>
+						<p class="overview_count">1,646人</p>
 					</div>
 				</article>
 				<div class="clear"></div>
@@ -185,7 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</article><!-- end of stats article -->
        
 		<article class="module width_full">
-			<header style="padding-left: 10px;"><h3>详细资料</h3></header>
+			<header><h3 style="padding-left: 10px">详细资料</h3></header>
                <form action="">
 				<div class="module_content">
 						<fieldset>
@@ -202,7 +199,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			<footer>
 				<div class="submit_link">
-					
 					<input type="submit" value="发布" class="alt_btn">
 					<input type="reset" value="重置">
 					</form>
