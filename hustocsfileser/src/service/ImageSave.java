@@ -5,7 +5,7 @@ public class ImageSave extends AbstractFileSaver {
 	private static final String IMAGE_PATH = "D:/Images/";
 
 	@Override
-	protected String generateTopPath() {
+	protected String topPath() {
 		return ImageSave.IMAGE_PATH;
 	}
 
@@ -16,7 +16,7 @@ public class ImageSave extends AbstractFileSaver {
 
 	public static void main(String agrs[]) {
 		ImageSave is = new ImageSave();
-		System.out.println(is.getFilePathGenerator().generateFilePath(is.generateTopPath(), "test.png"));
+		System.out.println(is.getFilePathGenerator().generateFilePath(is.topPath(), "test.png"));
 	}
 
 }

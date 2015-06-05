@@ -11,12 +11,12 @@
   </welcome-file-list>
   
   <servlet>
-  	<servlet-name>uploadfile</servlet-name>
-  	<servlet-class>UpldFileServlet</servlet-class>
+  	<servlet-name>uploadFileServlet</servlet-name>
+  	<servlet-class>action.UploadFileServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-	<servlet-name>uploadfile</servlet-name>
-	<url-pattern>upload</url-pattern>  
+  	<servlet-name>uploadFileServlet</servlet-name>
+  	<url-pattern>/uploadFileAction</url-pattern>
   </servlet-mapping>
 </web-app>

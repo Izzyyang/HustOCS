@@ -142,9 +142,5 @@ public class AudioInfo extends AbstractFfmpegOption implements Serializable {
 		System.out.println(audio.codec);
 	}
 
-	@Override
-	public void fromFfprobe() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

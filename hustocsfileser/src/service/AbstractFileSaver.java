@@ -12,12 +12,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public abstract class AbstractFileSaver {
 
 	private IFilePathGenerator filePathGenerator;
-
+	protected abstract String topPath();
 	public AbstractFileSaver() {
 		filePathGenerator = new FilePathGenerate();
 	}
-
-	protected abstract String generateTopPath();
 
 	protected abstract boolean filteType(String type);
 
@@ -33,7 +31,7 @@ public abstract class AbstractFileSaver {
 					if (true == this.filteType(stream.getContentType())) {
 						new StreamWrite().write(
 								this.filePathGenerator.generateFilePath(
-										this.generateTopPath(),
+										this.topPath(),
 										stream.getName()), stream.openStream());
 					}
 				}

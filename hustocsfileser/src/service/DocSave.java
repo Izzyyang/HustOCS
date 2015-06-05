@@ -4,7 +4,7 @@ public class DocSave extends AbstractFileSaver{
 	private static final String DOC_PATH = "D:/Docs/";
 
 	@Override
-	protected String generateTopPath() {
+	protected String topPath() {
 		return DocSave.DOC_PATH;
 	}
 
@@ -15,7 +15,7 @@ public class DocSave extends AbstractFileSaver{
 
 	public static void main(String agrs[]) {
 		ImageSave is = new ImageSave();
-		System.out.println(is.getFilePathGenerator().generateFilePath(is.generateTopPath(), "test.png"));
+		System.out.println(is.getFilePathGenerator().generateFilePath(is.topPath(), "test.png"));
 	}
 
 }

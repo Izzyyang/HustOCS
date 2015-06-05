@@ -5,6 +5,6 @@ import java.util.List;
 import entity.Resource;
 
 public interface ResourceDaoer {
-	public boolean insert(Resource resource);
-	public List<String> selectFiles(String resourceId);
+	public boolean insert(String lessonId, String url);
+	public String selectFileURL(String resourceId);
 }

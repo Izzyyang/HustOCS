@@ -6,27 +6,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public  class AbsFfprobe {
-	protected String outputFormat;
+public  class Ffprobe {
 	protected ByteArrayOutputStream bos; 
 	protected String attrisInfo;
 	protected FfmpegLocater locater;
 
-	public AbsFfprobe() {
+	public Ffprobe() {
 		this.locater = DefaultFfmpegLocate.getInstance();
 	}
 
-	public AbsFfprobe(FfmpegLocater locater) {
+	public Ffprobe(FfmpegLocater locater) {
 		this.locater = locater;
 	}
 
-	public String outputFormat() {
-		return this.outputFormat;
-	}
-
-	protected boolean probe(String filePath) {
+	protected boolean probe(String filePath, String format) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(locater.getFfprobeExecutePath()).append(" -hide_banner -print_format ").append(this.outputFormat).append(" -i ").append(filePath);
+		sb.append(locater.getFfprobeExecutePath()).append(" -hide_banner -print_format ").append(format).append(" -i ").append(filePath);
 		try {
 			System.out.println(sb.toString());
 			Process p = Runtime.getRuntime().exec(sb.toString());
@@ -42,18 +37,15 @@ public  class AbsFfprobe {
 			p.waitFor();
 			return p.exitValue() == 0;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
 	}
 	
 	public static void main(String args[]) {
-		AbsFfprobe probe = new AbsFfprobe();
-		probe.outputFormat = "JSON";
-		probe.probe("D:/Video/movie.mp4");
+		Ffprobe probe = new Ffprobe();
+		probe.probe("D:/Video/movie.mp4", "JSON");
 	}
 }

@@ -3,10 +3,10 @@ package service;
 
 public class VideoSave extends AbstractFileSaver {
 	
-	private static final String VIDEO_PATH  = "/home/sunlnx/video/";
+	private static final String VIDEO_PATH  = "D:/Video/";
 
 	@Override
-	protected String generateTopPath() {
+	protected String topPath() {
 		return VideoSave.VIDEO_PATH;
 	}
 
