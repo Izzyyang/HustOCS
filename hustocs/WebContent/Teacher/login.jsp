@@ -54,13 +54,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <span style="float:left;"><img src="Teacher/image.jsp" name="validateCodeImg" border=0 id="validateCodeImg" style="width:60px;margin:0px 10px;"/><a href="javascript:void(0);" onClick="changeimg()">换一张 </a></span> 
                                 </div>
                                 <div id="vcode" style="margin-left:13px;line-height:20px;vertical-align:middle;clear:both;margin-top:-10px;"></div>
-                                <!-- <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">记住我
-                                    </label>
-                                </div>
-                                 -->
-                                <!-- Change this to a button or input when using this as a form -->
                                 <input id="sub" type="button" class="btn btn-lg btn-success btn-block" value="登录"/>
                             </fieldset>
                         </form>
@@ -69,18 +62,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </div>
-<SCRIPT type="text/javascript">
+    <script type="text/javascript" src="Teacher/js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="Teacher/js/teacherlogin.js"></script>
+    <SCRIPT type="text/javascript">
 	function changeimg()	
 	{
 		var myimg = document.getElementById("validateCodeImg"); 
 		now = new Date(); 
 		myimg.src="Teacher/image.jsp?code="+now.getTime();
 	} 
-	function aa(){
-	    alert("45890-");
-	}
-</SCRIPT>
-    <script type="text/javascript" src="Teacher/js/jquery-1.11.1.js"></script>
-    <script type="text/javascript" src="Teacher/js/teacherlogin.js"></script>
+	$(function(){
+	$("input[name='name']").blur(function() {
+		var name = $(this).val();
+		if(name==null){
+			$("#vname").html("");
+			$("#vname").css("color","#FF0000");
+			$("#vname").html("*教工号不能为空！");
+			$(this).foucs();
+		}else if(name.length > 32){
+			$("#vname").html("");
+			$("#vname").css("color","#FF0000");
+			$("#vname").html("*用户名长度过长，请重新填写！");
+			$(this).foucs();
+		}else{
+		    $("#vname").html("");
+		}
+		});
+		
+		$("input[name='password']").blur(function() {
+			var psw = $(this).val();
+			var name = $("input[name='name']").val();
+			if(psw==null){
+				$("#vpsw").html("");
+				$("#vpsw").css("color","#FF0000");
+				$("#vpsw").html("*密码不能为空！");
+				$(this).foucs();
+			}else if(psw.length > 32){
+				$("#vpsw").html("");
+				$("#vpsw").css("color","#FF0000");
+				$("#vpsw").html("*密码长度过长，请重新填写！");
+				$(this).foucs();
+			}else{
+			    $("#vpsw").html("");
+			}
+			});
+	$("input[name='verify']").blur(function() {
+		var code = $(this).val();
+		var rand = $("#rand").val();
+		if(code==null){
+			$("#vcode").html("");
+			$("#vcode").css("color","#FF0000");
+			$("#vcode").html("*验证码不能为空！");
+		}else if(code.length > 5){
+			$("#vcode").html("");
+			$("#vcode").css("color","#FF0000");
+			$("#vcode").html("*验证码长度过长，请重新输入！");
+		}else{
+		    $("#vcode").html("");
+		}
+	});
+	
+});
+	
+   </SCRIPT>
 </body>
 </html>

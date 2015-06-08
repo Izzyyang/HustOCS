@@ -66,15 +66,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">   欢迎您！ </a>)</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开始新课</a></article>
+			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">课程信息</a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column" style="min-height:660px; max-height:800px;">
+		<form class="quick_search">
+			<input type="text" value="快速搜索" onFocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+			<input type="submit" value="搜索">
+		</form>
 		<h3>工具</h3>
 		<ul class="toggle">
 			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>

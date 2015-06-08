@@ -150,17 +150,21 @@ public class LessonAction extends ActionSupport implements RequestAware,ServletR
 		TearInfo teacherInfo = (TearInfo) servletRequest.getSession().getAttribute("tear");
 		Tear teacher = teacherInfo.getTear();
 		Set<Lesn> tearLessons = teacher.getLesns();
-		Set<Lesn> deleteLess = new HashSet<Lesn>();
 		Lesn deleteLesn = lessonService.viewLesson(Lesn.class, lesid);
-		System.out.println(tearLessons.size());
+		System.out.println("遍历前："+tearLessons.size());
+		
+		//help to delete from set
+		List deleteList = new ArrayList<>();
+		
 		if(deleteLesn!=null && tearLessons!=null){
 			 for(Lesn les : tearLessons){  
 		        if(les.getId().equals(deleteLesn.getId())){
-		        	tearLessons.remove(les);
+		        	deleteList.add(les);
 		        }
 			 } 
-			//tearLessons.removeAll(deleteLess);
-			System.out.println(tearLessons.size());
+			tearLessons.removeAll(deleteList);
+			System.out.println("遍历完后："+tearLessons.size());
+			
 			teacher.setLesns(tearLessons);
 			if(teacherService.updateTeacher(teacher)){
 				 return "dLessSuccess";

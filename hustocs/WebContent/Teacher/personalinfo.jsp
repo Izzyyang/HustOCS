@@ -90,23 +90,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<hgroup>
 			<h1 class="site_title"><a href="Teacher/index.jsp">华中大公开课教师系统</a></h1>
 			<h2 class="section_title">&nbsp;</h2>
-			<div class="btn_view_site"><a href="<%=basePath%>/teacherpage/teacher.html">个人主页</a>个人主页</a></div>
+			<div class="btn_view_site"><a href="<%=basePath%>/teacherpage/teacher.html">个人主页</a></div>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">   欢迎您！ </a>)</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开始新课</a></article>
+			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">个人信息</a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column" style="min-height:660px; max-height:800px;">
 		<form class="quick_search">
 			<input type="text" value="快速搜索" onFocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+			<input type="submit" value="搜索">
 		</form>
 		<hr/>
 		<h3>工具</h3>

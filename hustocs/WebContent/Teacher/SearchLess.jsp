@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">教师课程</a></article>
+			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">课程搜索列表</a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li class="icn_folder">
 			   <a>本科生课程</a>
 			    <ul class="tog">
-				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec">查看本科课程</a>
 					 </li>
 					 <li><a href="Teacher/lessoninfo.jsp" id="upload" style="background:url(Teacher/images/icn_folder.png) no-repeat scroll left center rgba(0, 0, 0, 0);">上传课件</a></li>
 				</ul>
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<li class="icn_audio"><a>研究生课程</a>
 			     <ul class="tog">
-				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
+				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec">查看研究生课程</a>
 					 </li>
 					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
 				</ul>
@@ -92,6 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<li class="icn_audio"><a>其他课程</a>
 			     <ul class="tog">
+				
 				     <li><a href="Teacher/updateCourse.jsp" style="background:url(Teacher/images/icn_edit.png) no-repeat scroll left center rgba(0, 0, 0, 0);" id="updatec"> 修改课程信息</a>
 					 </li>
 					 <li><a href="Teacher/lessoninfo.jsp" id="upload">上传课件</a></li>
@@ -116,27 +117,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	     <section id="main">
            <article class="module width_full">
            <form action="lesson/addCourse_Action" method="post" enctype="multipart/form-data">
-			<header><h3>所有课程</h3></header>
+			<header><h3>搜索结果</h3></header>
 				<div class="module_content" style="min-height: 400px;">
 					<fieldset class="lesson" style="min-width: 400px; min-height: 400px;">
-							<table id="tearles"> 
-							     <tr><td colspan="4">本科课程</td></tr>
+							<table id="tearles" style="width: 650px;"> 
 							      <c:forEach var="les" items="${sessionScope.flesSet}">
 							         <tr><td><c:out value="${les.title}" /></td><td><a href="resource/lookFile_Action?lesid=${les.id}">查看/上传资源</a></td><td><a href="lesson/goUpdateLess_Action?lesid=${les.id}">修改课程信息</a></td><td><a href="lesson/deleteLesson_Action?lesid=${les.id}">删除课程</a></td></tr>
 							      </c:forEach>
 							</table>
 						</fieldset>
-					<fieldset class="lesson" style="margin-left: 20px; min-width: 400px;min-height: 400px;">
-							<table id="tearles"> 
-							     <tr><td colspan="4">研究生课程</td></tr>
-							     
-							      <c:forEach var="les" items="${sessionScope.slesSet}">
-							         <tr><td><c:out value="${les.title}" /></td><td><a href="resource/lookFile_Action?lesid=${les.id}">查看/上传资源</a></td><td><a href="lesson/goUpdateLess_Action?lesid=${les.id}">修改课程信息</a></td><td><a href="lesson/deleteLesson_Action?lesid=${les.id}">删除课程</a></td></tr>
-							      </c:forEach>
-							
-							</table>
-				   </fieldset>
-						
 						<div class="clear"></div>
 				</div>
 			<footer>

@@ -47,19 +47,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>${sessionScope.tear.name}(<a href="#">欢迎您！ </a>)</p>
+			<p>${sessionScope.tear.name}(<a href="#">   欢迎您！ </a>)</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">开设新课</a></article>
+			<article class="breadcrumbs"><a href="Teacher/index.jsp">工具</a> <div class="breadcrumb_divider"></div> <a class="current" id="currentpage">修改密码</a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column" style="min-height:660px; max-height:800px;">
-		<h3>工具</h3>
 		<form class="quick_search">
 			<input type="text" value="快速搜索" onFocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+			<input type="submit" value="搜索">
 		</form>
+		<h3>工具</h3>
 		<ul class="toggle">
 			<li class="icn_new_article" id="addnewCourse"><a href="Teacher/index.jsp">开设新课程</a></li>
 			<li class="icn_edit_article" id="personInform"><a href="Teacher/personalinfo.jsp">个人资料</a></li>
